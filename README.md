@@ -11,7 +11,7 @@ where its sentences sit against the range of the field.
 Everything in it was measured on 6 million words of published papers, and every rule
 carries its count.
 
-Try it in the browser, without installing anything: [check a draft](https://parsakh00.github.io/writing-style-lab/check.html). The text stays on your machine.
+Try it in the browser, without installing anything: [check a draft](https://parsakh00.github.io/writing-style-lab/check.html).
 
 ## Install
 
