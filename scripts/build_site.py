@@ -1,10 +1,9 @@
-"""Render README.md and SKILL.md into a small static site for GitHub Pages, with a page
+"""Render README.md into a small static site for GitHub Pages, with a page
 that runs the checker in the browser.
 
-    python scripts/build_site.py  ->  site/index.html, site/skill.html, site/check.html
+    python scripts/build_site.py  ->  site/index.html, site/check.html
 """
 import html
-import re
 import shutil
 from pathlib import Path
 
@@ -105,7 +104,7 @@ def md_to_html(md: str) -> str:
 
 
 def page(title: str, body: str, current: str = "") -> str:
-    links = [("index.html", "Overview"), ("skill.html", "The skill"), ("check.html", "Check a draft"),
+    links = [("index.html", "Overview"), ("check.html", "Check a draft"),
              ("https://github.com/parsakh00/writing-style-lab", "GitHub")]
     nav = "".join(f'<a href="{h}"{" aria-current=page" if h == current else ""}>{n}</a>' for h, n in links)
     return (f"<!doctype html><html lang=en><head><meta charset=utf-8>"
@@ -123,7 +122,6 @@ def main() -> int:
     skill = (SKILL / "SKILL.md").read_text(encoding="utf-8")
     skill = re.sub(r"^---\n.*?\n---\n", "", skill, flags=re.S)  # drop the frontmatter
     (OUT / "index.html").write_text(page("writing-style", md_to_html(readme), "index.html"), encoding="utf-8")
-    (OUT / "skill.html").write_text(page("The skill", md_to_html(skill), "skill.html"), encoding="utf-8")
 
     # The checker itself, run in the browser with Pyodide. check.py and its data are
     # copied beside the page.
@@ -134,7 +132,7 @@ def main() -> int:
     data_files = sorted(f.name for f in (tool / "data").glob("*.json"))
     body = CHECK_BODY.replace("__DATA_FILES__", ",".join(data_files))
     (OUT / "check.html").write_text(page("Check a draft", body, "check.html"), encoding="utf-8")
-    print("site/index.html, site/skill.html, site/check.html")
+    print("site/index.html, site/check.html")
     return 0
 
 
