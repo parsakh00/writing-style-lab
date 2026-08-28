@@ -92,6 +92,41 @@ run.onclick = async () => {
   } catch (e) { out.textContent = String(e); status.textContent = "error"; }
   run.disabled = false;
 };
+
+let policy = null;
+document.getElementById("dopolish").onclick = async () => {
+  const key = document.getElementById("apikey").value.trim(), ps = document.getElementById("pstatus");
+  const draft = document.getElementById("draft").value, reg = document.getElementById("register").value;
+  if (!key) { ps.textContent = "enter an API key"; return; }
+  try { localStorage.setItem("ws_key", key); } catch (e) {}
+  ps.textContent = "polishing";
+  if (!policy) policy = await (await fetch("tool/SKILL.md")).text();
+  const system = "You revise scientific prose to the policy below. Keep every claim, number, citation marker and technical term exactly as given; change register, phrasing, sentence structure and citation practice only. Return the revised text and nothing else.
+
+" + policy;
+  const user = "Register: " + reg + "
+
+The checker's report on this draft:
+" + out.textContent.slice(0, 6000) + "
+
+The draft:
+" + draft;
+  try {
+    const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST",
+      headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
+      body: JSON.stringify({ model: "claude-sonnet-5", max_tokens: 4096, system, messages: [{ role: "user", content: user }] }) });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error ? j.error.message : r.statusText);
+    const text = j.content.map(c => c.text || "").join("");
+    const pe = document.getElementById("polished"); pe.textContent = text; pe.style.display = "block";
+    pyodide.globals.set("polished_text", text); pyodide.globals.set("reg", reg);
+    const ae = document.getElementById("after");
+    ae.textContent = "After polishing:
+" + await pyodide.runPythonAsync("check.report(polished_text, register=reg, reference=ref, suggest=False)");
+    ae.style.display = "block"; ps.textContent = "";
+  } catch (e) { ps.textContent = "error: " + e.message; }
+};
+try { const k = localStorage.getItem("ws_key"); if (k) document.getElementById("apikey").value = k; } catch (e) {}
 </script>
 """
 
