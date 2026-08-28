@@ -65,7 +65,7 @@ CHECK_BODY = r"""
 </div>
 <p style="margin:1rem 0 .5rem"><textarea id=draft rows=14 placeholder="Paste your draft."></textarea></p>
 <p style="margin:.4rem 0 0"><button id=run disabled>Polish</button><span class=status id=status></span></p>
-<p class=note style="margin:.6rem 0 0" id=quota>Three polishes per computer per day.</p>
+<p class=note style="margin:.6rem 0 0" id=quota>3/3 left today on this computer.</p>
 </div>
 <pre id=polished style="display:none;white-space:pre-wrap;font-family:inherit;font-size:1rem;line-height:1.6"></pre>
 <div class=panel id=fb style="display:none">
@@ -91,12 +91,28 @@ async function boot() {
   run.disabled = false;
 }
 const ready = boot().catch(e => { document.getElementById("loadmsg").textContent = "The page could not load"; detail.textContent = String(e); });
+let ticker = null;
+function busy(on) {
+  if (ticker) { clearInterval(ticker); ticker = null; }
+  if (!on) { status.textContent = ""; return; }
+  let n = 0; status.textContent = "polishing";
+  ticker = setInterval(() => { n = (n + 1) % 4; status.textContent = "polishing" + " .".repeat(n); }, 450);
+}
+function showQuota(left, limit) {
+  document.getElementById("quota").textContent = `${left}/${limit} left today on this computer.`;
+  if (left <= 0) { run.disabled = true; status.textContent = "come back tomorrow"; }
+}
+async function loadQuota() {
+  try { const q = await (await fetch(POLISH_URL + "/quota")).json(); if (q.limit) showQuota(q.remaining, q.limit); } catch (e) {}
+}
+ready.then(loadQuota);
 run.onclick = async () => {
   await ready;
   const draft = document.getElementById("draft").value, reg = document.getElementById("register").value;
+  const pe = document.getElementById("polished");
   if (draft.trim().split(/\s+/).length < 5) { status.textContent = "paste a draft"; return; }
   if (!POLISH_URL) { status.textContent = "the polish service is not set up yet"; return; }
-  run.disabled = true; status.textContent = "polishing";
+  run.disabled = true; busy(true); pe.style.display = "none";
   // The checker runs here and its report travels with the draft, so the rewrite is
   // aimed at what this draft actually does. The report itself is not shown.
   const rep = report(draft, data, { register: reg, reference: "corpus", suggest: true, name: "draft" });
@@ -104,15 +120,19 @@ run.onclick = async () => {
     const r = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ draft, register: reg, report: rep.slice(0, 8000) }) });
     const j = await r.json();
-    if (!r.ok) throw new Error(j.error || r.statusText);
-    const pe = document.getElementById("polished"); pe.textContent = j.text; pe.style.display = "block";
     const left = r.headers.get("x-remaining");
-    if (left !== null) document.getElementById("quota").textContent = left + " of 3 polishes left on this computer today.";
+    if (!r.ok) throw new Error(j.error || r.statusText);
+    pe.textContent = j.text; pe.style.display = "block";
+    if (left !== null) showQuota(parseInt(left, 10), 3);
     document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&passage=" + encodeURIComponent(j.text.slice(0, 3000));
     document.getElementById("fb").style.display = "block";
-    status.textContent = "";
-  } catch (e) { status.textContent = e.message; }
-  run.disabled = false;
+    busy(false);
+  } catch (e) {
+    busy(false);
+    pe.textContent = "Could not polish: " + e.message; pe.style.display = "block";
+    if (/used its/.test(e.message)) showQuota(0, 3);
+  }
+  if (!run.disabled || !/come back/.test(status.textContent)) run.disabled = false;
 };
 </script>
 """

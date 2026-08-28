@@ -33,6 +33,12 @@ export default {
       return json(env, 200, { key: k ? `set, ${k.length} chars, starts ${k.slice(0, 11)}` : "missing",
                               origin: env.ALLOWED_ORIGIN || "missing", counters: env.RATE ? "bound" : "missing" });
     }
+    if (request.method === "GET" && new URL(request.url).pathname === "/quota") {
+      const day = new Date().toISOString().slice(0, 10);
+      const ip = request.headers.get("cf-connecting-ip") || "unknown";
+      const used = parseInt((await env.RATE.get(`ip:${day}:${ip}`)) || "0", 10);
+      return json(env, 200, { remaining: Math.max(PER_IP_PER_DAY - used, 0), limit: PER_IP_PER_DAY });
+    }
     if (request.method !== "POST") return json(env, 405, { error: "POST only" });
 
     const origin = request.headers.get("origin") || "";
