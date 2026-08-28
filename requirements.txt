@@ -6,4 +6,4 @@ matplotlib>=3.8
 requests>=2.31
 spacy>=3.7
 transformers>=4.44
-torch>=2.2
+torch>=2.13.0
