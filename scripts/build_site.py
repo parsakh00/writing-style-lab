@@ -126,9 +126,7 @@ run.onclick = async () => {
     // use remain, send exactly those back once. Free, and tied to this text by token.
     if (j.text) {
       const again = report(j.text, data, { register: reg, reference: "corpus", suggest: true, name: "polished" });
-      const flagged = again.split("
-").filter(l => /^\s{2,}(?:\d+x |colon |passive |'|sequences no paper|\[|')/.test(l) || /papers write:/.test(l)).slice(0, 40).join("
-");
+      const flagged = again.split("\n").filter(l => /^\s{2,}(?:\d+x |colon |passive |'|sequences no paper|\[|')/.test(l) || /papers write:/.test(l)).slice(0, 40).join("\n");
       if (flagged.trim()) {
         status.textContent = "polishing, second pass";
         const r2 = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
