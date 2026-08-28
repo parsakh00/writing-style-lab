@@ -36,7 +36,7 @@ export default {
     if (request.method === "GET" && new URL(request.url).pathname === "/quota") {
       const day = new Date().toISOString().slice(0, 10);
       const ip = request.headers.get("cf-connecting-ip") || "unknown";
-      const used = parseInt((await env.RATE.get(`v3:ip:${day}:${ip}`)) || "0", 10);
+      const used = parseInt((await env.RATE.get(`v4:ip:${day}:${ip}`)) || "0", 10);
       return json(env, 200, { remaining: Math.max(PER_IP_PER_DAY - used, 0), limit: PER_IP_PER_DAY });
     }
     if (request.method !== "POST") return json(env, 405, { error: "POST only" });
@@ -55,7 +55,7 @@ export default {
     // Limits. KV keys expire at the end of the day they were made.
     const day = new Date().toISOString().slice(0, 10);
     const ip = request.headers.get("cf-connecting-ip") || "unknown";
-    const ipKey = `v3:ip:${day}:${ip}`, totalKey = `v3:total:${day}`;
+    const ipKey = `v4:ip:${day}:${ip}`, totalKey = `v4:total:${day}`;
     const used = parseInt((await env.RATE.get(ipKey)) || "0", 10);
     const total = parseInt((await env.RATE.get(totalKey)) || "0", 10);
     if (used >= PER_IP_PER_DAY) return json(env, 429, { error: `this computer has used its ${PER_IP_PER_DAY} polishes for today` }, { "x-remaining": "0" });
@@ -66,7 +66,10 @@ export default {
     const r = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "content-type": "application/json", "x-api-key": env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({ model: MODEL, max_tokens: 4096, system: SYSTEM_HEAD + policy, messages: [{ role: "user", content: user }] }),
+      // Thinking is off: with it on, a long draft used the whole output budget on thought
+      // and returned no text. The checker's report already says what to change.
+      body: JSON.stringify({ model: MODEL, max_tokens: 8192, thinking: { type: "disabled" },
+                             system: SYSTEM_HEAD + policy, messages: [{ role: "user", content: user }] }),
     });
     const j = await r.json();
     if (!r.ok) return json(env, 502, { error: j.error ? j.error.message : "upstream error" });
