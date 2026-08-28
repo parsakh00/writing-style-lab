@@ -312,8 +312,12 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
     # in the corpus set, never under 35%. Drafts written in the default register run 24
     # to 39%. This is the measure closest to "the word order reads machine-written".
     low = [x.lower() for x in RE_WORD.findall(text)]
-    seqs = load("sequences.json")
-    known = set(seqs["trigrams"])
+    if (DATA / "sequences.json").exists():
+        known = set(load("sequences.json")["trigrams"])
+    else:
+        # The page ships trigrams.json only; the connective subset is derived here.
+        known = {g for g in load("trigrams.json")["trigrams"]
+                 if sum(x in FUNCTION_WORDS for x in g.split()) >= 2}
     conn = [g for g in zip(low, low[1:], low[2:])
             if sum(x in FUNCTION_WORDS for x in g) >= 2]
     conn = [" ".join(g) for g in conn]
