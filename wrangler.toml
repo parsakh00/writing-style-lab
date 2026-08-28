@@ -1,0 +1,12 @@
+# Deploys the polish service from the repository root. The same worker is described in
+# worker/wrangler.toml for builds rooted in that folder.
+name = "writing-style-lab"
+main = "worker/worker.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://parsakh00.github.io"
+
+[[kv_namespaces]]
+binding = "RATE"
+id = "4b2cd6ed6b014ba9937fe07ff91c2922"
