@@ -119,8 +119,6 @@ def page(title: str, body: str, current: str = "") -> str:
 def main() -> int:
     OUT.mkdir(exist_ok=True)
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    skill = (SKILL / "SKILL.md").read_text(encoding="utf-8")
-    skill = re.sub(r"^---\n.*?\n---\n", "", skill, flags=re.S)  # drop the frontmatter
     (OUT / "index.html").write_text(page("writing-style", md_to_html(readme), "index.html"), encoding="utf-8")
 
     # The checker itself, run in the browser with Pyodide. check.py and its data are
