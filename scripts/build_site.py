@@ -62,6 +62,10 @@ CHECK_BODY = """
 <p style="margin:.4rem 0 0"><button id=run disabled>Check</button><span class=status id=status></span></p>
 </div>
 <pre id=out></pre>
+<div class=panel id=fb style="display:none">
+<p style="margin:0 0 .5rem"><strong>Did something still read wrong?</strong> Send the passage and the report as feedback. Each report is measured against the corpus, and rules change when the papers agree.</p>
+<p style="margin:0"><a id=fblink href="#" target=_blank rel=noopener>Send feedback</a></p>
+</div>
 <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
 <script>
 const DATA = "__DATA_FILES__".split(",");
@@ -89,6 +93,9 @@ run.onclick = async () => {
   try {
     out.textContent = await pyodide.runPythonAsync("check.report(draft_text, register=reg, reference=ref, suggest=sug)");
     status.textContent = "";
+    const rep = out.textContent.slice(0, 5000);
+    document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&report=" + encodeURIComponent(rep);
+    document.getElementById("fb").style.display = "block";
   } catch (e) { out.textContent = String(e); status.textContent = "error"; }
   run.disabled = false;
 };

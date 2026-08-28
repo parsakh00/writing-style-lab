@@ -1,0 +1,50 @@
+# When someone files feedback, measure the passage they quoted against the corpus and
+# post the numbers back as a comment. The rest is a human decision: whether a rule
+# changes, and what the change is.
+
+name: feedback
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  measure:
+    if: contains(github.event.issue.labels.*.name, 'feedback')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --no-deps .
+      - name: measure the quoted passage
+        env:
+          BODY: ${{ github.event.issue.body }}
+        run: |
+          python - <<'PY' > comment.md
+          import os, re
+          from writingstyle import report
+          body = os.environ["BODY"]
+          m = re.search(r"### The passage\s*\n(.*?)(?:\n### |\Z)", body, re.S)
+          passage = (m.group(1) if m else body).strip()
+          if len(passage.split()) < 5:
+              print("Thanks. I could not find a passage to measure in this issue; the first field should hold the text itself.")
+          else:
+              out = report(passage, suggest=True, name="passage")
+              print("Thanks for the report. Here is the passage measured against the corpus, so the discussion starts from numbers:\n")
+              print("```text\n" + out.strip() + "\n```\n")
+              print("A maintainer will check the construction you flagged against the papers and, if the data agree, change the rule and credit this issue.")
+          PY
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number, body: fs.readFileSync('comment.md', 'utf8')
+            });

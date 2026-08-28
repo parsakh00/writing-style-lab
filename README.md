@@ -55,4 +55,6 @@ This is a first version, built from one corpus. It will get better with other co
 other groups' profiles, and corrections from people who write in fields it has not
 seen. A rule that looks wrong for your field is checked against the papers, not
 argued: the skill measures the construction in the corpus and reports the count. Any
-idea for improving it is welcome; see `CONTRIBUTING.md`.
+idea for improving it is welcome; see `CONTRIBUTING.md`. Feedback on a checked draft goes
+through the [feedback form](https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml),
+and every report is measured against the corpus before a rule changes.

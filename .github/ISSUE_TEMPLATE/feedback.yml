@@ -1,0 +1,31 @@
+name: Feedback on a checked draft
+description: A passage that still reads wrong after the skill, or a rule that seems off for your field
+title: "Feedback: "
+labels: [feedback]
+body:
+  - type: textarea
+    id: passage
+    attributes:
+      label: The passage
+      description: The sentence or paragraph, as the skill left it. Nothing else is needed from the draft.
+      placeholder: Paste the passage here.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What reads wrong
+      description: Which part, and how it reads to you (robotic, formal, unlike papers in your field, a rule that misfires).
+    validations:
+      required: true
+  - type: input
+    id: field
+    attributes:
+      label: Your field
+      placeholder: e.g. materials chemistry, ecology, clinical medicine
+  - type: textarea
+    id: report
+    attributes:
+      label: The checker's report (optional)
+      description: Paste the output the page or the command line gave you, if you have it.
+      render: text
