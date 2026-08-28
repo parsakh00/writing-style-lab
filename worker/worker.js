@@ -15,7 +15,7 @@ const DAILY_TOTAL = 200;
 const MODEL = "claude-sonnet-5";
 const POLICY_URL = "https://parsakh00.github.io/writing-style-lab/tool/SKILL.md";
 
-const SYSTEM_HEAD = "You revise scientific prose to the policy below. Keep every claim, number, citation marker and technical term exactly as given; change register, phrasing, sentence structure and citation practice only. Return the revised text and nothing else.\n\n";
+const SYSTEM_HEAD = "You revise scientific prose to the policy below. Keep every claim, number, citation marker and technical term exactly as given; change register, phrasing, sentence structure and citation practice only. Never introduce a number, value, name or reference that is not in the draft: where the draft gives no number, keep its wording, and where a citation is missing, leave the sentence uncited rather than adding a placeholder. Citations: when the draft introduces a finding by naming its authors and carries a citation marker, for example 'Smith and coworkers found that X [12]', write the finding in the author's words with the same marker, 'X [12]', and keep the marker exactly as written, in its position after the claim it belongs to. When a finding names its authors and has no marker, keep the sentence as it is; do not add a marker, a placeholder or a name. Return the revised text and nothing else.\n\n";
 
 function cors(env, extra = {}) {
   return { "access-control-allow-origin": env.ALLOWED_ORIGIN || "*", "access-control-allow-methods": "POST, OPTIONS",
@@ -36,7 +36,7 @@ export default {
     if (request.method === "GET" && new URL(request.url).pathname === "/quota") {
       const day = new Date().toISOString().slice(0, 10);
       const ip = request.headers.get("cf-connecting-ip") || "unknown";
-      const used = parseInt((await env.RATE.get(`v4:ip:${day}:${ip}`)) || "0", 10);
+      const used = parseInt((await env.RATE.get(`v5:ip:${day}:${ip}`)) || "0", 10);
       return json(env, 200, { remaining: Math.max(PER_IP_PER_DAY - used, 0), limit: PER_IP_PER_DAY });
     }
     if (request.method !== "POST") return json(env, 405, { error: "POST only" });
@@ -55,7 +55,7 @@ export default {
     // Limits. KV keys expire at the end of the day they were made.
     const day = new Date().toISOString().slice(0, 10);
     const ip = request.headers.get("cf-connecting-ip") || "unknown";
-    const ipKey = `v4:ip:${day}:${ip}`, totalKey = `v4:total:${day}`;
+    const ipKey = `v5:ip:${day}:${ip}`, totalKey = `v5:total:${day}`;
     const used = parseInt((await env.RATE.get(ipKey)) || "0", 10);
     const total = parseInt((await env.RATE.get(totalKey)) || "0", 10);
     if (used >= PER_IP_PER_DAY) return json(env, 429, { error: `this computer has used its ${PER_IP_PER_DAY} polishes for today` }, { "x-remaining": "0" });
