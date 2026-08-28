@@ -38,24 +38,14 @@ print(report(text, suggest=True))
 
 ## What it reports
 
-- **Sequences.** Which of the draft's word sequences papers have used, and with
-  `--suggest`, the continuation papers write after the same two words where the draft
-  departs.
-- **General rules**, each verified across the corpus: how a quantity noun takes its
-  preposition, what a comparison is made with, where "therefore" goes, which
-  abstract-noun claims papers make and which they do not, and how a method sentence is
-  built.
-- **Citing.** Citation density against the published range, and every author named to
-  introduce a finding, which papers almost never do.
-- **Register.** The stock hedges and attenuators that papers do not use, and the
-  contrastive constructions that drafts overuse.
-- **Structure.** Words before the verb and sentences opening on old information, after
-  Gopen and Swan; clauses per sentence against the field's range.
-- **Targets.** Sentence, vocabulary and register measures against the middle range of
-  published papers. A real paper lands inside most of them and outside some; a draft
-  inside all of them was written to the metric.
+- **Sequences.** Which phrases papers use, and what they write where the draft departs.
+- **Rules.** Constructions papers use and constructions they do not, each with its count.
+- **Citing.** How often the draft cites, and how.
+- **Register.** Hedges and qualifiers that papers leave out.
+- **Structure.** Sentence shape, after Gopen and Swan.
+- **Targets.** Where the draft sits against the middle range of published papers.
 
-The full policy, with the numbers behind each rule, is `SKILL.md`.
+The full policy, with the numbers, is `SKILL.md`.
 
 ## A beginning
 
