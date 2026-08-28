@@ -1,0 +1,51 @@
+# Automatic handling of feedback issues. Claude reads the issue, measures the passage
+# against the corpus with the checker, compares the flagged construction with the
+# policy in SKILL.md, and either opens a pull request that changes the rule with its
+# numbers, or comments explaining why the data do not support a change. The pull
+# request still needs a merge; the ruleset requires it.
+#
+# Needs the repository secret ANTHROPIC_API_KEY. Set a monthly spend limit on that key
+# in the Anthropic console, since anyone can open an issue.
+
+name: claude-feedback
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  handle:
+    if: contains(github.event.issue.labels.*.name, 'feedback')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --no-deps .
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            A feedback issue was opened on this repository (issue #${{ github.event.issue.number }}).
+            Read it with `gh issue view ${{ github.event.issue.number }}`.
+
+            Follow .claude/skills/writing-style/SKILL.md, section "Improving this skill":
+            1. Measure the quoted passage with `writing-style` (the installed checker) with --suggest.
+            2. Identify the construction the reporter flags. Measure its rate in the corpus with the
+               bundled data in .claude/skills/writing-style/data/ (vocab.json, sequences.json,
+               trigrams.json) and, where the full index is needed, scripts/suggest_sequences.py.
+            3. If the data support a change, make it in SKILL.md, check.py or data/, with the count in
+               the text, on a branch named feedback-${{ github.event.issue.number }}, and open a pull
+               request that closes the issue and quotes the numbers. Commit messages are short and plain.
+            4. If the data do not support a change, comment on the issue with the measurement and say so.
+            Never tune anything against a detector score. Do not add anyone's name to the repository.
+          claude_args: "--allowed-tools Bash,Read,Edit,Write,Glob,Grep --max-turns 40"
