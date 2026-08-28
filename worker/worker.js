@@ -36,7 +36,7 @@ export default {
     if (request.method === "GET" && new URL(request.url).pathname === "/quota") {
       const day = new Date().toISOString().slice(0, 10);
       const ip = request.headers.get("cf-connecting-ip") || "unknown";
-      const used = parseInt((await env.RATE.get(`ip:${day}:${ip}`)) || "0", 10);
+      const used = parseInt((await env.RATE.get(`v2:ip:${day}:${ip}`)) || "0", 10);
       return json(env, 200, { remaining: Math.max(PER_IP_PER_DAY - used, 0), limit: PER_IP_PER_DAY });
     }
     if (request.method !== "POST") return json(env, 405, { error: "POST only" });
@@ -55,7 +55,7 @@ export default {
     // Limits. KV keys expire at the end of the day they were made.
     const day = new Date().toISOString().slice(0, 10);
     const ip = request.headers.get("cf-connecting-ip") || "unknown";
-    const ipKey = `ip:${day}:${ip}`, totalKey = `total:${day}`;
+    const ipKey = `v2:ip:${day}:${ip}`, totalKey = `v2:total:${day}`;
     const used = parseInt((await env.RATE.get(ipKey)) || "0", 10);
     const total = parseInt((await env.RATE.get(totalKey)) || "0", 10);
     if (used >= PER_IP_PER_DAY) return json(env, 429, { error: `this computer has used its ${PER_IP_PER_DAY} polishes for today` }, { "x-remaining": "0" });
