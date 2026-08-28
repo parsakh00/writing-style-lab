@@ -1,0 +1,29 @@
+data/
+results/*.csv
+results/*.parquet
+results/*.json
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.egg-info/
+.ipynb_checkpoints/
+
+
+# API keys, never committed
+.gptzero_key
+*_key
+results/academic_ngrams.json
+results/academic_vocab.json
+
+# not part of this project
+data_matched/
+eval/
+
+dist/
+build/
+results/
+.claude/skills/writing-style/data/local_preferences.json
+!.claude/skills/writing-style/data/
+!.claude/skills/writing-style/data/*.json

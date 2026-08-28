@@ -1,0 +1,3425 @@
+{
+"source": "Coxhead 2000 Academic Word List, 570 families; rates per million words, family-prefix matching",
+"families": [
+{
+"headword": "sole",
+"papers": 3497.7,
+"group": 4578.9,
+"machine": 2006.0
+},
+{
+"headword": "structure",
+"papers": 3023.8,
+"group": 2062.0,
+"machine": 3421.6
+},
+{
+"headword": "mode",
+"papers": 2885.7,
+"group": 3301.1,
+"machine": 1486.7
+},
+{
+"headword": "react",
+"papers": 2106.8,
+"group": 764.8,
+"machine": 3755.9
+},
+{
+"headword": "fee",
+"papers": 2070.1,
+"group": 658.3,
+"machine": 1380.0
+},
+{
+"headword": "concentrate",
+"papers": 1869.3,
+"group": 706.7,
+"machine": 1444.0
+},
+{
+"headword": "process",
+"papers": 1868.8,
+"group": 939.0,
+"machine": 3841.3
+},
+{
+"headword": "interact",
+"papers": 1826.0,
+"group": 2429.8,
+"machine": 1138.2
+},
+{
+"headword": "obtain",
+"papers": 1685.2,
+"group": 1258.5,
+"machine": 519.3
+},
+{
+"headword": "energy",
+"papers": 1630.9,
+"group": 1103.6,
+"machine": 1749.9
+},
+{
+"headword": "indicate",
+"papers": 1618.9,
+"group": 668.0,
+"machine": 3051.7
+},
+{
+"headword": "simulate",
+"papers": 1490.3,
+"group": 3397.9,
+"machine": 611.8
+},
+{
+"headword": "method",
+"papers": 1489.1,
+"group": 2468.5,
+"machine": 2155.4
+},
+{
+"headword": "remove",
+"papers": 1388.7,
+"group": 455.0,
+"machine": 953.2
+},
+{
+"headword": "site",
+"papers": 1353.9,
+"group": 880.9,
+"machine": 1045.7
+},
+{
+"headword": "area",
+"papers": 1306.5,
+"group": 1713.5,
+"machine": 2141.2
+},
+{
+"headword": "analyse",
+"papers": 1182.9,
+"group": 590.5,
+"machine": 1650.3
+},
+{
+"headword": "capacity",
+"papers": 1106.4,
+"group": 271.1,
+"machine": 1287.6
+},
+{
+"headword": "bond",
+"papers": 1082.5,
+"group": 329.1,
+"machine": 576.2
+},
+{
+"headword": "data",
+"papers": 1060.1,
+"group": 1752.2,
+"machine": 405.5
+},
+{
+"headword": "chemical",
+"papers": 1051.0,
+"group": 1858.7,
+"machine": 1038.6
+},
+{
+"headword": "potential",
+"papers": 1018.8,
+"group": 3397.9,
+"machine": 3300.7
+},
+{
+"headword": "function",
+"papers": 989.5,
+"group": 1771.5,
+"machine": 1429.8
+},
+{
+"headword": "range",
+"papers": 979.2,
+"group": 1190.7,
+"machine": 1102.6
+},
+{
+"headword": "select",
+"papers": 968.1,
+"group": 387.2,
+"machine": 3051.7
+},
+{
+"headword": "file",
+"papers": 963.3,
+"group": 706.7,
+"machine": 1700.1
+},
+{
+"headword": "pose",
+"papers": 916.2,
+"group": 1306.9,
+"machine": 526.4
+},
+{
+"headword": "phase",
+"papers": 914.2,
+"group": 2226.5,
+"machine": 334.3
+},
+{
+"headword": "specific",
+"papers": 893.6,
+"group": 493.7,
+"machine": 1493.8
+},
+{
+"headword": "volume",
+"papers": 860.3,
+"group": 1732.8,
+"machine": 441.0
+},
+{
+"headword": "parameter",
+"papers": 859.8,
+"group": 1461.8,
+"machine": 540.6
+},
+{
+"headword": "significant",
+"papers": 855.5,
+"group": 348.5,
+"machine": 2859.6
+},
+{
+"headword": "found",
+"papers": 836.0,
+"group": 513.1,
+"machine": 1116.8
+},
+{
+"headword": "complex",
+"papers": 833.6,
+"group": 571.2,
+"machine": 1152.4
+},
+{
+"headword": "compound",
+"papers": 820.5,
+"group": 48.4,
+"machine": 711.4
+},
+{
+"headword": "inhibit",
+"papers": 819.3,
+"group": 38.7,
+"machine": 412.6
+},
+{
+"headword": "ratio",
+"papers": 813.1,
+"group": 668.0,
+"machine": 490.8
+},
+{
+"headword": "format",
+"papers": 804.7,
+"group": 697.0,
+"machine": 1266.2
+},
+{
+"headword": "similar",
+"papers": 796.6,
+"group": 726.0,
+"machine": 490.8
+},
+{
+"headword": "initial",
+"papers": 789.5,
+"group": 300.1,
+"machine": 576.2
+},
+{
+"headword": "distribute",
+"papers": 786.9,
+"group": 522.7,
+"machine": 782.5
+},
+{
+"headword": "correspond",
+"papers": 753.2,
+"group": 1335.9,
+"machine": 441.0
+},
+{
+"headword": "constant",
+"papers": 752.7,
+"group": 726.0,
+"machine": 270.3
+},
+{
+"headword": "exhibit",
+"papers": 723.8,
+"group": 261.4,
+"machine": 1856.6
+},
+{
+"headword": "reside",
+"papers": 708.8,
+"group": 58.1,
+"machine": 170.7
+},
+{
+"headword": "core",
+"papers": 701.6,
+"group": 484.0,
+"machine": 142.3
+},
+{
+"headword": "layer",
+"papers": 676.0,
+"group": 2216.8,
+"machine": 334.3
+},
+{
+"headword": "conduct",
+"papers": 651.0,
+"group": 145.2,
+"machine": 2504.0
+},
+{
+"headword": "mechanism",
+"papers": 644.6,
+"group": 242.0,
+"machine": 1138.2
+},
+{
+"headword": "investigate",
+"papers": 618.9,
+"group": 367.9,
+"machine": 981.7
+},
+{
+"headword": "cycle",
+"papers": 599.7,
+"group": 232.3,
+"machine": 1856.6
+},
+{
+"headword": "enhance",
+"papers": 562.5,
+"group": 309.8,
+"machine": 4332.1
+},
+{
+"headword": "previous",
+"papers": 561.3,
+"group": 232.3,
+"machine": 99.6
+},
+{
+"headword": "equate",
+"papers": 528.4,
+"group": 1384.3,
+"machine": 56.9
+},
+{
+"headword": "image",
+"papers": 519.5,
+"group": 319.5,
+"machine": 711.4
+},
+{
+"headword": "via",
+"papers": 512.6,
+"group": 242.0,
+"machine": 569.1
+},
+{
+"headword": "demonstrate",
+"papers": 512.4,
+"group": 367.9,
+"machine": 1671.7
+},
+{
+"headword": "generate",
+"papers": 506.5,
+"group": 232.3,
+"machine": 433.9
+},
+{
+"headword": "final",
+"papers": 494.7,
+"group": 425.9,
+"machine": 263.2
+},
+{
+"headword": "predict",
+"papers": 492.4,
+"group": 638.9,
+"machine": 199.2
+},
+{
+"headword": "confirm",
+"papers": 489.9,
+"group": 338.8,
+"machine": 1252.0
+},
+{
+"headword": "contact",
+"papers": 487.5,
+"group": 377.5,
+"machine": 234.7
+},
+{
+"headword": "consist",
+"papers": 477.9,
+"group": 677.6,
+"machine": 853.6
+},
+{
+"headword": "attribute",
+"papers": 476.8,
+"group": 87.1,
+"machine": 860.7
+},
+{
+"headword": "region",
+"papers": 464.1,
+"group": 697.0,
+"machine": 56.9
+},
+{
+"headword": "environment",
+"papers": 462.8,
+"group": 251.7,
+"machine": 2653.4
+},
+{
+"headword": "dynamic",
+"papers": 462.8,
+"group": 687.3,
+"machine": 562.0
+},
+{
+"headword": "occur",
+"papers": 449.5,
+"group": 406.6,
+"machine": 35.6
+},
+{
+"headword": "evaluate",
+"papers": 440.8,
+"group": 435.6,
+"machine": 1728.6
+},
+{
+"headword": "reveal",
+"papers": 429.8,
+"group": 125.8,
+"machine": 1131.1
+},
+{
+"headword": "intense",
+"papers": 419.1,
+"group": 96.8,
+"machine": 754.0
+},
+{
+"headword": "transfer",
+"papers": 418.7,
+"group": 116.2,
+"machine": 803.8
+},
+{
+"headword": "detect",
+"papers": 410.2,
+"group": 67.8,
+"machine": 1308.9
+},
+{
+"headword": "element",
+"papers": 399.6,
+"group": 319.5,
+"machine": 213.4
+},
+{
+"headword": "framework",
+"papers": 389.3,
+"group": 164.6,
+"machine": 889.2
+},
+{
+"headword": "factor",
+"papers": 381.6,
+"group": 87.1,
+"machine": 469.5
+},
+{
+"headword": "negate",
+"papers": 379.2,
+"group": 445.3,
+"machine": 78.2
+},
+{
+"headword": "grade",
+"papers": 378.7,
+"group": 242.0,
+"machine": 256.1
+},
+{
+"headword": "achieve",
+"papers": 377.5,
+"group": 222.7,
+"machine": 889.2
+},
+{
+"headword": "stable",
+"papers": 374.2,
+"group": 271.1,
+"machine": 569.1
+},
+{
+"headword": "design",
+"papers": 372.2,
+"group": 309.8,
+"machine": 704.2
+},
+{
+"headword": "role",
+"papers": 372.0,
+"group": 174.2,
+"machine": 725.6
+},
+{
+"headword": "release",
+"papers": 365.3,
+"group": 910.0,
+"machine": 910.5
+},
+{
+"headword": "research",
+"papers": 358.4,
+"group": 222.7,
+"machine": 739.8
+},
+{
+"headword": "converse",
+"papers": 354.2,
+"group": 145.2,
+"machine": 1159.5
+},
+{
+"headword": "affect",
+"papers": 348.9,
+"group": 38.7,
+"machine": 177.8
+},
+{
+"headword": "approach",
+"papers": 348.6,
+"group": 493.7,
+"machine": 725.6
+},
+{
+"headword": "require",
+"papers": 342.7,
+"group": 513.1,
+"machine": 739.8
+},
+{
+"headword": "furthermore",
+"papers": 342.4,
+"group": 38.7,
+"machine": 540.6
+},
+{
+"headword": "contribute",
+"papers": 340.5,
+"group": 1345.6,
+"machine": 725.6
+},
+{
+"headword": "derive",
+"papers": 317.5,
+"group": 609.9,
+"machine": 185.0
+},
+{
+"headword": "positive",
+"papers": 313.5,
+"group": 474.3,
+"machine": 128.0
+},
+{
+"headword": "technique",
+"papers": 306.7,
+"group": 232.3,
+"machine": 846.5
+},
+{
+"headword": "component",
+"papers": 304.5,
+"group": 861.6,
+"machine": 291.7
+},
+{
+"headword": "target",
+"papers": 299.2,
+"group": 77.4,
+"machine": 348.6
+},
+{
+"headword": "display",
+"papers": 296.1,
+"group": 154.9,
+"machine": 78.2
+},
+{
+"headword": "transit",
+"papers": 294.6,
+"group": 358.2,
+"machine": 298.8
+},
+{
+"headword": "extract",
+"papers": 294.5,
+"group": 183.9,
+"machine": 156.5
+},
+{
+"headword": "transform",
+"papers": 293.8,
+"group": 193.6,
+"machine": 177.8
+},
+{
+"headword": "shift",
+"papers": 290.3,
+"group": 116.2,
+"machine": 298.8
+},
+{
+"headword": "subsequent",
+"papers": 279.5,
+"group": 164.6,
+"machine": 348.6
+},
+{
+"headword": "involve",
+"papers": 278.3,
+"group": 348.5,
+"machine": 1159.5
+},
+{
+"headword": "coordinate",
+"papers": 275.3,
+"group": 532.4,
+"machine": 213.4
+},
+{
+"headword": "physical",
+"papers": 272.1,
+"group": 455.0,
+"machine": 99.6
+},
+{
+"headword": "approximate",
+"papers": 271.3,
+"group": 396.9,
+"machine": 341.4
+},
+{
+"headword": "aggregate",
+"papers": 267.6,
+"group": 300.1,
+"machine": 185.0
+},
+{
+"headword": "obvious",
+"papers": 267.4,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "whereas",
+"papers": 264.4,
+"group": 251.7,
+"machine": 106.7
+},
+{
+"headword": "feature",
+"papers": 261.0,
+"group": 590.5,
+"machine": 220.5
+},
+{
+"headword": "network",
+"papers": 255.6,
+"group": 67.8,
+"machine": 177.8
+},
+{
+"headword": "invest",
+"papers": 252.1,
+"group": 135.5,
+"machine": 640.2
+},
+{
+"headword": "theme",
+"papers": 249.1,
+"group": 174.2,
+"machine": 1038.6
+},
+{
+"headword": "estimate",
+"papers": 244.3,
+"group": 387.2,
+"machine": 42.7
+},
+{
+"headword": "sphere",
+"papers": 244.2,
+"group": 658.3,
+"machine": 49.8
+},
+{
+"headword": "channel",
+"papers": 238.1,
+"group": 58.1,
+"machine": 128.0
+},
+{
+"headword": "create",
+"papers": 237.6,
+"group": 193.6,
+"machine": 377.0
+},
+{
+"headword": "link",
+"papers": 237.6,
+"group": 174.2,
+"machine": 384.1
+},
+{
+"headword": "induce",
+"papers": 236.4,
+"group": 164.6,
+"machine": 220.5
+},
+{
+"headword": "hence",
+"papers": 234.3,
+"group": 48.4,
+"machine": 7.1
+},
+{
+"headword": "domain",
+"papers": 231.1,
+"group": 125.8,
+"machine": 35.6
+},
+{
+"headword": "illustrate",
+"papers": 226.4,
+"group": 232.3,
+"machine": 28.5
+},
+{
+"headword": "assign",
+"papers": 225.3,
+"group": 290.4,
+"machine": 0.0
+},
+{
+"headword": "bulk",
+"papers": 224.0,
+"group": 1190.7,
+"machine": 14.2
+},
+{
+"headword": "define",
+"papers": 223.8,
+"group": 3107.5,
+"machine": 28.5
+},
+{
+"headword": "transport",
+"papers": 223.0,
+"group": 116.2,
+"machine": 654.4
+},
+{
+"headword": "percent",
+"papers": 220.8,
+"group": 329.1,
+"machine": 7.1
+},
+{
+"headword": "construct",
+"papers": 218.4,
+"group": 455.0,
+"machine": 56.9
+},
+{
+"headword": "locate",
+"papers": 217.4,
+"group": 338.8,
+"machine": 14.2
+},
+{
+"headword": "uniform",
+"papers": 212.2,
+"group": 261.4,
+"machine": 995.9
+},
+{
+"headword": "source",
+"papers": 210.2,
+"group": 193.6,
+"machine": 177.8
+},
+{
+"headword": "promote",
+"papers": 210.2,
+"group": 48.4,
+"machine": 327.2
+},
+{
+"headword": "stress",
+"papers": 204.5,
+"group": 1064.9,
+"machine": 199.2
+},
+{
+"headword": "maintain",
+"papers": 204.2,
+"group": 48.4,
+"machine": 768.3
+},
+{
+"headword": "available",
+"papers": 203.8,
+"group": 464.7,
+"machine": 177.8
+},
+{
+"headword": "major",
+"papers": 203.1,
+"group": 125.8,
+"machine": 71.1
+},
+{
+"headword": "expose",
+"papers": 198.9,
+"group": 38.7,
+"machine": 554.9
+},
+{
+"headword": "couple",
+"papers": 197.8,
+"group": 135.5,
+"machine": 277.4
+},
+{
+"headword": "compute",
+"papers": 189.0,
+"group": 513.1,
+"machine": 7.1
+},
+{
+"headword": "recover",
+"papers": 186.8,
+"group": 29.0,
+"machine": 441.0
+},
+{
+"headword": "assume",
+"papers": 186.2,
+"group": 677.6,
+"machine": 0.0
+},
+{
+"headword": "contrast",
+"papers": 186.0,
+"group": 96.8,
+"machine": 185.0
+},
+{
+"headword": "overall",
+"papers": 186.0,
+"group": 77.4,
+"machine": 640.2
+},
+{
+"headword": "purchase",
+"papers": 185.3,
+"group": 38.7,
+"machine": 28.5
+},
+{
+"headword": "period",
+"papers": 183.1,
+"group": 203.3,
+"machine": 199.2
+},
+{
+"headword": "series",
+"papers": 183.1,
+"group": 58.1,
+"machine": 604.7
+},
+{
+"headword": "incorporate",
+"papers": 182.5,
+"group": 174.2,
+"machine": 903.4
+},
+{
+"headword": "sequence",
+"papers": 180.3,
+"group": 38.7,
+"machine": 21.3
+},
+{
+"headword": "medium",
+"papers": 176.7,
+"group": 19.4,
+"machine": 14.2
+},
+{
+"headword": "external",
+"papers": 175.9,
+"group": 251.7,
+"machine": 21.3
+},
+{
+"headword": "section",
+"papers": 174.2,
+"group": 406.6,
+"machine": 64.0
+},
+{
+"headword": "adjust",
+"papers": 174.2,
+"group": 96.8,
+"machine": 227.6
+},
+{
+"headword": "conform",
+"papers": 166.5,
+"group": 164.6,
+"machine": 28.5
+},
+{
+"headword": "device",
+"papers": 164.0,
+"group": 19.4,
+"machine": 1337.3
+},
+{
+"headword": "tense",
+"papers": 162.4,
+"group": 3765.7,
+"machine": 185.0
+},
+{
+"headword": "deviate",
+"papers": 158.9,
+"group": 358.2,
+"machine": 49.8
+},
+{
+"headword": "convene",
+"papers": 156.1,
+"group": 445.3,
+"machine": 341.4
+},
+{
+"headword": "trend",
+"papers": 154.4,
+"group": 164.6,
+"machine": 85.4
+},
+{
+"headword": "focus",
+"papers": 153.0,
+"group": 232.3,
+"machine": 981.7
+},
+{
+"headword": "normal",
+"papers": 150.8,
+"group": 1084.2,
+"machine": 35.6
+},
+{
+"headword": "dimension",
+"papers": 149.0,
+"group": 232.3,
+"machine": 35.6
+},
+{
+"headword": "impact",
+"papers": 147.5,
+"group": 48.4,
+"machine": 818.1
+},
+{
+"headword": "facilitate",
+"papers": 146.3,
+"group": 48.4,
+"machine": 1017.2
+},
+{
+"headword": "internal",
+"papers": 145.8,
+"group": 271.1,
+"machine": 42.7
+},
+{
+"headword": "theory",
+"papers": 145.3,
+"group": 755.1,
+"machine": 277.4
+},
+{
+"headword": "intermediate",
+"papers": 143.6,
+"group": 48.4,
+"machine": 213.4
+},
+{
+"headword": "denote",
+"papers": 141.4,
+"group": 232.3,
+"machine": 7.1
+},
+{
+"headword": "sum",
+"papers": 136.4,
+"group": 213.0,
+"machine": 455.3
+},
+{
+"headword": "fluctuate",
+"papers": 136.2,
+"group": 193.6,
+"machine": 28.5
+},
+{
+"headword": "error",
+"papers": 135.0,
+"group": 203.3,
+"machine": 0.0
+},
+{
+"headword": "neutral",
+"papers": 131.3,
+"group": 329.1,
+"machine": 21.3
+},
+{
+"headword": "unique",
+"papers": 130.0,
+"group": 890.6,
+"machine": 682.9
+},
+{
+"headword": "establish",
+"papers": 127.1,
+"group": 125.8,
+"machine": 113.8
+},
+{
+"headword": "assess",
+"papers": 126.3,
+"group": 19.4,
+"machine": 1052.8
+},
+{
+"headword": "valid",
+"papers": 125.1,
+"group": 513.1,
+"machine": 412.6
+},
+{
+"headword": "formula",
+"papers": 124.8,
+"group": 300.1,
+"machine": 35.6
+},
+{
+"headword": "media",
+"papers": 124.1,
+"group": 67.8,
+"machine": 99.6
+},
+{
+"headword": "assemble",
+"papers": 123.9,
+"group": 58.1,
+"machine": 106.7
+},
+{
+"headword": "access",
+"papers": 123.3,
+"group": 542.1,
+"machine": 99.6
+},
+{
+"headword": "reverse",
+"papers": 122.9,
+"group": 77.4,
+"machine": 270.3
+},
+{
+"headword": "random",
+"papers": 121.6,
+"group": 242.0,
+"machine": 7.1
+},
+{
+"headword": "version",
+"papers": 121.2,
+"group": 135.5,
+"machine": 21.3
+},
+{
+"headword": "visible",
+"papers": 119.1,
+"group": 0.0,
+"machine": 149.4
+},
+{
+"headword": "prior",
+"papers": 118.2,
+"group": 116.2,
+"machine": 7.1
+},
+{
+"headword": "appropriate",
+"papers": 116.9,
+"group": 67.8,
+"machine": 71.1
+},
+{
+"headword": "equip",
+"papers": 116.9,
+"group": 48.4,
+"machine": 227.6
+},
+{
+"headword": "proportion",
+"papers": 116.4,
+"group": 29.0,
+"machine": 28.5
+},
+{
+"headword": "text",
+"papers": 115.7,
+"group": 222.7,
+"machine": 156.5
+},
+{
+"headword": "vary",
+"papers": 115.4,
+"group": 135.5,
+"machine": 533.5
+},
+{
+"headword": "conclude",
+"papers": 115.2,
+"group": 58.1,
+"machine": 28.5
+},
+{
+"headword": "phenomenon",
+"papers": 114.9,
+"group": 58.1,
+"machine": 14.2
+},
+{
+"headword": "distinct",
+"papers": 114.4,
+"group": 183.9,
+"machine": 71.1
+},
+{
+"headword": "confine",
+"papers": 113.3,
+"group": 687.3,
+"machine": 35.6
+},
+{
+"headword": "consequent",
+"papers": 113.2,
+"group": 48.4,
+"machine": 21.3
+},
+{
+"headword": "radical",
+"papers": 112.7,
+"group": 19.4,
+"machine": 71.1
+},
+{
+"headword": "convert",
+"papers": 111.8,
+"group": 174.2,
+"machine": 99.6
+},
+{
+"headword": "substitute",
+"papers": 111.0,
+"group": 29.0,
+"machine": 49.8
+},
+{
+"headword": "technology",
+"papers": 109.8,
+"group": 96.8,
+"machine": 113.8
+},
+{
+"headword": "orient",
+"papers": 108.1,
+"group": 58.1,
+"machine": 14.2
+},
+{
+"headword": "attach",
+"papers": 107.6,
+"group": 48.4,
+"machine": 42.7
+},
+{
+"headword": "individual",
+"papers": 107.0,
+"group": 77.4,
+"machine": 85.4
+},
+{
+"headword": "statistic",
+"papers": 105.9,
+"group": 600.2,
+"machine": 0.0
+},
+{
+"headword": "relax",
+"papers": 105.8,
+"group": 29.0,
+"machine": 14.2
+},
+{
+"headword": "ensure",
+"papers": 105.3,
+"group": 145.2,
+"machine": 981.7
+},
+{
+"headword": "sufficient",
+"papers": 102.7,
+"group": 154.9,
+"machine": 49.8
+},
+{
+"headword": "integrate",
+"papers": 102.7,
+"group": 609.9,
+"machine": 1465.4
+},
+{
+"headword": "route",
+"papers": 102.7,
+"group": 803.5,
+"machine": 120.9
+},
+{
+"headword": "identify",
+"papers": 101.9,
+"group": 96.8,
+"machine": 227.6
+},
+{
+"headword": "challenge",
+"papers": 100.9,
+"group": 222.7,
+"machine": 910.5
+},
+{
+"headword": "consume",
+"papers": 99.1,
+"group": 48.4,
+"machine": 199.2
+},
+{
+"headword": "isolate",
+"papers": 99.1,
+"group": 38.7,
+"machine": 49.8
+},
+{
+"headword": "monitor",
+"papers": 98.4,
+"group": 87.1,
+"machine": 1422.7
+},
+{
+"headword": "alternative",
+"papers": 97.4,
+"group": 125.8,
+"machine": 291.7
+},
+{
+"headword": "trace",
+"papers": 95.9,
+"group": 87.1,
+"machine": 64.0
+},
+{
+"headword": "rigid",
+"papers": 95.2,
+"group": 154.9,
+"machine": 71.1
+},
+{
+"headword": "accurate",
+"papers": 94.3,
+"group": 271.1,
+"machine": 149.4
+},
+{
+"headword": "strategy",
+"papers": 94.2,
+"group": 125.8,
+"machine": 92.5
+},
+{
+"headword": "interval",
+"papers": 94.0,
+"group": 38.7,
+"machine": 14.2
+},
+{
+"headword": "index",
+"papers": 93.5,
+"group": 48.4,
+"machine": 14.2
+},
+{
+"headword": "apparent",
+"papers": 92.7,
+"group": 203.3,
+"machine": 7.1
+},
+{
+"headword": "globe",
+"papers": 92.5,
+"group": 58.1,
+"machine": 49.8
+},
+{
+"headword": "insert",
+"papers": 92.0,
+"group": 67.8,
+"machine": 71.1
+},
+{
+"headword": "insight",
+"papers": 91.7,
+"group": 87.1,
+"machine": 1003.0
+},
+{
+"headword": "considerable",
+"papers": 91.3,
+"group": 87.1,
+"machine": 35.6
+},
+{
+"headword": "crucial",
+"papers": 91.3,
+"group": 19.4,
+"machine": 924.8
+},
+{
+"headword": "regulate",
+"papers": 90.5,
+"group": 19.4,
+"machine": 483.7
+},
+{
+"headword": "primary",
+"papers": 89.6,
+"group": 77.4,
+"machine": 71.1
+},
+{
+"headword": "flexible",
+"papers": 89.6,
+"group": 67.8,
+"machine": 448.2
+},
+{
+"headword": "accumulate",
+"papers": 89.6,
+"group": 77.4,
+"machine": 156.5
+},
+{
+"headword": "retain",
+"papers": 88.0,
+"group": 58.1,
+"machine": 277.4
+},
+{
+"headword": "minimum",
+"papers": 87.1,
+"group": 271.1,
+"machine": 0.0
+},
+{
+"headword": "thereby",
+"papers": 86.6,
+"group": 48.4,
+"machine": 291.7
+},
+{
+"headword": "scheme",
+"papers": 86.4,
+"group": 183.9,
+"machine": 0.0
+},
+{
+"headword": "supplement",
+"papers": 86.3,
+"group": 87.1,
+"machine": 14.2
+},
+{
+"headword": "enable",
+"papers": 85.4,
+"group": 232.3,
+"machine": 298.8
+},
+{
+"headword": "code",
+"papers": 84.4,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "despite",
+"papers": 84.1,
+"group": 77.4,
+"machine": 113.8
+},
+{
+"headword": "tradition",
+"papers": 82.9,
+"group": 116.2,
+"machine": 341.4
+},
+{
+"headword": "evident",
+"papers": 81.7,
+"group": 58.1,
+"machine": 28.5
+},
+{
+"headword": "parallel",
+"papers": 81.6,
+"group": 348.5,
+"machine": 14.2
+},
+{
+"headword": "overlap",
+"papers": 81.4,
+"group": 145.2,
+"machine": 0.0
+},
+{
+"headword": "emerge",
+"papers": 80.4,
+"group": 38.7,
+"machine": 163.6
+},
+{
+"headword": "eliminate",
+"papers": 80.0,
+"group": 96.8,
+"machine": 28.5
+},
+{
+"headword": "protocol",
+"papers": 79.0,
+"group": 19.4,
+"machine": 113.8
+},
+{
+"headword": "equivalent",
+"papers": 78.9,
+"group": 329.1,
+"machine": 0.0
+},
+{
+"headword": "aspect",
+"papers": 77.7,
+"group": 87.1,
+"machine": 206.3
+},
+{
+"headword": "diverse",
+"papers": 77.2,
+"group": 38.7,
+"machine": 106.7
+},
+{
+"headword": "implement",
+"papers": 75.0,
+"group": 96.8,
+"machine": 185.0
+},
+{
+"headword": "alter",
+"papers": 74.2,
+"group": 48.4,
+"machine": 149.4
+},
+{
+"headword": "issue",
+"papers": 73.7,
+"group": 38.7,
+"machine": 149.4
+},
+{
+"headword": "displace",
+"papers": 73.7,
+"group": 67.8,
+"machine": 0.0
+},
+{
+"headword": "cite",
+"papers": 72.6,
+"group": 193.6,
+"machine": 28.5
+},
+{
+"headword": "restrict",
+"papers": 72.3,
+"group": 164.6,
+"machine": 21.3
+},
+{
+"headword": "undergo",
+"papers": 70.8,
+"group": 48.4,
+"machine": 163.6
+},
+{
+"headword": "nevertheless",
+"papers": 70.6,
+"group": 106.5,
+"machine": 0.0
+},
+{
+"headword": "acquire",
+"papers": 70.0,
+"group": 38.7,
+"machine": 21.3
+},
+{
+"headword": "identical",
+"papers": 70.0,
+"group": 116.2,
+"machine": 35.6
+},
+{
+"headword": "relevant",
+"papers": 69.6,
+"group": 58.1,
+"machine": 14.2
+},
+{
+"headword": "prime",
+"papers": 69.5,
+"group": 135.5,
+"machine": 92.5
+},
+{
+"headword": "intrinsic",
+"papers": 68.6,
+"group": 116.2,
+"machine": 49.8
+},
+{
+"headword": "label",
+"papers": 68.1,
+"group": 87.1,
+"machine": 21.3
+},
+{
+"headword": "brief",
+"papers": 67.6,
+"group": 96.8,
+"machine": 56.9
+},
+{
+"headword": "imply",
+"papers": 67.4,
+"group": 19.4,
+"machine": 7.1
+},
+{
+"headword": "refine",
+"papers": 67.1,
+"group": 9.7,
+"machine": 99.6
+},
+{
+"headword": "culture",
+"papers": 66.9,
+"group": 48.4,
+"machine": 21.3
+},
+{
+"headword": "decline",
+"papers": 64.4,
+"group": 19.4,
+"machine": 49.8
+},
+{
+"headword": "precise",
+"papers": 64.4,
+"group": 48.4,
+"machine": 185.0
+},
+{
+"headword": "restrain",
+"papers": 63.9,
+"group": 38.7,
+"machine": 0.0
+},
+{
+"headword": "virtual",
+"papers": 63.6,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "dominate",
+"papers": 63.4,
+"group": 38.7,
+"machine": 0.0
+},
+{
+"headword": "instance",
+"papers": 62.9,
+"group": 58.1,
+"machine": 604.7
+},
+{
+"headword": "visual",
+"papers": 62.9,
+"group": 19.4,
+"machine": 78.2
+},
+{
+"headword": "comprise",
+"papers": 62.4,
+"group": 87.1,
+"machine": 0.0
+},
+{
+"headword": "constrain",
+"papers": 61.2,
+"group": 58.1,
+"machine": 28.5
+},
+{
+"headword": "classic",
+"papers": 60.0,
+"group": 164.6,
+"machine": 0.0
+},
+{
+"headword": "exceed",
+"papers": 59.9,
+"group": 58.1,
+"machine": 21.3
+},
+{
+"headword": "initiate",
+"papers": 58.9,
+"group": 9.7,
+"machine": 42.7
+},
+{
+"headword": "decade",
+"papers": 57.0,
+"group": 48.4,
+"machine": 0.0
+},
+{
+"headword": "highlight",
+"papers": 57.0,
+"group": 58.1,
+"machine": 526.4
+},
+{
+"headword": "infer",
+"papers": 55.8,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "resource",
+"papers": 55.3,
+"group": 0.0,
+"machine": 78.2
+},
+{
+"headword": "publish",
+"papers": 55.3,
+"group": 300.1,
+"machine": 0.0
+},
+{
+"headword": "input",
+"papers": 53.5,
+"group": 77.4,
+"machine": 21.3
+},
+{
+"headword": "author",
+"papers": 52.6,
+"group": 154.9,
+"machine": 0.0
+},
+{
+"headword": "migrate",
+"papers": 52.6,
+"group": 38.7,
+"machine": 14.2
+},
+{
+"headword": "sustain",
+"papers": 51.3,
+"group": 29.0,
+"machine": 654.4
+},
+{
+"headword": "attain",
+"papers": 51.3,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "benefit",
+"papers": 50.3,
+"group": 48.4,
+"machine": 313.0
+},
+{
+"headword": "interpret",
+"papers": 50.3,
+"group": 135.5,
+"machine": 7.1
+},
+{
+"headword": "proceed",
+"papers": 50.3,
+"group": 29.0,
+"machine": 49.8
+},
+{
+"headword": "regime",
+"papers": 49.1,
+"group": 67.8,
+"machine": 28.5
+},
+{
+"headword": "expand",
+"papers": 47.9,
+"group": 67.8,
+"machine": 220.5
+},
+{
+"headword": "principle",
+"papers": 47.4,
+"group": 145.2,
+"machine": 71.1
+},
+{
+"headword": "eventual",
+"papers": 47.4,
+"group": 67.8,
+"machine": 7.1
+},
+{
+"headword": "adjacent",
+"papers": 47.3,
+"group": 19.4,
+"machine": 7.1
+},
+{
+"headword": "minor",
+"papers": 46.1,
+"group": 9.7,
+"machine": 64.0
+},
+{
+"headword": "automate",
+"papers": 45.7,
+"group": 19.4,
+"machine": 42.7
+},
+{
+"headword": "exclude",
+"papers": 44.7,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "predominant",
+"papers": 44.7,
+"group": 116.2,
+"machine": 49.8
+},
+{
+"headword": "fundamental",
+"papers": 44.6,
+"group": 135.5,
+"machine": 99.6
+},
+{
+"headword": "portion",
+"papers": 44.6,
+"group": 19.4,
+"machine": 14.2
+},
+{
+"headword": "ultimate",
+"papers": 42.9,
+"group": 9.7,
+"machine": 35.6
+},
+{
+"headword": "participate",
+"papers": 42.0,
+"group": 0.0,
+"machine": 14.2
+},
+{
+"headword": "output",
+"papers": 41.9,
+"group": 29.0,
+"machine": 7.1
+},
+{
+"headword": "modify",
+"papers": 41.4,
+"group": 9.7,
+"machine": 99.6
+},
+{
+"headword": "project",
+"papers": 41.0,
+"group": 96.8,
+"machine": 71.1
+},
+{
+"headword": "minimal",
+"papers": 41.0,
+"group": 29.0,
+"machine": 313.0
+},
+{
+"headword": "nuclear",
+"papers": 40.9,
+"group": 0.0,
+"machine": 92.5
+},
+{
+"headword": "collapse",
+"papers": 39.5,
+"group": 67.8,
+"machine": 35.6
+},
+{
+"headword": "constitute",
+"papers": 38.8,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "assist",
+"papers": 38.8,
+"group": 0.0,
+"machine": 21.3
+},
+{
+"headword": "comprehensive",
+"papers": 38.7,
+"group": 9.7,
+"machine": 341.4
+},
+{
+"headword": "capable",
+"papers": 38.5,
+"group": 38.7,
+"machine": 28.5
+},
+{
+"headword": "deduce",
+"papers": 38.0,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "qualitative",
+"papers": 37.8,
+"group": 145.2,
+"machine": 0.0
+},
+{
+"headword": "complement",
+"papers": 37.2,
+"group": 9.7,
+"machine": 49.8
+},
+{
+"headword": "trigger",
+"papers": 37.2,
+"group": 67.8,
+"machine": 64.0
+},
+{
+"headword": "empirical",
+"papers": 37.0,
+"group": 48.4,
+"machine": 0.0
+},
+{
+"headword": "duration",
+"papers": 36.7,
+"group": 0.0,
+"machine": 99.6
+},
+{
+"headword": "inherent",
+"papers": 36.7,
+"group": 87.1,
+"machine": 28.5
+},
+{
+"headword": "context",
+"papers": 36.0,
+"group": 29.0,
+"machine": 56.9
+},
+{
+"headword": "contrary",
+"papers": 36.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "bias",
+"papers": 36.0,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "tape",
+"papers": 35.8,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "adapt",
+"papers": 35.3,
+"group": 145.2,
+"machine": 49.8
+},
+{
+"headword": "distort",
+"papers": 34.3,
+"group": 0.0,
+"machine": 35.6
+},
+{
+"headword": "concept",
+"papers": 34.1,
+"group": 145.2,
+"machine": 7.1
+},
+{
+"headword": "impose",
+"papers": 34.0,
+"group": 106.5,
+"machine": 0.0
+},
+{
+"headword": "reject",
+"papers": 34.0,
+"group": 0.0,
+"machine": 14.2
+},
+{
+"headword": "suspend",
+"papers": 34.0,
+"group": 87.1,
+"machine": 7.1
+},
+{
+"headword": "persist",
+"papers": 33.8,
+"group": 29.0,
+"machine": 42.7
+},
+{
+"headword": "hypothesis",
+"papers": 33.3,
+"group": 19.4,
+"machine": 78.2
+},
+{
+"headword": "explicit",
+"papers": 32.3,
+"group": 96.8,
+"machine": 0.0
+},
+{
+"headword": "exploit",
+"papers": 31.6,
+"group": 19.4,
+"machine": 85.4
+},
+{
+"headword": "principal",
+"papers": 31.3,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "objective",
+"papers": 30.6,
+"group": 9.7,
+"machine": 21.3
+},
+{
+"headword": "survey",
+"papers": 29.9,
+"group": 9.7,
+"machine": 7.1
+},
+{
+"headword": "vehicle",
+"papers": 29.4,
+"group": 38.7,
+"machine": 35.6
+},
+{
+"headword": "reinforce",
+"papers": 29.1,
+"group": 0.0,
+"machine": 21.3
+},
+{
+"headword": "outcome",
+"papers": 28.9,
+"group": 48.4,
+"machine": 64.0
+},
+{
+"headword": "resolve",
+"papers": 28.8,
+"group": 48.4,
+"machine": 0.0
+},
+{
+"headword": "adequate",
+"papers": 28.4,
+"group": 9.7,
+"machine": 14.2
+},
+{
+"headword": "differentiate",
+"papers": 26.9,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "diminish",
+"papers": 26.9,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "passive",
+"papers": 26.9,
+"group": 9.7,
+"machine": 14.2
+},
+{
+"headword": "aid",
+"papers": 26.4,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "accommodate",
+"papers": 26.1,
+"group": 9.7,
+"machine": 14.2
+},
+{
+"headword": "corporate",
+"papers": 25.9,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "plus",
+"papers": 25.6,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "coincide",
+"papers": 24.9,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "panel",
+"papers": 24.9,
+"group": 77.4,
+"machine": 14.2
+},
+{
+"headword": "compensate",
+"papers": 24.7,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "criteria",
+"papers": 24.7,
+"group": 154.9,
+"machine": 14.2
+},
+{
+"headword": "occupy",
+"papers": 24.4,
+"group": 29.0,
+"machine": 7.1
+},
+{
+"headword": "survive",
+"papers": 23.0,
+"group": 19.4,
+"machine": 21.3
+},
+{
+"headword": "option",
+"papers": 22.9,
+"group": 58.1,
+"machine": 56.9
+},
+{
+"headword": "finite",
+"papers": 22.4,
+"group": 242.0,
+"machine": 7.1
+},
+{
+"headword": "inspect",
+"papers": 22.0,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "widespread",
+"papers": 22.0,
+"group": 0.0,
+"machine": 206.3
+},
+{
+"headword": "integral",
+"papers": 22.0,
+"group": 638.9,
+"machine": 0.0
+},
+{
+"headword": "integrity",
+"papers": 22.0,
+"group": 0.0,
+"machine": 277.4
+},
+{
+"headword": "perspective",
+"papers": 21.9,
+"group": 435.6,
+"machine": 135.2
+},
+{
+"headword": "evolve",
+"papers": 21.2,
+"group": 38.7,
+"machine": 14.2
+},
+{
+"headword": "restore",
+"papers": 20.9,
+"group": 0.0,
+"machine": 21.3
+},
+{
+"headword": "institute",
+"papers": 20.7,
+"group": 38.7,
+"machine": 21.3
+},
+{
+"headword": "scope",
+"papers": 20.7,
+"group": 29.0,
+"machine": 149.4
+},
+{
+"headword": "task",
+"papers": 20.5,
+"group": 19.4,
+"machine": 7.1
+},
+{
+"headword": "manual",
+"papers": 20.5,
+"group": 29.0,
+"machine": 7.1
+},
+{
+"headword": "community",
+"papers": 20.3,
+"group": 38.7,
+"machine": 14.2
+},
+{
+"headword": "goal",
+"papers": 20.3,
+"group": 19.4,
+"machine": 71.1
+},
+{
+"headword": "cooperate",
+"papers": 20.0,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "dispose",
+"papers": 20.0,
+"group": 9.7,
+"machine": 156.5
+},
+{
+"headword": "preliminary",
+"papers": 19.5,
+"group": 0.0,
+"machine": 42.7
+},
+{
+"headword": "technical",
+"papers": 18.8,
+"group": 58.1,
+"machine": 49.8
+},
+{
+"headword": "medical",
+"papers": 18.8,
+"group": 29.0,
+"machine": 85.4
+},
+{
+"headword": "clarify",
+"papers": 18.8,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "prospect",
+"papers": 18.8,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "so-called",
+"papers": 18.8,
+"group": 77.4,
+"machine": 0.0
+},
+{
+"headword": "administrate",
+"papers": 18.7,
+"group": 9.7,
+"machine": 28.5
+},
+{
+"headword": "motive",
+"papers": 18.5,
+"group": 58.1,
+"machine": 14.2
+},
+{
+"headword": "rely",
+"papers": 18.3,
+"group": 38.7,
+"machine": 14.2
+},
+{
+"headword": "discrete",
+"papers": 18.2,
+"group": 48.4,
+"machine": 7.1
+},
+{
+"headword": "intervene",
+"papers": 18.2,
+"group": 0.0,
+"machine": 142.3
+},
+{
+"headword": "nonetheless",
+"papers": 18.2,
+"group": 9.7,
+"machine": 7.1
+},
+{
+"headword": "contract",
+"papers": 18.0,
+"group": 9.7,
+"machine": 7.1
+},
+{
+"headword": "presume",
+"papers": 17.8,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "scenario",
+"papers": 17.8,
+"group": 38.7,
+"machine": 263.2
+},
+{
+"headword": "straightforward",
+"papers": 17.7,
+"group": 77.4,
+"machine": 56.9
+},
+{
+"headword": "devote",
+"papers": 17.2,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "mutual",
+"papers": 16.8,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "income",
+"papers": 16.6,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "discriminate",
+"papers": 16.5,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "transmit",
+"papers": 16.5,
+"group": 38.7,
+"machine": 7.1
+},
+{
+"headword": "whereby",
+"papers": 16.3,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "inevitable",
+"papers": 15.8,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "guarantee",
+"papers": 15.6,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "publication",
+"papers": 15.6,
+"group": 29.0,
+"machine": 14.2
+},
+{
+"headword": "offset",
+"papers": 15.6,
+"group": 0.0,
+"machine": 14.2
+},
+{
+"headword": "compatible",
+"papers": 15.6,
+"group": 87.1,
+"machine": 7.1
+},
+{
+"headword": "somewhat",
+"papers": 15.1,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "anticipate",
+"papers": 15.1,
+"group": 48.4,
+"machine": 7.1
+},
+{
+"headword": "enormous",
+"papers": 15.1,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "rational",
+"papers": 15.0,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "implicit",
+"papers": 14.8,
+"group": 96.8,
+"machine": 0.0
+},
+{
+"headword": "likewise",
+"papers": 14.6,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "implicate",
+"papers": 14.5,
+"group": 29.0,
+"machine": 227.6
+},
+{
+"headword": "terminate",
+"papers": 14.3,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "margin",
+"papers": 14.1,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "topic",
+"papers": 13.8,
+"group": 29.0,
+"machine": 7.1
+},
+{
+"headword": "document",
+"papers": 13.1,
+"group": 9.7,
+"machine": 7.1
+},
+{
+"headword": "abstract",
+"papers": 13.1,
+"group": 77.4,
+"machine": 0.0
+},
+{
+"headword": "drama",
+"papers": 13.1,
+"group": 48.4,
+"machine": 7.1
+},
+{
+"headword": "submit",
+"papers": 12.6,
+"group": 58.1,
+"machine": 7.1
+},
+{
+"headword": "manipulate",
+"papers": 11.8,
+"group": 38.7,
+"machine": 21.3
+},
+{
+"headword": "undertake",
+"papers": 11.6,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "guideline",
+"papers": 11.4,
+"group": 38.7,
+"machine": 85.4
+},
+{
+"headword": "mature",
+"papers": 11.4,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "precede",
+"papers": 11.3,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "allocate",
+"papers": 10.9,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "symbol",
+"papers": 10.6,
+"group": 38.7,
+"machine": 0.0
+},
+{
+"headword": "status",
+"papers": 10.4,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "innovate",
+"papers": 10.4,
+"group": 0.0,
+"machine": 206.3
+},
+{
+"headword": "encounter",
+"papers": 10.4,
+"group": 9.7,
+"machine": 7.1
+},
+{
+"headword": "injure",
+"papers": 10.3,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "accompany",
+"papers": 9.9,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "economy",
+"papers": 9.8,
+"group": 0.0,
+"machine": 14.2
+},
+{
+"headword": "respond",
+"papers": 9.8,
+"group": 48.4,
+"machine": 28.5
+},
+{
+"headword": "commit",
+"papers": 9.6,
+"group": 0.0,
+"machine": 14.2
+},
+{
+"headword": "sector",
+"papers": 9.4,
+"group": 0.0,
+"machine": 14.2
+},
+{
+"headword": "arbitrary",
+"papers": 9.2,
+"group": 348.5,
+"machine": 0.0
+},
+{
+"headword": "depress",
+"papers": 9.1,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "category",
+"papers": 8.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "incline",
+"papers": 8.7,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "instruct",
+"papers": 8.6,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "register",
+"papers": 8.4,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "foundation",
+"papers": 8.4,
+"group": 19.4,
+"machine": 64.0
+},
+{
+"headword": "paradigm",
+"papers": 8.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "ongoing",
+"papers": 8.2,
+"group": 0.0,
+"machine": 64.0
+},
+{
+"headword": "prohibit",
+"papers": 8.1,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "annual",
+"papers": 7.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "adult",
+"papers": 7.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "concurrent",
+"papers": 7.7,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "circumstance",
+"papers": 7.6,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "communicate",
+"papers": 7.6,
+"group": 48.4,
+"machine": 21.3
+},
+{
+"headword": "contradict",
+"papers": 7.2,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "colleague",
+"papers": 7.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "seek",
+"papers": 7.1,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "edit",
+"papers": 6.9,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "intelligent",
+"papers": 6.6,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "pursue",
+"papers": 6.4,
+"group": 9.7,
+"machine": 21.3
+},
+{
+"headword": "ethic",
+"papers": 6.4,
+"group": 0.0,
+"machine": 28.5
+},
+{
+"headword": "albeit",
+"papers": 6.4,
+"group": 9.7,
+"machine": 14.2
+},
+{
+"headword": "utilise",
+"papers": 6.1,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "append",
+"papers": 6.1,
+"group": 125.8,
+"machine": 0.0
+},
+{
+"headword": "revise",
+"papers": 6.1,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "assure",
+"papers": 6.1,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "chart",
+"papers": 5.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "coherent",
+"papers": 5.7,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "team",
+"papers": 5.7,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "violate",
+"papers": 5.7,
+"group": 48.4,
+"machine": 0.0
+},
+{
+"headword": "acknowledge",
+"papers": 5.5,
+"group": 9.7,
+"machine": 28.5
+},
+{
+"headword": "conceive",
+"papers": 5.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "minimise",
+"papers": 5.4,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "secure",
+"papers": 5.2,
+"group": 9.7,
+"machine": 56.9
+},
+{
+"headword": "notion",
+"papers": 5.2,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "incidence",
+"papers": 5.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "sex",
+"papers": 5.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "specify",
+"papers": 5.0,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "convince",
+"papers": 5.0,
+"group": 48.4,
+"machine": 0.0
+},
+{
+"headword": "partner",
+"papers": 4.7,
+"group": 29.0,
+"machine": 163.6
+},
+{
+"headword": "debate",
+"papers": 4.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "perceive",
+"papers": 4.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "emphasis",
+"papers": 4.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "justify",
+"papers": 4.5,
+"group": 9.7,
+"machine": 7.1
+},
+{
+"headword": "domestic",
+"papers": 4.4,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "logic",
+"papers": 4.4,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "analogy",
+"papers": 4.4,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "confer",
+"papers": 4.2,
+"group": 0.0,
+"machine": 21.3
+},
+{
+"headword": "underlie",
+"papers": 4.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "infrastructure",
+"papers": 4.2,
+"group": 0.0,
+"machine": 56.9
+},
+{
+"headword": "export",
+"papers": 4.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "job",
+"papers": 4.0,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "conflict",
+"papers": 4.0,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "commission",
+"papers": 3.9,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "erode",
+"papers": 3.9,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "entity",
+"papers": 3.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "revolution",
+"papers": 3.7,
+"group": 0.0,
+"machine": 99.6
+},
+{
+"headword": "academy",
+"papers": 3.5,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "aware",
+"papers": 3.5,
+"group": 9.7,
+"machine": 71.1
+},
+{
+"headword": "compile",
+"papers": 3.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "expert",
+"papers": 3.4,
+"group": 0.0,
+"machine": 49.8
+},
+{
+"headword": "hierarchy",
+"papers": 3.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "paragraph",
+"papers": 3.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "item",
+"papers": 3.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "style",
+"papers": 2.9,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "commence",
+"papers": 2.9,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "military",
+"papers": 2.9,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "comment",
+"papers": 2.7,
+"group": 67.8,
+"machine": 0.0
+},
+{
+"headword": "fund",
+"papers": 2.7,
+"group": 0.0,
+"machine": 35.6
+},
+{
+"headword": "civil",
+"papers": 2.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "enforce",
+"papers": 2.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "norm",
+"papers": 2.7,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "grant",
+"papers": 2.5,
+"group": 0.0,
+"machine": 35.6
+},
+{
+"headword": "invoke",
+"papers": 2.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "credit",
+"papers": 2.4,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "temporary",
+"papers": 2.4,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "consent",
+"papers": 2.2,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "clause",
+"papers": 2.2,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "ambiguous",
+"papers": 2.2,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "appreciate",
+"papers": 2.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "odd",
+"papers": 2.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "finance",
+"papers": 2.0,
+"group": 0.0,
+"machine": 64.0
+},
+{
+"headword": "chapter",
+"papers": 2.0,
+"group": 29.0,
+"machine": 0.0
+},
+{
+"headword": "cease",
+"papers": 2.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "legislate",
+"papers": 1.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "consult",
+"papers": 1.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "draft",
+"papers": 1.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "abandon",
+"papers": 1.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "commodity",
+"papers": 1.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "schedule",
+"papers": 1.7,
+"group": 87.1,
+"machine": 0.0
+},
+{
+"headword": "notwithstanding",
+"papers": 1.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "maximise",
+"papers": 1.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "amend",
+"papers": 1.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "vision",
+"papers": 1.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "authority",
+"papers": 1.3,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "ministry",
+"papers": 1.3,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "advocate",
+"papers": 1.3,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "controversy",
+"papers": 1.2,
+"group": 38.7,
+"machine": 0.0
+},
+{
+"headword": "unify",
+"papers": 1.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "attitude",
+"papers": 0.8,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "quote",
+"papers": 0.8,
+"group": 9.7,
+"machine": 0.0
+},
+{
+"headword": "behalf",
+"papers": 0.8,
+"group": 19.4,
+"machine": 0.0
+},
+{
+"headword": "forthcoming",
+"papers": 0.8,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "legal",
+"papers": 0.7,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "ethnic",
+"papers": 0.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "professional",
+"papers": 0.7,
+"group": 0.0,
+"machine": 14.2
+},
+{
+"headword": "mental",
+"papers": 0.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "definite",
+"papers": 0.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "contemporary",
+"papers": 0.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "practitioner",
+"papers": 0.7,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "journal",
+"papers": 0.5,
+"group": 832.5,
+"machine": 0.0
+},
+{
+"headword": "philosophy",
+"papers": 0.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "gender",
+"papers": 0.5,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "labour",
+"papers": 0.3,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "estate",
+"papers": 0.3,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "voluntary",
+"papers": 0.3,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "mediate",
+"papers": 0.3,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "policy",
+"papers": 0.2,
+"group": 0.0,
+"machine": 14.2
+},
+{
+"headword": "liberal",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "psychology",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "incentive",
+"papers": 0.2,
+"group": 0.0,
+"machine": 42.7
+},
+{
+"headword": "deny",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "ideology",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "successor",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "thesis",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "currency",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "subordinate",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "levy",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "reluctance",
+"papers": 0.2,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "immigrate",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "summary",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "generation",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "licence",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "revenue",
+"papers": 0.0,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "welfare",
+"papers": 0.0,
+"group": 0.0,
+"machine": 7.1
+},
+{
+"headword": "federal",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "ignorant",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "lecture",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "overseas",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "subsidy",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+},
+{
+"headword": "priority",
+"papers": 0.0,
+"group": 0.0,
+"machine": 0.0
+}
+]
+}

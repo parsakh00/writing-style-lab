@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install --no-deps .
+      - name: command line, on this repository's own README
+        run: writing-style README.md --register docs --suggest
+      - name: library entry point
+        run: |
+          python -c "from writingstyle import report; r = report(open('README.md').read(), register='docs'); assert 'inside the published range' in r; print(r.splitlines()[0])"
+      - name: skill directory works on its own
+        run: python .claude/skills/writing-style/check.py .claude/skills/writing-style/SKILL.md --register docs

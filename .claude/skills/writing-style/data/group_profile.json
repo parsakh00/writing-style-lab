@@ -1,0 +1,846 @@
+{
+ "n_papers": 19,
+ "total_words": 103300,
+ "characteristic_terms": [
+  {
+   "word": "polyplex",
+   "rate_per_million": 464.7,
+   "corpus_rate": 7.9,
+   "ratio": 58.6
+  },
+  {
+   "word": "lj-eos",
+   "rate_per_million": 377.5,
+   "corpus_rate": 6.4,
+   "ratio": 58.6
+  },
+  {
+   "word": "harasima",
+   "rate_per_million": 377.5,
+   "corpus_rate": 6.4,
+   "ratio": 58.6
+  },
+  {
+   "word": "aw-fea",
+   "rate_per_million": 319.5,
+   "corpus_rate": 5.5,
+   "ratio": 58.6
+  },
+  {
+   "word": "tren",
+   "rate_per_million": 474.3,
+   "corpus_rate": 8.4,
+   "ratio": 56.3
+  },
+  {
+   "word": "nonsolvent",
+   "rate_per_million": 309.8,
+   "corpus_rate": 5.6,
+   "ratio": 55.1
+  },
+  {
+   "word": "microgels",
+   "rate_per_million": 377.5,
+   "corpus_rate": 6.9,
+   "ratio": 54.4
+  },
+  {
+   "word": "kirkwood",
+   "rate_per_million": 348.5,
+   "corpus_rate": 6.4,
+   "ratio": 54.1
+  },
+  {
+   "word": "polyanion",
+   "rate_per_million": 493.7,
+   "corpus_rate": 9.3,
+   "ratio": 53.3
+  },
+  {
+   "word": "microgel",
+   "rate_per_million": 348.5,
+   "corpus_rate": 6.6,
+   "ratio": 52.7
+  },
+  {
+   "word": "irving",
+   "rate_per_million": 329.1,
+   "corpus_rate": 6.3,
+   "ratio": 52.4
+  },
+  {
+   "word": "polycation",
+   "rate_per_million": 513.1,
+   "corpus_rate": 9.9,
+   "ratio": 51.7
+  },
+  {
+   "word": "tangential",
+   "rate_per_million": 1790.9,
+   "corpus_rate": 35.9,
+   "ratio": 49.9
+  },
+  {
+   "word": "tensor",
+   "rate_per_million": 3117.1,
+   "corpus_rate": 68.8,
+   "ratio": 45.3
+  },
+  {
+   "word": "north",
+   "rate_per_million": 367.9,
+   "corpus_rate": 8.8,
+   "ratio": 42.0
+  },
+  {
+   "word": "pim-",
+   "rate_per_million": 484.0,
+   "corpus_rate": 11.7,
+   "ratio": 41.2
+  },
+  {
+   "word": "definitions",
+   "rate_per_million": 668.0,
+   "corpus_rate": 16.5,
+   "ratio": 40.4
+  },
+  {
+   "word": "wafers",
+   "rate_per_million": 319.5,
+   "corpus_rate": 8.8,
+   "ratio": 36.5
+  },
+  {
+   "word": "configurational",
+   "rate_per_million": 629.2,
+   "corpus_rate": 17.9,
+   "ratio": 35.2
+  },
+  {
+   "word": "kernels",
+   "rate_per_million": 183.9,
+   "corpus_rate": 5.3,
+   "ratio": 34.8
+  },
+  {
+   "word": "inhomogeneous",
+   "rate_per_million": 280.7,
+   "corpus_rate": 8.1,
+   "ratio": 34.7
+  },
+  {
+   "word": "scalar",
+   "rate_per_million": 183.9,
+   "corpus_rate": 5.5,
+   "ratio": 33.7
+  },
+  {
+   "word": "definition",
+   "rate_per_million": 1384.3,
+   "corpus_rate": 42.2,
+   "ratio": 32.8
+  },
+  {
+   "word": "polycations",
+   "rate_per_million": 319.5,
+   "corpus_rate": 9.8,
+   "ratio": 32.8
+  },
+  {
+   "word": "virial",
+   "rate_per_million": 300.1,
+   "corpus_rate": 9.3,
+   "ratio": 32.4
+  },
+  {
+   "word": "mats",
+   "rate_per_million": 300.1,
+   "corpus_rate": 9.3,
+   "ratio": 32.4
+  },
+  {
+   "word": "anharmonic",
+   "rate_per_million": 183.9,
+   "corpus_rate": 5.8,
+   "ratio": 31.8
+  },
+  {
+   "word": "department",
+   "rate_per_million": 290.4,
+   "corpus_rate": 9.9,
+   "ratio": 29.3
+  },
+  {
+   "word": "contour",
+   "rate_per_million": 1587.6,
+   "corpus_rate": 55.7,
+   "ratio": 28.5
+  },
+  {
+   "word": "contours",
+   "rate_per_million": 232.3,
+   "corpus_rate": 8.6,
+   "ratio": 27.0
+  },
+  {
+   "word": "uniquely",
+   "rate_per_million": 164.6,
+   "corpus_rate": 6.1,
+   "ratio": 26.9
+  },
+  {
+   "word": "momentum",
+   "rate_per_million": 309.8,
+   "corpus_rate": 11.7,
+   "ratio": 26.4
+  },
+  {
+   "word": "society",
+   "rate_per_million": 309.8,
+   "corpus_rate": 12.6,
+   "ratio": 24.7
+  },
+  {
+   "word": "nonequilibrium",
+   "rate_per_million": 183.9,
+   "corpus_rate": 7.6,
+   "ratio": 24.2
+  },
+  {
+   "word": "slit-shaped",
+   "rate_per_million": 222.7,
+   "corpus_rate": 9.3,
+   "ratio": 24.1
+  },
+  {
+   "word": "arbitrary",
+   "rate_per_million": 348.5,
+   "corpus_rate": 15.0,
+   "ratio": 23.2
+  },
+  {
+   "word": "geometrically",
+   "rate_per_million": 164.6,
+   "corpus_rate": 7.4,
+   "ratio": 22.1
+  },
+  {
+   "word": "averaging",
+   "rate_per_million": 425.9,
+   "corpus_rate": 19.7,
+   "ratio": 21.7
+  },
+  {
+   "word": "high-pressure",
+   "rate_per_million": 406.6,
+   "corpus_rate": 19.5,
+   "ratio": 20.8
+  },
+  {
+   "word": "integral",
+   "rate_per_million": 629.2,
+   "corpus_rate": 30.2,
+   "ratio": 20.8
+  },
+  {
+   "word": "physics",
+   "rate_per_million": 493.7,
+   "corpus_rate": 24.5,
+   "ratio": 20.2
+  },
+  {
+   "word": "biomolecular",
+   "rate_per_million": 183.9,
+   "corpus_rate": 9.4,
+   "ratio": 19.5
+  },
+  {
+   "word": "turbulent",
+   "rate_per_million": 116.2,
+   "corpus_rate": 6.3,
+   "ratio": 18.5
+  },
+  {
+   "word": "cartesian",
+   "rate_per_million": 116.2,
+   "corpus_rate": 6.3,
+   "ratio": 18.5
+  },
+  {
+   "word": "laplace",
+   "rate_per_million": 116.2,
+   "corpus_rate": 6.4,
+   "ratio": 18.0
+  },
+  {
+   "word": "crossing",
+   "rate_per_million": 174.2,
+   "corpus_rate": 9.8,
+   "ratio": 17.9
+  },
+  {
+   "word": "valid",
+   "rate_per_million": 309.8,
+   "corpus_rate": 18.0,
+   "ratio": 17.2
+  },
+  {
+   "word": "slit",
+   "rate_per_million": 387.2,
+   "corpus_rate": 22.6,
+   "ratio": 17.1
+  },
+  {
+   "word": "perspective",
+   "rate_per_million": 425.9,
+   "corpus_rate": 26.0,
+   "ratio": 16.4
+  },
+  {
+   "word": "derivation",
+   "rate_per_million": 125.8,
+   "corpus_rate": 7.8,
+   "ratio": 16.2
+  },
+  {
+   "word": "triblock",
+   "rate_per_million": 232.3,
+   "corpus_rate": 14.4,
+   "ratio": 16.2
+  },
+  {
+   "word": "hcho",
+   "rate_per_million": 309.8,
+   "corpus_rate": 19.7,
+   "ratio": 15.7
+  },
+  {
+   "word": "coarse-grained",
+   "rate_per_million": 880.9,
+   "corpus_rate": 56.4,
+   "ratio": 15.6
+  },
+  {
+   "word": "buckling",
+   "rate_per_million": 154.9,
+   "corpus_rate": 9.9,
+   "ratio": 15.6
+  },
+  {
+   "word": "advances",
+   "rate_per_million": 193.6,
+   "corpus_rate": 12.6,
+   "ratio": 15.4
+  },
+  {
+   "word": "delta",
+   "rate_per_million": 222.7,
+   "corpus_rate": 15.0,
+   "ratio": 14.8
+  },
+  {
+   "word": "kelvin",
+   "rate_per_million": 174.2,
+   "corpus_rate": 12.2,
+   "ratio": 14.2
+  },
+  {
+   "word": "curved",
+   "rate_per_million": 154.9,
+   "corpus_rate": 10.9,
+   "ratio": 14.2
+  },
+  {
+   "word": "pairwise",
+   "rate_per_million": 271.1,
+   "corpus_rate": 19.5,
+   "ratio": 13.9
+  },
+  {
+   "word": "circles",
+   "rate_per_million": 154.9,
+   "corpus_rate": 11.2,
+   "ratio": 13.8
+  }
+ ],
+ "formulas": {
+  "due to the": 0.823,
+  "based on the": 0.494,
+  "of the pressure": 0.474,
+  "of the local": 0.397,
+  "pressure in the": 0.358,
+  "as shown in": 0.348,
+  "to the surface": 0.319,
+  "at the interface": 0.319,
+  "the number of": 0.31,
+  "in terms of": 0.31,
+  "the surface of": 0.29,
+  "of the system": 0.29,
+  "parallel to the": 0.271,
+  "the values of": 0.261,
+  "on the surface": 0.261,
+  "this journal is": 0.252,
+  "pressure of the": 0.252,
+  "journal is the": 0.252,
+  "definition of the": 0.252,
+  "to the pressure": 0.242,
+  "thickness of the": 0.242,
+  "in this work": 0.242,
+  "there is no": 0.232,
+  "normal to the": 0.232,
+  "as well as": 0.232,
+  "to determine the": 0.223,
+  "of the surface": 0.223,
+  "contribution to the": 0.223,
+  "in the bulk": 0.213,
+  "we note that": 0.203,
+  "the presence of": 0.203,
+  "the formation of": 0.203,
+  "r is the": 0.203,
+  "of the molecules": 0.194,
+  "of the adsorbed": 0.194,
+  "is shown in": 0.194,
+  "to calculate the": 0.184,
+  "the definition of": 0.184,
+  "the case of": 0.184
+ },
+ "combinations": {
+  "causal spine (their most-used links, per 1000 words)": [
+   {
+    "phrase": "due to",
+    "per_1000w": 1.22
+   },
+   {
+    "phrase": "because",
+    "per_1000w": 0.8
+   },
+   {
+    "phrase": "leads to",
+    "per_1000w": 0.69
+   },
+   {
+    "phrase": "thus",
+    "per_1000w": 0.69
+   },
+   {
+    "phrase": "therefore",
+    "per_1000w": 0.29
+   },
+   {
+    "phrase": "results in",
+    "per_1000w": 0.28
+   },
+   {
+    "phrase": "so that",
+    "per_1000w": 0.24
+   },
+   {
+    "phrase": "because of",
+    "per_1000w": 0.13
+   },
+   {
+    "phrase": "as a result",
+    "per_1000w": 0.08
+   },
+   {
+    "phrase": "attributed to",
+    "per_1000w": 0.05
+   }
+  ],
+  "method verb: 'can be' + participle (2.02 per 1000, their default)": [
+   {
+    "phrase": "can be written as",
+    "per_1000w": 0.25
+   },
+   {
+    "phrase": "can be calculated from",
+    "per_1000w": null
+   },
+   {
+    "phrase": "can be obtained by",
+    "per_1000w": null
+   },
+   {
+    "phrase": "can be expressed as",
+    "per_1000w": null
+   },
+   {
+    "phrase": "is given by",
+    "per_1000w": 0.14
+   },
+   {
+    "phrase": "is calculated from",
+    "per_1000w": 0.16
+   },
+   {
+    "phrase": "is defined as",
+    "per_1000w": 0.06
+   },
+   {
+    "phrase": "were performed",
+    "per_1000w": 0.24
+   },
+   {
+    "phrase": "using the",
+    "per_1000w": 0.59
+   },
+   {
+    "phrase": "is set to",
+    "per_1000w": 0.08
+   }
+  ],
+  "sentence openers (share of sentences)": [
+   {
+    "phrase": "This ...",
+    "per_1000w": 1.35
+   },
+   {
+    "phrase": "However,",
+    "per_1000w": 0.79
+   },
+   {
+    "phrase": "These ...",
+    "per_1000w": 0.5
+   },
+   {
+    "phrase": "For a/the ...",
+    "per_1000w": 0.45
+   },
+   {
+    "phrase": "When ...",
+    "per_1000w": 0.29
+   },
+   {
+    "phrase": "Here,",
+    "per_1000w": 0.24
+   },
+   {
+    "phrase": "Thus,",
+    "per_1000w": 0.24
+   },
+   {
+    "phrase": "Although ...",
+    "per_1000w": 0.18
+   },
+   {
+    "phrase": "For example,",
+    "per_1000w": 0.15
+   },
+   {
+    "phrase": "Such ...",
+    "per_1000w": 0.15
+   },
+   {
+    "phrase": "In addition,",
+    "per_1000w": 0.13
+   },
+   {
+    "phrase": "Therefore,",
+    "per_1000w": 0.13
+   },
+   {
+    "phrase": "Since ...",
+    "per_1000w": 0.13
+   },
+   {
+    "phrase": "As shown in",
+    "per_1000w": 0.12
+   },
+   {
+    "phrase": "In this work, we",
+    "per_1000w": 0.08
+   }
+  ],
+  "stance by pointing, not softening": [
+   {
+    "phrase": "note that",
+    "per_1000w": 0.32
+   },
+   {
+    "phrase": "we note that",
+    "per_1000w": 0.2
+   },
+   {
+    "phrase": "it should be noted that",
+    "per_1000w": 0.11
+   },
+   {
+    "phrase": "in general",
+    "per_1000w": 0.18
+   },
+   {
+    "phrase": "in practice",
+    "per_1000w": 0.17
+   },
+   {
+    "phrase": "it is possible to",
+    "per_1000w": 0.13
+   },
+   {
+    "phrase": "in principle",
+    "per_1000w": 0.12
+   },
+   {
+    "phrase": "it is worth",
+    "per_1000w": 0.1
+   },
+   {
+    "phrase": "indicates that",
+    "per_1000w": 0.18
+   },
+   {
+    "phrase": "suggests that",
+    "per_1000w": 0.14
+   },
+   {
+    "phrase": "appears to",
+    "per_1000w": 0.11
+   },
+   {
+    "phrase": "is likely",
+    "per_1000w": 0.09
+   },
+   {
+    "phrase": "is expected to",
+    "per_1000w": 0.09
+   },
+   {
+    "phrase": "may be",
+    "per_1000w": 0.11
+   },
+   {
+    "phrase": "as expected",
+    "per_1000w": 0.1
+   }
+  ],
+  "we + verb (model-building verbs)": [
+   {
+    "phrase": "we have",
+    "per_1000w": 0.41
+   },
+   {
+    "phrase": "we note",
+    "per_1000w": 0.22
+   },
+   {
+    "phrase": "we also",
+    "per_1000w": 0.19
+   },
+   {
+    "phrase": "we consider",
+    "per_1000w": 0.16
+   },
+   {
+    "phrase": "we present",
+    "per_1000w": 0.15
+   },
+   {
+    "phrase": "we assume",
+    "per_1000w": 0.14
+   },
+   {
+    "phrase": "we found",
+    "per_1000w": 0.09
+   },
+   {
+    "phrase": "we show",
+    "per_1000w": 0.09
+   },
+   {
+    "phrase": "we first",
+    "per_1000w": 0.07
+   },
+   {
+    "phrase": "we use",
+    "per_1000w": 0.06
+   }
+  ],
+  "comparison frames": [
+   {
+    "phrase": "compared with / to",
+    "per_1000w": 0.44
+   },
+   {
+    "phrase": "in terms of",
+    "per_1000w": 0.31
+   },
+   {
+    "phrase": "similar to",
+    "per_1000w": 0.2
+   },
+   {
+    "phrase": "close to",
+    "per_1000w": 0.17
+   },
+   {
+    "phrase": "consistent with",
+    "per_1000w": 0.14
+   },
+   {
+    "phrase": "as a function of",
+    "per_1000w": 0.11
+   },
+   {
+    "phrase": "in good agreement with",
+    "per_1000w": 0.09
+   },
+   {
+    "phrase": "with respect to",
+    "per_1000w": 0.09
+   },
+   {
+    "phrase": "in comparison with",
+    "per_1000w": 0.07
+   },
+   {
+    "phrase": "differs from",
+    "per_1000w": 0.07
+   },
+   {
+    "phrase": "agrees well with",
+    "per_1000w": 0.05
+   }
+  ],
+  "spatial and system frames (their field)": [
+   {
+    "phrase": "parallel to the surface",
+    "per_1000w": 0.27
+   },
+   {
+    "phrase": "normal to the surface",
+    "per_1000w": 0.23
+   },
+   {
+    "phrase": "in the bulk phase",
+    "per_1000w": 0.18
+   },
+   {
+    "phrase": "in equilibrium with the bulk",
+    "per_1000w": 0.15
+   },
+   {
+    "phrase": "the pore wall",
+    "per_1000w": 0.19
+   },
+   {
+    "phrase": "the simulation box",
+    "per_1000w": 0.22
+   },
+   {
+    "phrase": "the thickness of the",
+    "per_1000w": 0.1
+   },
+   {
+    "phrase": "the surface area of",
+    "per_1000w": 0.1
+   },
+   {
+    "phrase": "the center of mass",
+    "per_1000w": 0.1
+   },
+   {
+    "phrase": "the first adsorbed layer",
+    "per_1000w": 0.11
+   },
+   {
+    "phrase": "term on the right",
+    "per_1000w": 0.1
+   },
+   {
+    "phrase": "the definition of the",
+    "per_1000w": 0.13
+   }
+  ],
+  "content pairs (2-word terms, per 1000 words)": [
+   {
+    "phrase": "pressure tensor",
+    "per_1000w": 2.29
+   },
+   {
+    "phrase": "tangential pressure",
+    "per_1000w": 1.41
+   },
+   {
+    "phrase": "surface area",
+    "per_1000w": 0.96
+   },
+   {
+    "phrase": "pore width",
+    "per_1000w": 0.48
+   },
+   {
+    "phrase": "pore size",
+    "per_1000w": 0.41
+   },
+   {
+    "phrase": "adsorbed layer",
+    "per_1000w": 0.4
+   },
+   {
+    "phrase": "bulk phase",
+    "per_1000w": 0.37
+   },
+   {
+    "phrase": "molecular simulation",
+    "per_1000w": 0.36
+   },
+   {
+    "phrase": "monte carlo",
+    "per_1000w": 0.32
+   },
+   {
+    "phrase": "simulation results",
+    "per_1000w": 0.32
+   },
+   {
+    "phrase": "adsorbate molecules",
+    "per_1000w": 0.28
+   },
+   {
+    "phrase": "bulk pressure",
+    "per_1000w": 0.24
+   },
+   {
+    "phrase": "density profile",
+    "per_1000w": 0.24
+   },
+   {
+    "phrase": "intermolecular forces",
+    "per_1000w": 0.23
+   },
+   {
+    "phrase": "free energy",
+    "per_1000w": 0.22
+   },
+   {
+    "phrase": "ensemble average",
+    "per_1000w": 0.2
+   },
+   {
+    "phrase": "number density",
+    "per_1000w": 0.18
+   },
+   {
+    "phrase": "uniquely defined",
+    "per_1000w": 0.15
+   },
+   {
+    "phrase": "irving kirkwood",
+    "per_1000w": 0.15
+   },
+   {
+    "phrase": "statistical mechanical",
+    "per_1000w": 0.11
+   },
+   {
+    "phrase": "inhomogeneous systems",
+    "per_1000w": 0.12
+   },
+   {
+    "phrase": "slit pores",
+    "per_1000w": 0.12
+   }
+  ]
+ },
+ "combination_note": "Measured on 19 papers, 103,300 words, 3,197 sentences. Rates per 1000 words; openers are per 1000 words of text, counted sentence-initially."
+}

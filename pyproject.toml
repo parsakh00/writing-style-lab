@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "writing-style-check"
+version = "0.1.0"
+description = "Score prose against measured targets from published scientific papers. No dependencies."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["scientific writing", "style", "academic", "manuscript"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Text Processing :: Linguistic",
+  "Intended Audience :: Science/Research",
+]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/parsakh00/writing-style-lab"
+
+[project.scripts]
+writing-style = "writingstyle.check:main"
+
+# The package is the skill directory itself, so one copy serves both an agent's skills
+# folder and pip. The data files travel with it.
+[tool.setuptools]
+package-dir = { "writingstyle" = ".claude/skills/writing-style" }
+packages = ["writingstyle"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+writingstyle = ["data/*.json", "SKILL.md"]
