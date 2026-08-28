@@ -24,6 +24,14 @@ function cors(env, extra = {}) {
 const json = (env, status, body, extra = {}) =>
   new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json", ...cors(env, extra) } });
 
+async function sign(env, text) {
+  // HMAC of the text with the API key as the secret; proves a second pass follows a
+  // first pass on this exact text. Nothing about the key is recoverable from it.
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(env.ANTHROPIC_API_KEY), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(text));
+  return [...new Uint8Array(sig)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: cors(env) });
@@ -36,7 +44,7 @@ export default {
     if (request.method === "GET" && new URL(request.url).pathname === "/quota") {
       const day = new Date().toISOString().slice(0, 10);
       const ip = request.headers.get("cf-connecting-ip") || "unknown";
-      const used = parseInt((await env.RATE.get(`v5:ip:${day}:${ip}`)) || "0", 10);
+      const used = parseInt((await env.RATE.get(`v6:ip:${day}:${ip}`)) || "0", 10);
       return json(env, 200, { remaining: Math.max(PER_IP_PER_DAY - used, 0), limit: PER_IP_PER_DAY });
     }
     if (request.method !== "POST") return json(env, 405, { error: "POST only" });
@@ -47,6 +55,7 @@ export default {
     let body;
     try { body = await request.json(); } catch { return json(env, 400, { error: "bad request" }); }
     const draft = String(body.draft || "").trim();
+    const pass2 = body.pass === 2 && typeof body.token === "string";
     const register = ["paper", "letter", "docs"].includes(body.register) ? body.register : "paper";
     const report = String(body.report || "").slice(0, 8000);
     if (draft.split(/\s+/).length < 5) return json(env, 400, { error: "paste a draft" });
@@ -55,10 +64,15 @@ export default {
     // Limits. KV keys expire at the end of the day they were made.
     const day = new Date().toISOString().slice(0, 10);
     const ip = request.headers.get("cf-connecting-ip") || "unknown";
-    const ipKey = `v5:ip:${day}:${ip}`, totalKey = `v5:total:${day}`;
+    const ipKey = `v6:ip:${day}:${ip}`, totalKey = `v6:total:${day}`;
     const used = parseInt((await env.RATE.get(ipKey)) || "0", 10);
     const total = parseInt((await env.RATE.get(totalKey)) || "0", 10);
-    if (used >= PER_IP_PER_DAY) return json(env, 429, { error: `this computer has used its ${PER_IP_PER_DAY} polishes for today` }, { "x-remaining": "0" });
+    if (pass2) {
+      // A second pass revises the first pass's own output against the checker's
+      // findings. It is free, and it is accepted only with the token the first pass
+      // issued for exactly that text, so it cannot be used as a second free polish.
+      if ((await sign(env, draft)) !== body.token) return json(env, 403, { error: "second pass without a first" });
+    } else if (used >= PER_IP_PER_DAY) return json(env, 429, { error: `this computer has used its ${PER_IP_PER_DAY} polishes for today` }, { "x-remaining": "0" });
     if (total >= DAILY_TOTAL) return json(env, 429, { error: "the daily limit for everyone has been reached; try tomorrow" }, { "x-remaining": "0" });
 
     const policy = await (await fetch(POLICY_URL, { cf: { cacheTtl: 3600 } })).text();
@@ -74,13 +88,16 @@ export default {
     const j = await r.json();
     if (!r.ok) return json(env, 502, { error: j.error ? j.error.message : "upstream error" });
 
-    const ttl = 86400;
-    await env.RATE.put(ipKey, String(used + 1), { expirationTtl: ttl });
-    await env.RATE.put(totalKey, String(total + 1), { expirationTtl: ttl });
     const text = (j.content || []).map(c => c.text || "").join("");
+    if (!pass2) {
+      const ttl = 86400;
+      await env.RATE.put(ipKey, String(used + 1), { expirationTtl: ttl });
+      await env.RATE.put(totalKey, String(total + 1), { expirationTtl: ttl });
+    }
     // The reply's shape travels with the text, so an empty answer can be diagnosed
     // from the page rather than guessed at.
     const shape = { stop_reason: j.stop_reason, blocks: (j.content || []).map(c => c.type), usage: j.usage, model: j.model };
-    return json(env, 200, { text, shape }, { "x-remaining": String(PER_IP_PER_DAY - used - 1) });
+    const remaining = pass2 ? Math.max(PER_IP_PER_DAY - used, 0) : PER_IP_PER_DAY - used - 1;
+    return json(env, 200, { text, shape, token: await sign(env, text) }, { "x-remaining": String(remaining) });
   },
 };
