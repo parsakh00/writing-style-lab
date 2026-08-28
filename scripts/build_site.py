@@ -52,7 +52,12 @@ footer{max-width:52rem;margin:0 auto;padding:1.5rem 1.2rem 3rem;color:var(--mute
 CHECK_BODY = """
 <h1>Check a draft</h1>
 <p class=lede>Paste a draft, choose the register, and read where it sits against published papers.</p>
-<div class=panel>
+<div class=panel id=loading>
+<p style="margin:0"><strong id=loadmsg>Preparing the checker</strong></p>
+<div style="height:6px;background:var(--code);border-radius:3px;margin:.8rem 0 .4rem;overflow:hidden"><div id=bar style="height:100%;width:0;background:var(--accent);transition:width .3s"></div></div>
+<p class=note style="margin:0" id=loaddetail>Loading Python</p>
+</div>
+<div class=panel id=tool style="display:none">
 <div class=controls>
 <label>Register <select id=register><option value=paper>paper</option><option value=letter>letter</option><option value=docs>documentation</option></select></label>
 <label>Reference <select id=reference><option value=corpus>corpus</option><option value=group>group</option></select></label>
@@ -67,19 +72,23 @@ CHECK_BODY = """
 const DATA = "__DATA_FILES__".split(",");
 let pyodide = null;
 const status = document.getElementById("status"), out = document.getElementById("out"), run = document.getElementById("run");
+const bar = document.getElementById("bar"), detail = document.getElementById("loaddetail");
+let done = 0, total = DATA.length + 2;
+function step(msg) { done += 1; bar.style.width = Math.round(100 * done / total) + "%"; detail.textContent = msg; }
 async function boot() {
-  status.textContent = "loading Python";
-  pyodide = await loadPyodide();
+  // Data files download in parallel with the Python runtime, so the wait is the slower
+  // of the two rather than the sum.
+  const files = Promise.all([["check.py", "tool/check.py"], ...DATA.map(f => ["data/" + f, "tool/data/" + f])]
+    .map(async ([name, url]) => { const t = await (await fetch(url)).text(); step("loaded " + name); return [name, t]; }));
+  pyodide = await loadPyodide(); step("Python ready");
   pyodide.FS.mkdirTree("/tool/data");
-  pyodide.FS.writeFile("/tool/check.py", await (await fetch("tool/check.py")).text());
-  for (const f of DATA) {
-    status.textContent = "loading " + f;
-    pyodide.FS.writeFile("/tool/data/" + f, await (await fetch("tool/data/" + f)).text());
-  }
+  for (const [name, t] of await files) pyodide.FS.writeFile("/tool/" + name, t);
   await pyodide.runPythonAsync("import sys; sys.path.insert(0, '/tool'); import check");
-  status.textContent = "ready"; run.disabled = false;
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("tool").style.display = "block";
+  run.disabled = false;
 }
-const ready = boot().catch(e => { status.textContent = "could not load: " + e; });
+const ready = boot().catch(e => { document.getElementById("loadmsg").textContent = "The checker could not load"; detail.textContent = String(e); });
 run.onclick = async () => {
   await ready; run.disabled = true; status.textContent = "checking";
   pyodide.globals.set("draft_text", document.getElementById("draft").value);
