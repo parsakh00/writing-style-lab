@@ -19,6 +19,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - run: python -m pip install --no-deps .
       - name: command line, on this repository's own README
         run: writing-style README.md --register docs --suggest
@@ -27,3 +30,18 @@ jobs:
           python -c "from writingstyle import report; r = report(open('README.md').read(), register='docs'); assert 'inside the published range' in r; print(r.splitlines()[0])"
       - name: skill directory works on its own
         run: python .claude/skills/writing-style/check.py .claude/skills/writing-style/SKILL.md --register docs
+      - name: the JavaScript port gives the same output as the Python checker
+        run: |
+          S=.claude/skills/writing-style
+          for f in README.md CONTRIBUTING.md $S/SKILL.md; do
+            python $S/check.py $f --register docs --suggest > py.txt
+            node $S/check.js $f --register docs --suggest > js.txt
+            diff --strip-trailing-cr py.txt js.txt
+          done
+      - name: the built page and its script parse
+        run: |
+          python -m pip install markdown==3.7
+          python scripts/build_site.py
+          python -c "import re;open('site/_inline.mjs','w',encoding='utf-8').write(re.search(r'<script type=module>(.*?)</script>', open('site/check.html',encoding='utf-8').read(), re.S).group(1))"
+          node --check site/_inline.mjs
+          node --check .claude/skills/writing-style/check.js
