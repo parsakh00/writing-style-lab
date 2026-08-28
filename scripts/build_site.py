@@ -65,7 +65,7 @@ CHECK_BODY = r"""
 </div>
 <p style="margin:1rem 0 .5rem"><textarea id=draft rows=14 placeholder="Paste your draft."></textarea></p>
 <p style="margin:.4rem 0 0"><button id=run disabled>Polish</button><span class=status id=status></span></p>
-<p class=note style="margin:.6rem 0 0" id=quota>3/3 left today on this computer.</p>
+<p class=note style="margin:.6rem 0 0" id=quota>3/3 attempts left</p>
 </div>
 <pre id=polished style="display:none;white-space:pre-wrap;font-family:inherit;font-size:1rem;line-height:1.6"></pre>
 <div class=panel id=fb style="display:none">
@@ -99,7 +99,7 @@ function busy(on) {
   ticker = setInterval(() => { n = (n + 1) % 4; status.textContent = "polishing" + " .".repeat(n); }, 450);
 }
 function showQuota(left, limit) {
-  document.getElementById("quota").textContent = `${left}/${limit} left today on this computer.`;
+  document.getElementById("quota").textContent = `${left}/${limit} attempt${left === 1 ? "" : "s"} left`;
   if (left <= 0) { run.disabled = true; status.textContent = "come back tomorrow"; }
 }
 async function loadQuota() {
