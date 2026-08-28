@@ -1,0 +1,11 @@
+name = "writing-style-polish"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://parsakh00.github.io"
+
+# Create the namespace once with `wrangler kv namespace create RATE` and paste its id here.
+[[kv_namespaces]]
+binding = "RATE"
+id = "REPLACE_WITH_THE_NAMESPACE_ID"

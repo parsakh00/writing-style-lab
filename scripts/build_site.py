@@ -10,6 +10,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / ".claude/skills/writing-style"
 OUT = ROOT / "site"
+# The polish service (worker/README.md). Empty until the worker is deployed.
+POLISH_URL = ""
 
 CSS = """
 :root{--bg:#fbfbf9;--fg:#1c1c1c;--muted:#5f6368;--line:#e3e1da;--panel:#ffffff;--accent:#1f5f8b;--code:#f1f0ea}
@@ -60,11 +62,10 @@ CHECK_BODY = r"""
 <div class=panel id=tool style="display:none">
 <div class=controls>
 <label>Register <select id=register><option value=paper>paper</option><option value=letter>letter</option><option value=docs>documentation</option></select></label>
-<label>API key <input type=password id=apikey placeholder="sk-ant-..." style="font:inherit;width:18rem;padding:.25rem .5rem;border:1px solid var(--line);border-radius:5px;background:var(--panel);color:var(--fg)"></label>
 </div>
 <p style="margin:1rem 0 .5rem"><textarea id=draft rows=14 placeholder="Paste your draft."></textarea></p>
 <p style="margin:.4rem 0 0"><button id=run disabled>Polish</button><span class=status id=status></span></p>
-<p class=note style="margin:.6rem 0 0">Your Anthropic API key is used from this browser and stored only here.</p>
+<p class=note style="margin:.6rem 0 0" id=quota>Three polishes per computer per day.</p>
 </div>
 <pre id=polished style="display:none;white-space:pre-wrap;font-family:inherit;font-size:1rem;line-height:1.6"></pre>
 <div class=panel id=fb style="display:none">
@@ -78,44 +79,39 @@ const FILES = ["reference.json", "group_reference.json", "vocab.json", "formulas
 const data = {};
 const status = document.getElementById("status"), run = document.getElementById("run");
 const bar = document.getElementById("bar"), detail = document.getElementById("loaddetail");
-let done = 0, policy = null;
+let done = 0;
+const POLISH_URL = "__POLISH_URL__";
 async function boot() {
   await Promise.all(FILES.map(async f => {
     data[f] = await (await fetch("tool/data/" + f)).json();
     done += 1; bar.style.width = Math.round(100 * done / FILES.length) + "%"; detail.textContent = "loaded " + f;
   }));
-  policy = await (await fetch("tool/SKILL.md")).text();
   document.getElementById("loading").style.display = "none";
   document.getElementById("tool").style.display = "block";
   run.disabled = false;
 }
 const ready = boot().catch(e => { document.getElementById("loadmsg").textContent = "The page could not load"; detail.textContent = String(e); });
-try { const k = localStorage.getItem("ws_key"); if (k) document.getElementById("apikey").value = k; } catch (e) {}
 run.onclick = async () => {
   await ready;
-  const key = document.getElementById("apikey").value.trim();
   const draft = document.getElementById("draft").value, reg = document.getElementById("register").value;
-  if (!key) { status.textContent = "enter an API key"; return; }
   if (draft.trim().split(/\s+/).length < 5) { status.textContent = "paste a draft"; return; }
-  try { localStorage.setItem("ws_key", key); } catch (e) {}
+  if (!POLISH_URL) { status.textContent = "the polish service is not set up yet"; return; }
   run.disabled = true; status.textContent = "polishing";
-  // The checker runs first and its report goes to the model with the policy, so the
-  // rewrite is aimed at what this draft actually does. The report itself is not shown.
+  // The checker runs here and its report travels with the draft, so the rewrite is
+  // aimed at what this draft actually does. The report itself is not shown.
   const rep = report(draft, data, { register: reg, reference: "corpus", suggest: true, name: "draft" });
-  const system = "You revise scientific prose to the policy below. Keep every claim, number, citation marker and technical term exactly as given; change register, phrasing, sentence structure and citation practice only. Return the revised text and nothing else.\n\n" + policy;
-  const user = "Register: " + reg + "\n\nThe checker's report on this draft:\n" + rep.slice(0, 8000) + "\n\nThe draft:\n" + draft;
   try {
-    const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST",
-      headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
-      body: JSON.stringify({ model: "claude-sonnet-5", max_tokens: 4096, system, messages: [{ role: "user", content: user }] }) });
+    const r = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ draft, register: reg, report: rep.slice(0, 8000) }) });
     const j = await r.json();
-    if (!r.ok) throw new Error(j.error ? j.error.message : r.statusText);
-    const text = j.content.map(c => c.text || "").join("");
-    const pe = document.getElementById("polished"); pe.textContent = text; pe.style.display = "block";
-    document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&passage=" + encodeURIComponent(text.slice(0, 3000));
+    if (!r.ok) throw new Error(j.error || r.statusText);
+    const pe = document.getElementById("polished"); pe.textContent = j.text; pe.style.display = "block";
+    const left = r.headers.get("x-remaining");
+    if (left !== null) document.getElementById("quota").textContent = left + " of 3 polishes left on this computer today.";
+    document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&passage=" + encodeURIComponent(j.text.slice(0, 3000));
     document.getElementById("fb").style.display = "block";
     status.textContent = "";
-  } catch (e) { status.textContent = "error: " + e.message; }
+  } catch (e) { status.textContent = e.message; }
   run.disabled = false;
 };
 </script>
@@ -152,7 +148,7 @@ def main() -> int:
         shutil.rmtree(tool)
     shutil.copytree(SKILL, tool, ignore=shutil.ignore_patterns(
         "__pycache__", "*.py", "local_preferences.json", "sequences.json", "group_profile.json", "awl_measured.json"))
-    body = CHECK_BODY
+    body = CHECK_BODY.replace("__POLISH_URL__", POLISH_URL)
     (OUT / "check.html").write_text(page("Polish a draft", body, "check.html"), encoding="utf-8")
     print("site/index.html, site/check.html")
     return 0
