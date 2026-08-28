@@ -67,6 +67,9 @@ CHECK_BODY = """
 <p style="margin:.4rem 0 0"><button id=run disabled>Check</button><span class=status id=status></span></p>
 </div>
 <pre id=out></pre>
+<link rel=preload as=script href="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js">
+<link rel=preload as=fetch crossorigin href="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.asm.wasm">
+<link rel=preload as=fetch href="tool/data/trigrams.json">
 <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
 <script>
 const DATA = "__DATA_FILES__".split(",");
@@ -168,7 +171,10 @@ def main() -> int:
     tool = OUT / "tool"
     if tool.exists():
         shutil.rmtree(tool)
-    shutil.copytree(SKILL, tool, ignore=shutil.ignore_patterns("__pycache__", "local_preferences.json"))
+    # Only what the checker reads at run time. sequences.json is a subset of trigrams.json
+    # and is derived in the browser; the profile and AWL files are documentation.
+    shutil.copytree(SKILL, tool, ignore=shutil.ignore_patterns(
+        "__pycache__", "local_preferences.json", "sequences.json", "group_profile.json", "awl_measured.json"))
     data_files = sorted(f.name for f in (tool / "data").glob("*.json"))
     body = CHECK_BODY.replace("__DATA_FILES__", ",".join(data_files))
     (OUT / "check.html").write_text(page("Check a draft", body, "check.html"), encoding="utf-8")
