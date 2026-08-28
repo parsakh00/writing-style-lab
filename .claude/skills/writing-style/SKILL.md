@@ -417,7 +417,12 @@ adopted" are not in the set.
 data 8); Henry coefficient 57 (Henry constant 6); binding energy 858, interaction
 energy 338, adsorption energy 301; isosteric heat 66.
 
-**10. Cause is a verb link.** "due to", "leads to", "results in", "arises from",
+**10. Say what papers say for a model that is wrong.** "at all pressures" (8 in 245
+papers) not "at every pressure" (0); "overestimates the uptake" (7) not "overbinds" (0);
+"increases more steeply" (17) not "rises too steeply" (0); "the opposite problem" 0. A
+sentence a reader flagged was built entirely from the zero-count forms, with a colon.
+
+**11. Cause is a verb link.** "due to", "leads to", "results in", "arises from",
 "because"; never "so" as a clause opener and never the claim as a colon-introduced
 list. Measured in the group section above.
 

@@ -119,9 +119,22 @@ run.onclick = async () => {
   try {
     const r = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ draft, register: reg, report: rep.slice(0, 8000) }) });
-    const j = await r.json();
+    let j = await r.json();
     const left = r.headers.get("x-remaining");
     if (!r.ok) throw new Error(j.error || r.statusText);
+    // Second pass: check the polished text itself, and if constructions papers do not
+    // use remain, send exactly those back once. Free, and tied to this text by token.
+    if (j.text) {
+      const again = report(j.text, data, { register: reg, reference: "corpus", suggest: true, name: "polished" });
+      const flagged = again.split("\n").filter(l => /^\s{2,}(?:\d+x |colon |passive |'|sequences no paper|\[|')/.test(l) || /papers write:/.test(l)).slice(0, 40).join("\n");
+      if (flagged.trim()) {
+        status.textContent = "polishing, second pass";
+        const r2 = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
+          body: JSON.stringify({ draft: j.text, register: reg, report: flagged, pass: 2, token: j.token }) });
+        const j2 = await r2.json();
+        if (r2.ok && j2.text) j = j2;
+      }
+    }
     pe.textContent = j.text || ("The service answered without text. Reply shape: " + JSON.stringify(j.shape || j).slice(0, 600));
     pe.style.display = "block"; pe.scrollIntoView({ behavior: "smooth", block: "start" });
     if (left !== null) showQuota(parseInt(left, 10), 3); else loadQuota();
