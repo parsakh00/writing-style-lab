@@ -583,7 +583,11 @@ this skill makes.
    contrastive constructions down to one per thousand words. Stop at 6 to 8 of 13 bands
    and 46% or more on sequences. A real paper scores there, and higher means the draft
    was written to the metric.
-4. Keep every claim and every number. The skill changes register, not content.
+4. Keep every claim and every number, and add nothing from outside the draft: no fact,
+   explanation, example, qualifier, number, name or reference the author did not write.
+   A finding introduced by its authors with a marker, "Smith and coworkers found that X
+   [12]", becomes "X [12]" with the marker kept; without a marker it stays as it is. The
+   skill changes register and structure, not content.
 
 ## Detectors
 
