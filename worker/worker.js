@@ -27,6 +27,12 @@ const json = (env, status, body, extra = {}) =>
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: cors(env) });
+    if (request.method === "GET" && new URL(request.url).pathname === "/health") {
+      // Reports what is bound, never the values.
+      const k = env.ANTHROPIC_API_KEY || "";
+      return json(env, 200, { key: k ? `set, ${k.length} chars, starts ${k.slice(0, 11)}` : "missing",
+                              origin: env.ALLOWED_ORIGIN || "missing", counters: env.RATE ? "bound" : "missing" });
+    }
     if (request.method !== "POST") return json(env, 405, { error: "POST only" });
 
     const origin = request.headers.get("origin") || "";
