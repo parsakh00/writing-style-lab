@@ -51,8 +51,7 @@ footer{max-width:52rem;margin:0 auto;padding:1.5rem 1.2rem 3rem;color:var(--mute
 
 CHECK_BODY = """
 <h1>Check a draft</h1>
-<p class=lede>The same checker that ships in the skill, run in your browser. Paste a draft, choose the
-register, and read where it sits against published papers.</p>
+<p class=lede>Paste a draft, choose the register, and read where it sits against published papers.</p>
 <div class=panel>
 <div class=controls>
 <label>Register <select id=register><option value=paper>paper</option><option value=letter>letter</option><option value=docs>documentation</option></select></label>
@@ -63,7 +62,6 @@ register, and read where it sits against published papers.</p>
 <p style="margin:.4rem 0 0"><button id=run disabled>Check</button><span class=status id=status></span></p>
 </div>
 <pre id=out></pre>
-<p class=note>The first run loads Python and the reference data, about 15 MB; later runs are immediate.</p>
 <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
 <script>
 const DATA = "__DATA_FILES__".split(",");
