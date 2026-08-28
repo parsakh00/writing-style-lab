@@ -49,7 +49,7 @@ button[disabled]{opacity:.55;cursor:default}
 footer{max-width:52rem;margin:0 auto;padding:1.5rem 1.2rem 3rem;color:var(--muted);font:.85rem -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;border-top:1px solid var(--line)}
 """
 
-CHECK_BODY = """
+CHECK_BODY = r"""
 <h1>Check a draft</h1>
 <p class=lede>Paste a draft, choose the register, and read where it sits against published papers.</p>
 <div class=panel id=loading>
