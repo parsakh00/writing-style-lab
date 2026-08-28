@@ -55,7 +55,7 @@ CHECK_BODY = """
 <div class=panel id=loading>
 <p style="margin:0"><strong id=loadmsg>Preparing the checker</strong></p>
 <div style="height:6px;background:var(--code);border-radius:3px;margin:.8rem 0 .4rem;overflow:hidden"><div id=bar style="height:100%;width:0;background:var(--accent);transition:width .3s"></div></div>
-<p class=note style="margin:0" id=loaddetail>Loading Python</p>
+<p class=note style="margin:0" id=loaddetail>Loading the reference data</p>
 </div>
 <div class=panel id=tool style="display:none">
 <div class=controls>
@@ -67,26 +67,32 @@ CHECK_BODY = """
 <p style="margin:.4rem 0 0"><button id=run disabled>Check</button><span class=status id=status></span></p>
 </div>
 <pre id=out></pre>
-<link rel=preload as=script href="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js">
-<link rel=preload as=fetch crossorigin href="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.asm.wasm">
-<link rel=preload as=fetch href="tool/data/trigrams.json">
-<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
-<script>
-const DATA = "__DATA_FILES__".split(",");
-let pyodide = null;
+<div class=panel id=polish style="display:none">
+<p style="margin:0 0 .6rem"><strong>Polish the draft.</strong> Rewrites the draft to the skill's policy and re-checks the result. Uses your own Anthropic API key, which stays in this browser.</p>
+<div class=controls>
+<label>API key <input type=password id=apikey placeholder="sk-ant-..." style="font:inherit;width:18rem;padding:.25rem .5rem;border:1px solid var(--line);border-radius:5px;background:var(--panel);color:var(--fg)"></label>
+<button id=dopolish>Polish</button><span class=status id=pstatus></span>
+</div>
+<pre id=polished style="display:none;white-space:pre-wrap;margin-top:1rem"></pre>
+<pre id=after style="display:none;white-space:pre-wrap;font-size:.88rem"></pre>
+</div>
+<div class=panel id=fb style="display:none">
+<p style="margin:0 0 .5rem"><strong>Did something still read wrong?</strong> Send the passage and the report as feedback. Each report is measured against the corpus, and rules change when the papers agree.</p>
+<p style="margin:0"><a id=fblink href="#" target=_blank rel=noopener>Send feedback</a></p>
+</div>
+<link rel=preload as=fetch crossorigin href="tool/data/trigrams.json">
+<script type=module>
+import { report } from "./tool/check.js";
+const FILES = ["reference.json", "group_reference.json", "vocab.json", "formulas.json", "trigrams.json"];
+const data = {};
 const status = document.getElementById("status"), out = document.getElementById("out"), run = document.getElementById("run");
 const bar = document.getElementById("bar"), detail = document.getElementById("loaddetail");
-let done = 0, total = DATA.length + 2;
-function step(msg) { done += 1; bar.style.width = Math.round(100 * done / total) + "%"; detail.textContent = msg; }
+let done = 0;
 async function boot() {
-  // Data files download in parallel with the Python runtime, so the wait is the slower
-  // of the two rather than the sum.
-  const files = Promise.all([["check.py", "tool/check.py"], ...DATA.map(f => ["data/" + f, "tool/data/" + f])]
-    .map(async ([name, url]) => { const t = await (await fetch(url)).text(); step("loaded " + name); return [name, t]; }));
-  pyodide = await loadPyodide(); step("Python ready");
-  pyodide.FS.mkdirTree("/tool/data");
-  for (const [name, t] of await files) pyodide.FS.writeFile("/tool/" + name, t);
-  await pyodide.runPythonAsync("import sys; sys.path.insert(0, '/tool'); import check");
+  await Promise.all(FILES.map(async f => {
+    data[f] = await (await fetch("tool/data/" + f)).json();
+    done += 1; bar.style.width = Math.round(100 * done / FILES.length) + "%"; detail.textContent = "loaded " + f;
+  }));
   document.getElementById("loading").style.display = "none";
   document.getElementById("tool").style.display = "block";
   run.disabled = false;
@@ -94,13 +100,15 @@ async function boot() {
 const ready = boot().catch(e => { document.getElementById("loadmsg").textContent = "The checker could not load"; detail.textContent = String(e); });
 run.onclick = async () => {
   await ready; run.disabled = true; status.textContent = "checking";
-  pyodide.globals.set("draft_text", document.getElementById("draft").value);
-  pyodide.globals.set("reg", document.getElementById("register").value);
-  pyodide.globals.set("ref", document.getElementById("reference").value);
-  pyodide.globals.set("sug", document.getElementById("suggest").checked);
+  const opts = { register: document.getElementById("register").value, reference: document.getElementById("reference").value,
+                 suggest: document.getElementById("suggest").checked, name: "draft" };
   try {
-    out.textContent = await pyodide.runPythonAsync("check.report(draft_text, register=reg, reference=ref, suggest=sug)");
+    out.textContent = report(document.getElementById("draft").value, data, opts);
     status.textContent = "";
+    const rep = out.textContent.slice(0, 5000);
+    document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&report=" + encodeURIComponent(rep);
+    document.getElementById("fb").style.display = "block";
+    document.getElementById("polish").style.display = "block";
   } catch (e) { out.textContent = String(e); status.textContent = "error"; }
   run.disabled = false;
 };
@@ -109,20 +117,13 @@ let policy = null;
 document.getElementById("dopolish").onclick = async () => {
   const key = document.getElementById("apikey").value.trim(), ps = document.getElementById("pstatus");
   const draft = document.getElementById("draft").value, reg = document.getElementById("register").value;
+  const ref = document.getElementById("reference").value;
   if (!key) { ps.textContent = "enter an API key"; return; }
   try { localStorage.setItem("ws_key", key); } catch (e) {}
   ps.textContent = "polishing";
   if (!policy) policy = await (await fetch("tool/SKILL.md")).text();
-  const system = "You revise scientific prose to the policy below. Keep every claim, number, citation marker and technical term exactly as given; change register, phrasing, sentence structure and citation practice only. Return the revised text and nothing else.
-
-" + policy;
-  const user = "Register: " + reg + "
-
-The checker's report on this draft:
-" + out.textContent.slice(0, 6000) + "
-
-The draft:
-" + draft;
+  const system = "You revise scientific prose to the policy below. Keep every claim, number, citation marker and technical term exactly as given; change register, phrasing, sentence structure and citation practice only. Return the revised text and nothing else.\n\n" + policy;
+  const user = "Register: " + reg + "\n\nThe checker's report on this draft:\n" + out.textContent.slice(0, 6000) + "\n\nThe draft:\n" + draft;
   try {
     const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST",
       headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
@@ -131,10 +132,8 @@ The draft:
     if (!r.ok) throw new Error(j.error ? j.error.message : r.statusText);
     const text = j.content.map(c => c.text || "").join("");
     const pe = document.getElementById("polished"); pe.textContent = text; pe.style.display = "block";
-    pyodide.globals.set("polished_text", text); pyodide.globals.set("reg", reg);
     const ae = document.getElementById("after");
-    ae.textContent = "After polishing:
-" + await pyodide.runPythonAsync("check.report(polished_text, register=reg, reference=ref, suggest=False)");
+    ae.textContent = "After polishing:\n" + report(text, data, { register: reg, reference: ref, suggest: false, name: "polished" });
     ae.style.display = "block"; ps.textContent = "";
   } catch (e) { ps.textContent = "error: " + e.message; }
 };
@@ -171,12 +170,9 @@ def main() -> int:
     tool = OUT / "tool"
     if tool.exists():
         shutil.rmtree(tool)
-    # Only what the checker reads at run time. sequences.json is a subset of trigrams.json
-    # and is derived in the browser; the profile and AWL files are documentation.
     shutil.copytree(SKILL, tool, ignore=shutil.ignore_patterns(
-        "__pycache__", "local_preferences.json", "sequences.json", "group_profile.json", "awl_measured.json"))
-    data_files = sorted(f.name for f in (tool / "data").glob("*.json"))
-    body = CHECK_BODY.replace("__DATA_FILES__", ",".join(data_files))
+        "__pycache__", "*.py", "local_preferences.json", "sequences.json", "group_profile.json", "awl_measured.json"))
+    body = CHECK_BODY
     (OUT / "check.html").write_text(page("Check a draft", body, "check.html"), encoding="utf-8")
     print("site/index.html, site/check.html")
     return 0
