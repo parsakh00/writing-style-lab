@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / ".claude/skills/writing-style"
 OUT = ROOT / "site"
 # The polish service (worker/README.md). Empty until the worker is deployed.
-POLISH_URL = ""
+POLISH_URL = "https://writing-style-lab.writing-style.workers.dev"
 
 CSS = """
 :root{--bg:#fbfbf9;--fg:#1c1c1c;--muted:#5f6368;--line:#e3e1da;--panel:#ffffff;--accent:#1f5f8b;--code:#f1f0ea}
