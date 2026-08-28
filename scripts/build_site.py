@@ -122,8 +122,9 @@ run.onclick = async () => {
     const j = await r.json();
     const left = r.headers.get("x-remaining");
     if (!r.ok) throw new Error(j.error || r.statusText);
-    pe.textContent = j.text; pe.style.display = "block";
-    if (left !== null) showQuota(parseInt(left, 10), 3);
+    pe.textContent = j.text || ("The service answered without text: " + JSON.stringify(j).slice(0, 500));
+    pe.style.display = "block"; pe.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (left !== null) showQuota(parseInt(left, 10), 3); else loadQuota();
     document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&passage=" + encodeURIComponent(j.text.slice(0, 3000));
     document.getElementById("fb").style.display = "block";
     busy(false);
