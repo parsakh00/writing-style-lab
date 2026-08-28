@@ -50,34 +50,25 @@ footer{max-width:52rem;margin:0 auto;padding:1.5rem 1.2rem 3rem;color:var(--mute
 """
 
 CHECK_BODY = r"""
-<h1>Check a draft</h1>
-<p class=lede>Paste a draft, choose the register, and read where it sits against published papers.</p>
+<h1>Polish a draft</h1>
+<p class=lede>Paste a draft and get it back written to the skill's policy.</p>
 <div class=panel id=loading>
-<p style="margin:0"><strong id=loadmsg>Preparing the checker</strong></p>
+<p style="margin:0"><strong id=loadmsg>Preparing</strong></p>
 <div style="height:6px;background:var(--code);border-radius:3px;margin:.8rem 0 .4rem;overflow:hidden"><div id=bar style="height:100%;width:0;background:var(--accent);transition:width .3s"></div></div>
 <p class=note style="margin:0" id=loaddetail>Loading the reference data</p>
 </div>
 <div class=panel id=tool style="display:none">
 <div class=controls>
 <label>Register <select id=register><option value=paper>paper</option><option value=letter>letter</option><option value=docs>documentation</option></select></label>
-<label>Reference <select id=reference><option value=corpus>corpus</option><option value=group>group</option></select></label>
-<label><input type=checkbox id=suggest checked> suggest replacements</label>
-</div>
-<p style="margin:1rem 0 .5rem"><textarea id=draft rows=14 placeholder="Paste your draft. Three hundred words or more gives stable numbers."></textarea></p>
-<p style="margin:.4rem 0 0"><button id=run disabled>Check</button><span class=status id=status></span></p>
-</div>
-<pre id=out></pre>
-<div class=panel id=polish style="display:none">
-<p style="margin:0 0 .6rem"><strong>Polish the draft.</strong> Rewrites the draft to the skill's policy and re-checks the result. Uses your own Anthropic API key, which stays in this browser.</p>
-<div class=controls>
 <label>API key <input type=password id=apikey placeholder="sk-ant-..." style="font:inherit;width:18rem;padding:.25rem .5rem;border:1px solid var(--line);border-radius:5px;background:var(--panel);color:var(--fg)"></label>
-<button id=dopolish>Polish</button><span class=status id=pstatus></span>
 </div>
-<pre id=polished style="display:none;white-space:pre-wrap;margin-top:1rem"></pre>
-<pre id=after style="display:none;white-space:pre-wrap;font-size:.88rem"></pre>
+<p style="margin:1rem 0 .5rem"><textarea id=draft rows=14 placeholder="Paste your draft."></textarea></p>
+<p style="margin:.4rem 0 0"><button id=run disabled>Polish</button><span class=status id=status></span></p>
+<p class=note style="margin:.6rem 0 0">Your Anthropic API key is used from this browser and stored only here.</p>
 </div>
+<pre id=polished style="display:none;white-space:pre-wrap;font-family:inherit;font-size:1rem;line-height:1.6"></pre>
 <div class=panel id=fb style="display:none">
-<p style="margin:0 0 .5rem"><strong>Did something still read wrong?</strong> Send the passage and the report as feedback. Each report is measured against the corpus, and rules change when the papers agree.</p>
+<p style="margin:0 0 .5rem"><strong>Did something still read wrong?</strong> Send the passage as feedback. Each report is measured against the corpus, and rules change when the papers agree.</p>
 <p style="margin:0"><a id=fblink href="#" target=_blank rel=noopener>Send feedback</a></p>
 </div>
 <link rel=preload as=fetch crossorigin href="tool/data/trigrams.json">
@@ -85,45 +76,34 @@ CHECK_BODY = r"""
 import { report } from "./tool/check.js";
 const FILES = ["reference.json", "group_reference.json", "vocab.json", "formulas.json", "trigrams.json"];
 const data = {};
-const status = document.getElementById("status"), out = document.getElementById("out"), run = document.getElementById("run");
+const status = document.getElementById("status"), run = document.getElementById("run");
 const bar = document.getElementById("bar"), detail = document.getElementById("loaddetail");
-let done = 0;
+let done = 0, policy = null;
 async function boot() {
   await Promise.all(FILES.map(async f => {
     data[f] = await (await fetch("tool/data/" + f)).json();
     done += 1; bar.style.width = Math.round(100 * done / FILES.length) + "%"; detail.textContent = "loaded " + f;
   }));
+  policy = await (await fetch("tool/SKILL.md")).text();
   document.getElementById("loading").style.display = "none";
   document.getElementById("tool").style.display = "block";
   run.disabled = false;
 }
-const ready = boot().catch(e => { document.getElementById("loadmsg").textContent = "The checker could not load"; detail.textContent = String(e); });
+const ready = boot().catch(e => { document.getElementById("loadmsg").textContent = "The page could not load"; detail.textContent = String(e); });
+try { const k = localStorage.getItem("ws_key"); if (k) document.getElementById("apikey").value = k; } catch (e) {}
 run.onclick = async () => {
-  await ready; run.disabled = true; status.textContent = "checking";
-  const opts = { register: document.getElementById("register").value, reference: document.getElementById("reference").value,
-                 suggest: document.getElementById("suggest").checked, name: "draft" };
-  try {
-    out.textContent = report(document.getElementById("draft").value, data, opts);
-    status.textContent = "";
-    const rep = out.textContent.slice(0, 5000);
-    document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&report=" + encodeURIComponent(rep);
-    document.getElementById("fb").style.display = "block";
-    document.getElementById("polish").style.display = "block";
-  } catch (e) { out.textContent = String(e); status.textContent = "error"; }
-  run.disabled = false;
-};
-
-let policy = null;
-document.getElementById("dopolish").onclick = async () => {
-  const key = document.getElementById("apikey").value.trim(), ps = document.getElementById("pstatus");
+  await ready;
+  const key = document.getElementById("apikey").value.trim();
   const draft = document.getElementById("draft").value, reg = document.getElementById("register").value;
-  const ref = document.getElementById("reference").value;
-  if (!key) { ps.textContent = "enter an API key"; return; }
+  if (!key) { status.textContent = "enter an API key"; return; }
+  if (draft.trim().split(/\s+/).length < 5) { status.textContent = "paste a draft"; return; }
   try { localStorage.setItem("ws_key", key); } catch (e) {}
-  ps.textContent = "polishing";
-  if (!policy) policy = await (await fetch("tool/SKILL.md")).text();
+  run.disabled = true; status.textContent = "polishing";
+  // The checker runs first and its report goes to the model with the policy, so the
+  // rewrite is aimed at what this draft actually does. The report itself is not shown.
+  const rep = report(draft, data, { register: reg, reference: "corpus", suggest: true, name: "draft" });
   const system = "You revise scientific prose to the policy below. Keep every claim, number, citation marker and technical term exactly as given; change register, phrasing, sentence structure and citation practice only. Return the revised text and nothing else.\n\n" + policy;
-  const user = "Register: " + reg + "\n\nThe checker's report on this draft:\n" + out.textContent.slice(0, 6000) + "\n\nThe draft:\n" + draft;
+  const user = "Register: " + reg + "\n\nThe checker's report on this draft:\n" + rep.slice(0, 8000) + "\n\nThe draft:\n" + draft;
   try {
     const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST",
       headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
@@ -132,12 +112,12 @@ document.getElementById("dopolish").onclick = async () => {
     if (!r.ok) throw new Error(j.error ? j.error.message : r.statusText);
     const text = j.content.map(c => c.text || "").join("");
     const pe = document.getElementById("polished"); pe.textContent = text; pe.style.display = "block";
-    const ae = document.getElementById("after");
-    ae.textContent = "After polishing:\n" + report(text, data, { register: reg, reference: ref, suggest: false, name: "polished" });
-    ae.style.display = "block"; ps.textContent = "";
-  } catch (e) { ps.textContent = "error: " + e.message; }
+    document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&passage=" + encodeURIComponent(text.slice(0, 3000));
+    document.getElementById("fb").style.display = "block";
+    status.textContent = "";
+  } catch (e) { status.textContent = "error: " + e.message; }
+  run.disabled = false;
 };
-try { const k = localStorage.getItem("ws_key"); if (k) document.getElementById("apikey").value = k; } catch (e) {}
 </script>
 """
 
@@ -148,7 +128,7 @@ def md_to_html(md: str) -> str:
 
 
 def page(title: str, body: str, current: str = "") -> str:
-    links = [("index.html", "Overview"), ("check.html", "Check a draft"),
+    links = [("index.html", "Overview"), ("check.html", "Polish a draft"),
              ("https://github.com/parsakh00/writing-style-lab", "GitHub")]
     nav = "".join(f'<a href="{h}"{" aria-current=page" if h == current else ""}>{n}</a>' for h, n in links)
     return (f"<!doctype html><html lang=en><head><meta charset=utf-8>"
@@ -173,7 +153,7 @@ def main() -> int:
     shutil.copytree(SKILL, tool, ignore=shutil.ignore_patterns(
         "__pycache__", "*.py", "local_preferences.json", "sequences.json", "group_profile.json", "awl_measured.json"))
     body = CHECK_BODY
-    (OUT / "check.html").write_text(page("Check a draft", body, "check.html"), encoding="utf-8")
+    (OUT / "check.html").write_text(page("Polish a draft", body, "check.html"), encoding="utf-8")
     print("site/index.html, site/check.html")
     return 0
 
