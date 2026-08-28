@@ -27,3 +27,4 @@ results/
 .claude/skills/writing-style/data/local_preferences.json
 !.claude/skills/writing-style/data/
 !.claude/skills/writing-style/data/*.json
+site/
