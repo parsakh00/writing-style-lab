@@ -118,7 +118,7 @@ function suggestSequences(text, sents, data, out) {
     const m = cont.get(k); m.set(d, (m.get(d) || 0) + tri[g]);
   }
   let total = 0, unatt = 0;
-  out("\nsequence suggestions (papers 56-63% unattested on all triples)");
+  out("\nsequence suggestions (papers 70-77% unattested on all triples)");
   sents.forEach((snt, i) => {
     const w = words(snt).map(x => x.toLowerCase());
     const grams = []; for (let j = 0; j < w.length - 2; j++) grams.push(w[j] + " " + w[j + 1] + " " + w[j + 2]);
@@ -185,10 +185,10 @@ export function report(text, data, { register = "paper", reference = "corpus", t
   for (let j = 0; j < low.length - 2; j++) { const g = [low[j], low[j + 1], low[j + 2]]; if (g.filter(x => FUNCTION_WORDS.has(x)).length >= 2) conn.push(g.join(" ")); }
   if (conn.length) {
     const hit = conn.filter(g => known.has(g)).length / conn.length;
-    out(`\nconnective sequences papers have used: ${pct(hit)} (papers 46-69%, p05-p95)${hit >= 0.46 ? "" : "  <<"}`);
-    if (hit < 0.46) {
+    out(`\nconnective sequences papers have used: ${pct(hit)} (papers 36-65%, p05-p95)${hit >= 0.36 ? "" : "  <<"}`);
+    if (hit < 0.36) {
       const missing = [...new Set(conn)].filter(g => !known.has(g));
-      out(`  sequences no paper in 6M words makes (${missing.length}), first 15:`);
+      out(`  sequences no paper in 6.8M words makes (${missing.length}), first 15:`);
       for (const g of missing.slice(0, 15)) out(`    ${g}`);
       out("  Rebuild the sentence around a sequence papers use; the formulas below are a start.");
     }

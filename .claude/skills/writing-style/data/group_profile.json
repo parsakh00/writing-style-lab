@@ -1,408 +1,409 @@
 {
- "n_papers": 19,
- "total_words": 103300,
+ "n_papers": 35,
+ "total_words": 206139,
  "characteristic_terms": [
   {
-   "word": "polyplex",
-   "rate_per_million": 464.7,
-   "corpus_rate": 7.9,
-   "ratio": 58.6
-  },
-  {
-   "word": "lj-eos",
-   "rate_per_million": 377.5,
-   "corpus_rate": 6.4,
-   "ratio": 58.6
-  },
-  {
-   "word": "harasima",
-   "rate_per_million": 377.5,
-   "corpus_rate": 6.4,
-   "ratio": 58.6
-  },
-  {
-   "word": "aw-fea",
-   "rate_per_million": 319.5,
-   "corpus_rate": 5.5,
-   "ratio": 58.6
+   "word": "poma",
+   "rate_per_million": 339.6,
+   "corpus_rate": 5.8,
+   "ratio": 58.7
   },
   {
    "word": "tren",
-   "rate_per_million": 474.3,
+   "rate_per_million": 475.4,
    "corpus_rate": 8.4,
-   "ratio": 56.3
+   "ratio": 56.4
   },
   {
-   "word": "nonsolvent",
-   "rate_per_million": 309.8,
-   "corpus_rate": 5.6,
-   "ratio": 55.1
+   "word": "datasets",
+   "rate_per_million": 363.8,
+   "corpus_rate": 6.6,
+   "ratio": 55.0
   },
   {
    "word": "microgels",
-   "rate_per_million": 377.5,
+   "rate_per_million": 378.4,
    "corpus_rate": 6.9,
-   "ratio": 54.4
-  },
-  {
-   "word": "kirkwood",
-   "rate_per_million": 348.5,
-   "corpus_rate": 6.4,
-   "ratio": 54.1
-  },
-  {
-   "word": "polyanion",
-   "rate_per_million": 493.7,
-   "corpus_rate": 9.3,
-   "ratio": 53.3
+   "ratio": 54.5
   },
   {
    "word": "microgel",
-   "rate_per_million": 348.5,
+   "rate_per_million": 349.3,
    "corpus_rate": 6.6,
-   "ratio": 52.7
+   "ratio": 52.8
   },
   {
-   "word": "irving",
-   "rate_per_million": 329.1,
-   "corpus_rate": 6.3,
-   "ratio": 52.4
-  },
-  {
-   "word": "polycation",
-   "rate_per_million": 513.1,
+   "word": "department",
+   "rate_per_million": 446.3,
    "corpus_rate": 9.9,
-   "ratio": 51.7
+   "ratio": 45.0
   },
   {
-   "word": "tangential",
-   "rate_per_million": 1790.9,
-   "corpus_rate": 35.9,
-   "ratio": 49.9
-  },
-  {
-   "word": "tensor",
-   "rate_per_million": 3117.1,
-   "corpus_rate": 68.8,
-   "ratio": 45.3
-  },
-  {
-   "word": "north",
-   "rate_per_million": 367.9,
-   "corpus_rate": 8.8,
-   "ratio": 42.0
-  },
-  {
-   "word": "pim-",
-   "rate_per_million": 484.0,
-   "corpus_rate": 11.7,
-   "ratio": 41.2
-  },
-  {
-   "word": "definitions",
-   "rate_per_million": 668.0,
-   "corpus_rate": 16.5,
-   "ratio": 40.4
+   "word": "deliverable",
+   "rate_per_million": 596.7,
+   "corpus_rate": 13.6,
+   "ratio": 44.0
   },
   {
    "word": "wafers",
-   "rate_per_million": 319.5,
+   "rate_per_million": 320.2,
    "corpus_rate": 8.8,
    "ratio": 36.5
   },
   {
-   "word": "configurational",
-   "rate_per_million": 629.2,
-   "corpus_rate": 17.9,
-   "ratio": 35.2
+   "word": "irving",
+   "rate_per_million": 213.4,
+   "corpus_rate": 6.3,
+   "ratio": 34.0
   },
   {
-   "word": "kernels",
-   "rate_per_million": 183.9,
-   "corpus_rate": 5.3,
-   "ratio": 34.8
+   "word": "harasima",
+   "rate_per_million": 218.3,
+   "corpus_rate": 6.4,
+   "ratio": 33.9
   },
   {
-   "word": "inhomogeneous",
-   "rate_per_million": 280.7,
+   "word": "cryogenic",
+   "rate_per_million": 266.8,
    "corpus_rate": 8.1,
-   "ratio": 34.7
+   "ratio": 32.9
   },
   {
-   "word": "scalar",
-   "rate_per_million": 183.9,
-   "corpus_rate": 5.5,
-   "ratio": 33.7
-  },
-  {
-   "word": "definition",
-   "rate_per_million": 1384.3,
-   "corpus_rate": 42.2,
-   "ratio": 32.8
-  },
-  {
-   "word": "polycations",
-   "rate_per_million": 319.5,
-   "corpus_rate": 9.8,
-   "ratio": 32.8
-  },
-  {
-   "word": "virial",
-   "rate_per_million": 300.1,
-   "corpus_rate": 9.3,
-   "ratio": 32.4
-  },
-  {
-   "word": "mats",
-   "rate_per_million": 300.1,
-   "corpus_rate": 9.3,
-   "ratio": 32.4
-  },
-  {
-   "word": "anharmonic",
-   "rate_per_million": 183.9,
-   "corpus_rate": 5.8,
-   "ratio": 31.8
-  },
-  {
-   "word": "department",
-   "rate_per_million": 290.4,
-   "corpus_rate": 9.9,
+   "word": "lj-eos",
+   "rate_per_million": 189.2,
+   "corpus_rate": 6.4,
    "ratio": 29.3
   },
   {
-   "word": "contour",
-   "rate_per_million": 1587.6,
-   "corpus_rate": 55.7,
-   "ratio": 28.5
-  },
-  {
-   "word": "contours",
-   "rate_per_million": 232.3,
-   "corpus_rate": 8.6,
-   "ratio": 27.0
-  },
-  {
-   "word": "uniquely",
-   "rate_per_million": 164.6,
-   "corpus_rate": 6.1,
-   "ratio": 26.9
-  },
-  {
-   "word": "momentum",
-   "rate_per_million": 309.8,
-   "corpus_rate": 11.7,
-   "ratio": 26.4
-  },
-  {
-   "word": "society",
-   "rate_per_million": 309.8,
-   "corpus_rate": 12.6,
-   "ratio": 24.7
-  },
-  {
-   "word": "nonequilibrium",
-   "rate_per_million": 183.9,
-   "corpus_rate": 7.6,
-   "ratio": 24.2
-  },
-  {
-   "word": "slit-shaped",
-   "rate_per_million": 222.7,
-   "corpus_rate": 9.3,
-   "ratio": 24.1
-  },
-  {
-   "word": "arbitrary",
-   "rate_per_million": 348.5,
-   "corpus_rate": 15.0,
-   "ratio": 23.2
-  },
-  {
-   "word": "geometrically",
-   "rate_per_million": 164.6,
-   "corpus_rate": 7.4,
-   "ratio": 22.1
-  },
-  {
-   "word": "averaging",
-   "rate_per_million": 425.9,
-   "corpus_rate": 19.7,
-   "ratio": 21.7
-  },
-  {
-   "word": "high-pressure",
-   "rate_per_million": 406.6,
-   "corpus_rate": 19.5,
-   "ratio": 20.8
-  },
-  {
-   "word": "integral",
-   "rate_per_million": 629.2,
-   "corpus_rate": 30.2,
-   "ratio": 20.8
-  },
-  {
-   "word": "physics",
-   "rate_per_million": 493.7,
-   "corpus_rate": 24.5,
-   "ratio": 20.2
-  },
-  {
-   "word": "biomolecular",
-   "rate_per_million": 183.9,
-   "corpus_rate": 9.4,
-   "ratio": 19.5
-  },
-  {
-   "word": "turbulent",
-   "rate_per_million": 116.2,
-   "corpus_rate": 6.3,
-   "ratio": 18.5
-  },
-  {
-   "word": "cartesian",
-   "rate_per_million": 116.2,
-   "corpus_rate": 6.3,
-   "ratio": 18.5
-  },
-  {
-   "word": "laplace",
-   "rate_per_million": 116.2,
+   "word": "kirkwood",
+   "rate_per_million": 189.2,
    "corpus_rate": 6.4,
+   "ratio": 29.3
+  },
+  {
+   "word": "tensor",
+   "rate_per_million": 1833.7,
+   "corpus_rate": 68.8,
+   "ratio": 26.7
+  },
+  {
+   "word": "tangential",
+   "rate_per_million": 936.3,
+   "corpus_rate": 35.9,
+   "ratio": 26.1
+  },
+  {
+   "word": "university",
+   "rate_per_million": 834.4,
+   "corpus_rate": 32.2,
+   "ratio": 25.9
+  },
+  {
+   "word": "articles",
+   "rate_per_million": 252.3,
+   "corpus_rate": 9.8,
+   "ratio": 25.9
+  },
+  {
+   "word": "trained",
+   "rate_per_million": 431.7,
+   "corpus_rate": 17.4,
+   "ratio": 24.9
+  },
+  {
+   "word": "definitions",
+   "rate_per_million": 388.1,
+   "corpus_rate": 16.5,
+   "ratio": 23.5
+  },
+  {
+   "word": "scalar",
+   "rate_per_million": 126.1,
+   "corpus_rate": 5.5,
+   "ratio": 23.1
+  },
+  {
+   "word": "north",
+   "rate_per_million": 198.9,
+   "corpus_rate": 8.8,
+   "ratio": 22.7
+  },
+  {
+   "word": "online",
+   "rate_per_million": 470.6,
+   "corpus_rate": 21.8,
+   "ratio": 21.6
+  },
+  {
+   "word": "node",
+   "rate_per_million": 310.5,
+   "corpus_rate": 14.5,
+   "ratio": 21.3
+  },
+  {
+   "word": "mats",
+   "rate_per_million": 194.0,
+   "corpus_rate": 9.3,
+   "ratio": 21.0
+  },
+  {
+   "word": "definition",
+   "rate_per_million": 873.2,
+   "corpus_rate": 42.2,
+   "ratio": 20.7
+  },
+  {
+   "word": "configurational",
+   "rate_per_million": 354.1,
+   "corpus_rate": 17.9,
+   "ratio": 19.8
+  },
+  {
+   "word": "inhomogeneous",
+   "rate_per_million": 160.1,
+   "corpus_rate": 8.1,
+   "ratio": 19.8
+  },
+  {
+   "word": "labels",
+   "rate_per_million": 198.9,
+   "corpus_rate": 10.2,
+   "ratio": 19.4
+  },
+  {
+   "word": "virial",
+   "rate_per_million": 179.5,
+   "corpus_rate": 9.3,
+   "ratio": 19.4
+  },
+  {
+   "word": "dataset",
+   "rate_per_million": 485.1,
+   "corpus_rate": 25.3,
+   "ratio": 19.2
+  },
+  {
+   "word": "forcefield",
+   "rate_per_million": 291.1,
+   "corpus_rate": 15.2,
+   "ratio": 19.1
+  },
+  {
+   "word": "iast",
+   "rate_per_million": 179.5,
+   "corpus_rate": 9.8,
+   "ratio": 18.4
+  },
+  {
+   "word": "supplemental",
+   "rate_per_million": 121.3,
+   "corpus_rate": 6.6,
+   "ratio": 18.3
+  },
+  {
+   "word": "read",
+   "rate_per_million": 92.2,
+   "corpus_rate": 5.1,
    "ratio": 18.0
   },
   {
-   "word": "crossing",
-   "rate_per_million": 174.2,
-   "corpus_rate": 9.8,
-   "ratio": 17.9
+   "word": "transferability",
+   "rate_per_million": 97.0,
+   "corpus_rate": 5.5,
+   "ratio": 17.8
   },
   {
-   "word": "valid",
-   "rate_per_million": 309.8,
-   "corpus_rate": 18.0,
-   "ratio": 17.2
+   "word": "anharmonic",
+   "rate_per_million": 101.9,
+   "corpus_rate": 5.8,
+   "ratio": 17.6
   },
   {
-   "word": "slit",
-   "rate_per_million": 387.2,
-   "corpus_rate": 22.6,
-   "ratio": 17.1
+   "word": "library",
+   "rate_per_million": 426.9,
+   "corpus_rate": 24.3,
+   "ratio": 17.6
   },
   {
-   "word": "perspective",
-   "rate_per_million": 425.9,
-   "corpus_rate": 26.0,
-   "ratio": 16.4
+   "word": "kernels",
+   "rate_per_million": 92.2,
+   "corpus_rate": 5.3,
+   "ratio": 17.4
   },
   {
-   "word": "derivation",
-   "rate_per_million": 125.8,
-   "corpus_rate": 7.8,
-   "ratio": 16.2
+   "word": "codes",
+   "rate_per_million": 87.3,
+   "corpus_rate": 5.1,
+   "ratio": 17.0
   },
   {
-   "word": "triblock",
-   "rate_per_million": 232.3,
-   "corpus_rate": 14.4,
-   "ratio": 16.2
+   "word": "uniquely",
+   "rate_per_million": 101.9,
+   "corpus_rate": 6.1,
+   "ratio": 16.7
   },
   {
    "word": "hcho",
-   "rate_per_million": 309.8,
+   "rate_per_million": 310.5,
    "corpus_rate": 19.7,
-   "ratio": 15.7
+   "ratio": 15.8
   },
   {
-   "word": "coarse-grained",
-   "rate_per_million": 880.9,
-   "corpus_rate": 56.4,
-   "ratio": 15.6
+   "word": "rules",
+   "rate_per_million": 315.3,
+   "corpus_rate": 20.0,
+   "ratio": 15.8
   },
   {
-   "word": "buckling",
-   "rate_per_million": 154.9,
-   "corpus_rate": 9.9,
-   "ratio": 15.6
+   "word": "inductive",
+   "rate_per_million": 92.2,
+   "corpus_rate": 6.0,
+   "ratio": 15.5
   },
   {
-   "word": "advances",
-   "rate_per_million": 193.6,
-   "corpus_rate": 12.6,
+   "word": "cartesian",
+   "rate_per_million": 97.0,
+   "corpus_rate": 6.3,
    "ratio": 15.4
   },
   {
-   "word": "delta",
-   "rate_per_million": 222.7,
-   "corpus_rate": 15.0,
-   "ratio": 14.8
+   "word": "name",
+   "rate_per_million": 121.3,
+   "corpus_rate": 7.9,
+   "ratio": 15.3
   },
   {
-   "word": "kelvin",
-   "rate_per_million": 174.2,
-   "corpus_rate": 12.2,
+   "word": "contour",
+   "rate_per_million": 848.9,
+   "corpus_rate": 55.7,
+   "ratio": 15.2
+  },
+  {
+   "word": "deletion",
+   "rate_per_million": 77.6,
+   "corpus_rate": 5.1,
+   "ratio": 15.1
+  },
+  {
+   "word": "histogram",
+   "rate_per_million": 237.7,
+   "corpus_rate": 15.9,
+   "ratio": 15.0
+  },
+  {
+   "word": "metrics",
+   "rate_per_million": 164.9,
+   "corpus_rate": 11.1,
+   "ratio": 14.9
+  },
+  {
+   "word": "momentum",
+   "rate_per_million": 174.6,
+   "corpus_rate": 11.7,
+   "ratio": 14.9
+  },
+  {
+   "word": "gcmc",
+   "rate_per_million": 742.2,
+   "corpus_rate": 49.9,
+   "ratio": 14.9
+  },
+  {
+   "word": "lyophilized",
+   "rate_per_million": 77.6,
+   "corpus_rate": 5.5,
    "ratio": 14.2
   },
   {
-   "word": "curved",
-   "rate_per_million": 154.9,
-   "corpus_rate": 10.9,
+   "word": "topologies",
+   "rate_per_million": 223.2,
+   "corpus_rate": 15.7,
    "ratio": 14.2
   },
   {
-   "word": "pairwise",
-   "rate_per_million": 271.1,
-   "corpus_rate": 19.5,
-   "ratio": 13.9
-  },
-  {
-   "word": "circles",
-   "rate_per_million": 154.9,
-   "corpus_rate": 11.2,
+   "word": "tasks",
+   "rate_per_million": 77.6,
+   "corpus_rate": 5.6,
    "ratio": 13.8
+  },
+  {
+   "word": "options",
+   "rate_per_million": 101.9,
+   "corpus_rate": 7.4,
+   "ratio": 13.7
+  },
+  {
+   "word": "predictions",
+   "rate_per_million": 620.9,
+   "corpus_rate": 45.5,
+   "ratio": 13.7
+  },
+  {
+   "word": "neural",
+   "rate_per_million": 315.3,
+   "corpus_rate": 23.1,
+   "ratio": 13.6
+  },
+  {
+   "word": "enabling",
+   "rate_per_million": 155.2,
+   "corpus_rate": 11.4,
+   "ratio": 13.6
+  },
+  {
+   "word": "contours",
+   "rate_per_million": 116.4,
+   "corpus_rate": 8.6,
+   "ratio": 13.5
+  },
+  {
+   "word": "arbitrary",
+   "rate_per_million": 198.9,
+   "corpus_rate": 15.0,
+   "ratio": 13.2
   }
  ],
  "formulas": {
-  "due to the": 0.823,
-  "based on the": 0.494,
-  "of the pressure": 0.474,
-  "of the local": 0.397,
-  "pressure in the": 0.358,
-  "as shown in": 0.348,
-  "to the surface": 0.319,
-  "at the interface": 0.319,
-  "the number of": 0.31,
-  "in terms of": 0.31,
-  "the surface of": 0.29,
-  "of the system": 0.29,
-  "parallel to the": 0.271,
-  "the values of": 0.261,
-  "on the surface": 0.261,
-  "this journal is": 0.252,
-  "pressure of the": 0.252,
-  "journal is the": 0.252,
-  "definition of the": 0.252,
-  "to the pressure": 0.242,
-  "thickness of the": 0.242,
-  "in this work": 0.242,
-  "there is no": 0.232,
-  "normal to the": 0.232,
-  "as well as": 0.232,
-  "to determine the": 0.223,
-  "of the surface": 0.223,
-  "contribution to the": 0.223,
-  "in the bulk": 0.213,
-  "we note that": 0.203,
-  "the presence of": 0.203,
-  "the formation of": 0.203,
-  "r is the": 0.203,
-  "of the molecules": 0.194,
-  "of the adsorbed": 0.194,
-  "is shown in": 0.194,
-  "to calculate the": 0.184,
-  "the definition of": 0.184,
-  "the case of": 0.184
+  "the number of": 0.548,
+  "based on the": 0.529,
+  "due to the": 0.5,
+  "as shown in": 0.403,
+  "in this work": 0.349,
+  "this journal is": 0.34,
+  "as well as": 0.335,
+  "of the system": 0.315,
+  "of the pressure": 0.286,
+  "journal is the": 0.286,
+  "the values of": 0.247,
+  "the presence of": 0.247,
+  "in terms of": 0.233,
+  "pressure of the": 0.218,
+  "the surface of": 0.213,
+  "pressure in the": 0.213,
+  "of the local": 0.213,
+  "to determine the": 0.199,
+  "there is no": 0.179,
+  "are governed by": 0.179,
+  "the terms and": 0.175,
+  "on see the": 0.175,
+  "governed by the": 0.175,
+  "for rules of": 0.175,
+  "downloaded from by": 0.175,
+  "by the applicable": 0.175,
+  "and conditions on": 0.175,
+  "to predict the": 0.17,
+  "to calculate the": 0.17,
+  "one of the": 0.17,
+  "of chemical and": 0.17,
+  "the case of": 0.165,
+  "such as the": 0.16,
+  "contribution to the": 0.16,
+  "this work we": 0.155,
+  "at the interface": 0.155,
+  "we note that": 0.15,
+  "of the pore": 0.15,
+  "in the system": 0.146,
+  "in order to": 0.146
  },
  "combinations": {
   "causal spine (their most-used links, per 1000 words)": [
@@ -842,5 +843,5 @@
    }
   ]
  },
- "combination_note": "Measured on 19 papers, 103,300 words, 3,197 sentences. Rates per 1000 words; openers are per 1000 words of text, counted sentence-initially."
+ "combination_note": "Combinations were measured on the first 19 papers (103,300 words); terms and formulas on all papers in the group set."
 }

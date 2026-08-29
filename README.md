@@ -8,7 +8,7 @@ reports where the draft differs, in numbers: which phrases no paper uses and wha
 write in their place, how the draft cites, which of its habits papers do not share, and
 where its sentences sit against the range of the field.
 
-Everything in it was measured on 6 million words of published papers, and every rule
+Everything in it was measured on 6.8 million words of published papers, and every rule
 carries its count.
 
 Try it in the browser, without installing anything: [polish a draft](https://parsakh00.github.io/writing-style-lab/check.html).

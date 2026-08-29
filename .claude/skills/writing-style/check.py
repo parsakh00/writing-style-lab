@@ -216,7 +216,7 @@ def suggest_sequences(text: str, sents: list[str]) -> None:
     """For each word triple no paper uses, what papers write after the same two words.
 
     This is how a sentence gets rebuilt: not by guessing a better phrase but by reading
-    off the continuation papers actually use. Real papers themselves run 56 to 63%
+    off the continuation papers actually use. Real papers themselves run 70 to 77%
     unattested on all triples, since technical names are unattested by nature, so the
     aim is to reach that range and stop.
     """
@@ -227,7 +227,7 @@ def suggest_sequences(text: str, sents: list[str]) -> None:
         a, b, d = g.split()
         cont[(a, b)][d] += c
     total = unatt = 0
-    print("\nsequence suggestions (papers 56-63% unattested on all triples)")
+    print("\nsequence suggestions (papers 70-77% unattested on all triples)")
     for i, snt in enumerate(sents, 1):
         w = [x.lower() for x in RE_WORD.findall(snt)]
         grams = [" ".join(w[j:j + 3]) for j in range(len(w) - 2)]
@@ -308,8 +308,8 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
 
     # Word sequences. Trigrams carrying at least two function words are phrasing rather
     # than content, and papers build almost entirely from ones other papers have used.
-    # Measured on 19 held-out papers: 52 to 63% of a paper's connective trigrams appear
-    # in the corpus set, never under 35%. Drafts written in the default register run 24
+    # Measured on 37 held-out papers: 46 to 57% of a paper's connective trigrams appear
+    # in the corpus set, p05 36%. Drafts written in the default register run 24
     # to 39%. This is the measure closest to "the word order reads machine-written".
     low = [x.lower() for x in RE_WORD.findall(text)]
     if (DATA / "sequences.json").exists():
@@ -323,11 +323,11 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
     conn = [" ".join(g) for g in conn]
     if conn:
         hit = sum(g in known for g in conn) / len(conn)
-        mark = "" if hit >= 0.46 else "  <<"
-        print(f"\nconnective sequences papers have used: {hit:.0%} (papers 46-69%, p05-p95){mark}")
-        if hit < 0.46:
+        mark = "" if hit >= 0.36 else "  <<"
+        print(f"\nconnective sequences papers have used: {hit:.0%} (papers 36-65%, p05-p95){mark}")
+        if hit < 0.36:
             missing = [g for g in dict.fromkeys(conn) if g not in known]
-            print(f"  sequences no paper in 6M words makes ({len(missing)}), first 15:")
+            print(f"  sequences no paper in 6.8M words makes ({len(missing)}), first 15:")
             for g in missing[:15]:
                 print(f"    {g}")
             print("  Rebuild the sentence around a sequence papers use; the formulas below are a start.")

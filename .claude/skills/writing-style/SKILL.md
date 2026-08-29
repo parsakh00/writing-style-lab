@@ -5,7 +5,7 @@ description: Use when drafting or revising prose the user will publish or submit
 
 # writing-style
 
-Targets measured from 6 million words of published papers. Self-contained: copy this
+Targets measured from 6.8 million words of published papers. Self-contained: copy this
 directory anywhere and it works.
 
 ```
@@ -14,9 +14,9 @@ python check.py DRAFT.md
 
 No dependencies beyond the Python standard library. The bundled `data/` holds the style
 reference (615 excerpts from 615 adsorption and simulation papers), a second profile for one
-research group (90 excerpts from 19 of their papers), a vocabulary of 31,550 word types,
-the 300 connective formulas papers rely on, 77,988 connective word sequences, and
-139,258 word triples with counts for `--suggest`.
+research group (177 excerpts from 37 of their papers), a vocabulary of 33,946 word types,
+the 300 connective formulas papers rely on, 86,899 connective word sequences, and
+157,318 word triples with counts for `--suggest`.
 
 **Calibration: a real published paper scores 6 to 8 of 13 targets.** The bands are p25
 to p75, so half the corpus sits outside any given one. Thirteen out of thirteen means the
@@ -71,18 +71,18 @@ its band are the same quantity. `--reference group` switches the column.
 | feature | corpus | that group |
 |---|---|---|
 | stock hedges /1000w | 0.00 - 0.00 | 0.00 - 0.00 |
-| contrastive constructions /1000w | 0.00 - 0.85 | 0.00 - 1.42 |
-| attenuators /1000w | 0.00 - 0.00 | 0.00 - 0.85 |
-| concessives /1000w | 0.85 - 2.57 | 0.86 - 2.96 |
+| contrastive constructions /1000w | 0.00 - 0.85 | 0.00 - 1.47 |
+| attenuators /1000w | 0.00 - 0.00 | 0.00 - 0.79 |
+| concessives /1000w | 0.85 - 2.57 | 0.84 - 2.76 |
 | self-qualifying sentences | 0.02 - 0.07 | 0.02 - 0.08 |
-| passive per clause | 0.37 - 0.60 | 0.24 - 0.39 |
-| first person /1000w | 0.9 - 5.9 | 4.3 - 12.0 |
-| mean sentence length | 21.6 - 27.0 | 25.0 - 30.1 |
-| sentence length IQR | 11 - 16 | 16 - 22 |
-| commas /1000w | 50 - 73 | 51 - 68 |
-| numeric tokens /1000w | 22 - 61 | 29 - 61 |
-| long words /1000w | 255 - 296 | 222 - 268 |
-| nominalisation /1000w | 51 - 70 | 48 - 62 |
+| passive per clause | 0.37 - 0.60 | 0.22 - 0.38 |
+| first person /1000w | 0.9 - 5.9 | 2.8 - 12.2 |
+| mean sentence length | 21.6 - 27.0 | 23.1 - 29.1 |
+| sentence length IQR | 11 - 16 | 14 - 21 |
+| commas /1000w | 50 - 73 | 52 - 75 |
+| numeric tokens /1000w | 22 - 61 | 31 - 75 |
+| long words /1000w | 255 - 296 | 225 - 295 |
+| nominalisation /1000w | 51 - 70 | 48 - 67 |
 
 Nine rules follow from these:
 
@@ -103,14 +103,14 @@ Nine rules follow from these:
 
 ## Writing for this group
 
-`data/group_reference.json` holds style targets from 90 excerpts of 19 papers by one
-research group and its coauthors, 2015 to 2023. `data/group_profile.json` holds their
+`data/group_reference.json` holds style targets from 177 excerpts of 37 papers by one
+research group and its coauthors, 2015 to 2026. `data/group_profile.json` holds their
 vocabulary and 105 word combinations, measured on 103,300 words and 3,197 sentences.
 Rates below are per 1000 words.
 
 Where their targets differ from the wider corpus, theirs are the narrower and correct
-ones for their manuscripts: less passive (0.24 to 0.39 against 0.37 to 0.60), more first
-person (4.3 to 12.0 against 0.9 to 5.9), longer and more varied sentences.
+ones for their manuscripts: less passive (0.22 to 0.38 against 0.37 to 0.60), more first
+person (2.8 to 12.2 against 0.9 to 5.9), longer and more varied sentences.
 
 ### The pattern in their combinations
 
@@ -181,7 +181,7 @@ imperative and scores lower still. Neither is a fault.
 
 ## Vocabulary
 
-The research pipeline holds word frequencies from **6 million words** of
+The research pipeline holds word frequencies from **6.8 million words** of
 published papers: 800 PMC chemistry and materials articles, 615 adsorption and simulation
 papers, and 14 from the target group. 41,017 word types; the copy in `data/vocab.json`
 keeps the 31,550 seen at least three times.
@@ -212,11 +212,11 @@ to characterise, give the number instead.
 The measure closest to "the word order reads machine-written". Take every word trigram
 that carries at least two function words: these are phrasing, not content. Papers build
 almost entirely from sequences other papers have used. On 129 excerpts from 19 held-out
-papers, **52 to 63% of connective trigrams are attested** in 6M words of papers, never
+papers, **52 to 63% of connective trigrams are attested** in 6.8M words of papers, never
 under 35%. Drafts in the default register run **24 to 39%**, below every excerpt. With
 the rest of this skill applied fully they reach 45 to 65%.
 
-`check.py` reports the share, flags it under 46% (the p05), and lists the unattested sequences. The ones a draft
+`check.py` reports the share, flags it under 36% (the p05), and lists the unattested sequences. The ones a draft
 produces fall into five habits, each with what papers do instead:
 
 | habit | draft | papers |
@@ -227,7 +227,7 @@ produces fall into five habits, each with what papers do instead:
 | copular ranking | "is second at 18%", "is a second source of" | "AllScAIP gives 18%." |
 | chains on "and" | "recovers X and diverges for Y", "cannot represent, and every" | two sentences |
 
-The test is mechanical: a sequence that appears nowhere in 6M words of papers is one
+The test is mechanical: a sequence that appears nowhere in 6.8M words of papers is one
 the reader has not met. With the repository present, `scripts/suggest_sequences.py DRAFT`
 lists each unattested triple with what papers write after the same two words: "the
 uptake of" (126) where a draft had "the uptake from", "isosteric heat of" (49) for
@@ -360,7 +360,7 @@ The output for one draft, and what was done with it:
 | was therefore retained | | Therefore, the closed-shell configuration was used for |
 
 Three rules for using it. Technical names are unattested by nature and are left alone:
-real papers themselves run **56 to 63% unattested** on all triples, and a draft that
+real papers themselves run **70 to 77% unattested** on all triples, and a draft that
 reaches that range is done. A suggestion is a continuation, not a synonym; "the
 Boltzmann constant" was not the meaning, and the replacement was the standard term
 "Boltzmann factor", which the index does not hold either. And every rebuilt sentence gets read once more
@@ -432,7 +432,7 @@ Vocabulary is not enough. Papers are built out of connective formulas, and a dra
 use only corpus-attested words while joining none of them the way papers do.
 
 the n-gram index holds 141,296 bigrams and 194,362 trigrams from the same
-6 million words. Rebuild both derived files with `python scripts/build_ngrams.py`.
+6.8 million words. Rebuild both derived files with `python scripts/build_ngrams.py`.
 
 **Measured: real papers at 800 words use 7 to 13% of the 60 most common connective
 formulas. Five drafts used 2 to 3%.**

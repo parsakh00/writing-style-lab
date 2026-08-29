@@ -167,7 +167,7 @@ def page(title: str, body: str, current: str = "") -> str:
             f"<title>{html.escape(title)}</title><style>{CSS}</style></head><body>"
             f"<header><div class=in><a class=brand href=index.html>writing-style</a><nav>{nav}</nav></div></header>"
             f"<main>{body}</main>"
-            f"<footer>Measured on 6 million words of published papers. MIT license.</footer></body></html>")
+            f"<footer>Measured on 6.8 million words of published papers. MIT license.</footer></body></html>")
 
 
 def main() -> int:
