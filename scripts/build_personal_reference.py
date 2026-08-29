@@ -35,6 +35,17 @@ _RE_HEADER = re.compile(
     r"^\s*(?:https?://|doi:|DOI|Journal of|The Journal of|Langmuir|ACS |Received|"
     r"Published|Accepted|Revised|Downloaded|\d+\s*$|[A-Z][a-z]+ et al\.)", re.IGNORECASE)
 _RE_HYPHEN_BREAK = re.compile(r"([a-z])-\s*\n\s*([a-z])")
+# Publisher boilerplate that PDF extraction interleaves with the prose: copyright and
+# licence lines, permission notices, download stamps, peer-review watermarks, running
+# heads. None of it is writing, and left in it becomes "attested" phrasing.
+_RE_BOILERPLATE = re.compile(
+    r"this journal is|royal society of chemistry|american chemical society|all rights reserved|"
+    r"with permission from|reproduced from ref|adapted from ref|copyright \d{4}|\(c\) \d{4}|"
+    r"downloaded (?:on|from|by)|for peer review|peer review of|creative commons|licensed under|"
+    r"this article is|published on \w+ \d|see https?://|\bdoi\b|department of|university of|"
+    r"school of|institute of|corresponding author|e-?mail|received:|accepted:|revised:|"
+    r"supporting information|electronic supplementary|\bissn\b|\bvol\.? \d|\bpp\.? \d|"
+    r"cite this|citation:|author contributions|conflicts? of interest|acknowledg", re.IGNORECASE)
 # Some PDF producers emit fi/fl/ff as a ligature glyph preceded by a stray space, so
 # the raw text holds "di <ff>erent" rather than "different". Unicode normalisation then
 # expands the glyph and yields "di fferent".
@@ -124,7 +135,7 @@ def clean_pdf_text(raw: str, min_alpha: float = 0.80) -> str:
         s = line.strip()
         if len(s) < 25:
             continue
-        if _RE_CAPTION.match(s) or _RE_HEADER.match(s):
+        if _RE_CAPTION.match(s) or _RE_HEADER.match(s) or _RE_BOILERPLATE.search(s):
             continue
         # Equation and symbol debris. Judged by notation density, not by letter count,
         # so that quantity-bearing sentences survive.

@@ -57,7 +57,7 @@ def group_docs() -> list[str]:
     from pypdf import PdfReader
     from build_personal_reference import clean_pdf_text
     out = []
-    for pdf in sorted((ROOT / "data/group_pdfs").glob("*.pdf")):
+    for pdf in sorted((ROOT / "data/group_pre2022").glob("*.pdf")):
         try:
             raw = "\n".join((pg.extract_text() or "") for pg in PdfReader(str(pdf)).pages)
         except Exception:  # noqa: BLE001

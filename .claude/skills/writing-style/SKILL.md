@@ -5,7 +5,7 @@ description: Use when drafting or revising prose the user will publish or submit
 
 # writing-style
 
-Targets measured from 6.8 million words of published papers. Self-contained: copy this
+Targets measured from 6.4 million words of published papers. Self-contained: copy this
 directory anywhere and it works.
 
 ```
@@ -14,9 +14,10 @@ python check.py DRAFT.md
 
 No dependencies beyond the Python standard library. The bundled `data/` holds the style
 reference (615 excerpts from 615 adsorption and simulation papers), a second profile for one
-research group (177 excerpts from 37 of their papers), a vocabulary of 33,946 word types,
-the 300 connective formulas papers rely on, 86,899 connective word sequences, and
-157,318 word triples with counts for `--suggest`.
+research group (82 excerpts from 20 of their papers published before 2022), a vocabulary of 32,815 word
+types,
+the 300 connective formulas papers rely on, 82,556 connective word sequences, and
+148,117 word triples with counts for `--suggest`.
 
 **Calibration: a real published paper scores 6 to 8 of 13 targets.** The bands are p25
 to p75, so half the corpus sits outside any given one. Thirteen out of thirteen means the
@@ -108,8 +109,9 @@ Nine rules follow from these:
 
 ## Writing for this group
 
-`data/group_reference.json` holds style targets from 177 excerpts of 37 papers by one
-research group and its coauthors, 2015 to 2026. `data/group_profile.json` holds their
+`data/group_reference.json` holds style targets from 82 excerpts of 20 papers by one
+research group and its coauthors, published before 2022. Everything the skill measures
+against is from before 2022, so that no model-assisted prose sits inside the reference. `data/group_profile.json` holds their
 vocabulary and 105 word combinations, measured on 103,300 words and 3,197 sentences.
 Rates below are per 1000 words.
 
@@ -171,47 +173,132 @@ irving, kirkwood, harasima, lj-eos, polycation, polyanion, microgel, nonsolvent.
 
 ## How the field writes
 
-Measured on 137 papers from the field collected by the user, 653,263 words, with the
-group's 35 papers beside them. Rates per 1000 words, field first, group second.
+Measured on 82 field papers and the group's 20, all published before 2022,
+365,659 and 95,370 words, cleaned of publisher boilerplate. Rates per 1000 words, field
+first, group second.
 
-**Reporting a result.** The dominant form is the passive with the figure attached:
-"are shown / plotted / presented / listed in" 0.43, 0.38. Then "we find that" 0.06,
-0.14; "these results show" 0.04, 0.02; "it can be seen that" 0.03, 0.00. "Figure 2
-shows" as a sentence subject does not occur.
+**Reporting a result.** are shown / plotted / listed in 0.56, 0.57; we find that 0.06, 0.12; as can be seen 0.06, 0.06; these results show 0.04, 0.04; the results show 0.02, 0.00; it can be seen that 0.02, 0.00. "Figure 2 shows" as a sentence subject does not occur.
 
-**Comparing with experiment.** "the experimental data / values / results" 0.51, 0.34;
-"is consistent with" 0.11, 0.12; "in good agreement with" 0.08, 0.08; "overestimates /
-underestimates" 0.08, 0.07; "deviates from" 0.04, 0.08; "captures the" 0.03, 0.05;
-"agrees well with" 0.02, 0.00. Never "higher than the experimental" as a bare
-comparison; the value or the data is the object.
+**Comparing with experiment.** the experimental data / values 0.59, 0.40; is consistent with 0.13, 0.08; in good agreement with 0.12, 0.12; overestimates / underestimates 0.08, 0.06; deviates from 0.05, 0.09; compared with the experimental 0.05, 0.02; agrees well with 0.03, 0.01; captures the 0.02, 0.03. The data or the value is the object of the comparison.
 
-**The field's nouns**, in the order the field uses them: selectivity 1.39; adsorption
-capacity 0.81; pore volume / size / diameter 0.80; breakthrough 0.46; isosteric heat of
-adsorption 0.31; at low pressures 0.27; binding energy / sites 0.23; Henry's constant /
-coefficient 0.18; open metal sites 0.16; at high pressures 0.12; saturation loading 0.07;
-gravimetric uptake 0.05; working capacity 0.04.
+**The field's nouns**, in the order the field uses them: selectivity 1.45, 0.34; pore volume / size 0.90, 0.53; adsorption capacity 0.73, 0.02; breakthrough 0.51, 0.01; isosteric heat of adsorption 0.34, 0.02; binding energy / sites 0.29, 0.04; at low pressures 0.26, 0.04; Henry's constant 0.22, 0.02; open metal sites 0.19, 0.00; at high pressures 0.12, 0.03.
 
-**Methods.** "force field" 0.54; "were performed / carried out" 0.36; "was used to" 0.30;
-"is calculated from / obtained using" 0.26; "machine learning / interatomic potential"
-0.24; "Lennard-Jones" 0.21; "training set" 0.17; "is defined as / given by" 0.16;
-"grand canonical Monte Carlo" 0.14; "can be written as" 0.05.
+**Methods.** were performed / carried out 0.43, 0.29; force field 0.35, 0.05; was used to 0.31, 0.09; is calculated from / obtained using 0.27, 0.26; Lennard-Jones 0.27, 0.43; is defined as / given by 0.20, 0.22; machine learning / interatomic potential 0.16, 0.02; grand canonical Monte Carlo 0.11, 0.10; training set 0.07, 0.12.
 
-**Cause.** "due to" 0.93; "because" 0.62; "therefore" 0.62; "thus" 0.57; "results in /
-from" 0.37; "leads to" 0.35; "attributed to" 0.22; "because of" 0.21; "hence" 0.15; "as
-a result" 0.13; "consequently" 0.12; "this is because" 0.04. The field uses "therefore"
-and "attributed to" more than the group does; the group uses "leads to" and "arises
-from" more.
+**Cause.** due to 0.92, 0.77; because 0.77, 0.86; therefore 0.69, 0.29; thus 0.66, 0.72; results in / from 0.42, 0.45; leads to 0.34, 0.47; because of 0.27, 0.16; attributed to 0.23, 0.08; hence 0.18, 0.07; consequently 0.09, 0.04; as a result 0.08, 0.03.
 
-**Stance.** "may be" 0.25; "indicates that" 0.24; "note that" 0.18 (group 0.37);
-"suggests that" 0.14; "in particular" 0.12; "possibly / probably" 0.11; "in general"
-0.09; "appears to" 0.05; "it should be noted" 0.05; "it is worth noting" 0.04; "to our
-knowledge" 0.03.
+**Stance.** may be 0.31, 0.10; indicates that 0.19, 0.20; note that 0.17, 0.37; suggests that 0.14, 0.18; in particular 0.14, 0.16; possibly / probably 0.12, 0.07; in general 0.11, 0.08; appears to 0.07, 0.09; it should be noted 0.05, 0.08; to our knowledge 0.04, 0.01; it is worth noting 0.03, 0.04.
 
-**Sentence openers**, per 1000 sentences: "In this" 10.9; "In the" 10.6; "It is" 10.0;
-"In addition" 8.9; "This is" 7.7; "The adsorption" 5.9; "However, the" 5.4; "For
-example" 5.0; "For the" 4.5; "As a" 4.2; "In contrast" 4.1; "On the" 3.8; "The
-results" 3.7; "As shown" 3.4; "Therefore, the" 3.1; "According to" 2.8; "Based on" 2.7;
-"Here we" 2.3; "Due to" 2.2; "These results" 2.0.
+**Sentence openers**, per 1000 sentences: "In the" 11.2; "In this" 10.8; "It is" 10.4; "This is" 9.4; "In addition" 8.9; "For example" 6.9; "However the" 6.2; "The adsorption" 5.8; "For the" 4.6; "On the" 4.3; "In contrast" 4.2; "The results" 4.0; "In order" 3.2; "Therefore the" 3.1; "As shown" 2.9; "As the" 2.6; "As a" 2.5; "The total" 2.4.
+
+### Phrasal combinations
+
+The connective sequences these papers are built from, per 1000 words in the field and
+group papers, with the general corpus beside them:
+
+- due to the 0.46 (general 0.73)
+- the number of 0.37 (general 0.28)
+- in this work 0.37 (general 0.18)
+- in order to 0.35 (general 0.38)
+- the presence of 0.29 (general 0.61)
+- based on the 0.29 (general 0.35)
+- as shown in 0.28 (general 0.69)
+- as well as 0.27 (general 0.32)
+- the adsorption of 0.25 (general 0.41)
+- are shown in 0.24 (general 0.39)
+- the use of 0.22 (general 0.15)
+- the amount of 0.21 (general 0.27)
+- to determine the 0.20 (general 0.15)
+- one of the 0.20 (general 0.22)
+- the case of 0.18 (general 0.18)
+- shown in the 0.18 (general 0.48)
+- volume of the 0.18 (general 0.08)
+- the effect of 0.18 (general 0.36)
+- in terms of 0.18 (general 0.13)
+- of the system 0.18 (general 0.07)
+- the values of 0.17 (general 0.12)
+- compared to the 0.17 (general 0.17)
+- than that of 0.16 (general 0.30)
+- can be used 0.16 (general 0.12)
+- the range of 0.16 (general 0.20)
+- in the case 0.15 (general 0.16)
+- it can be 0.15 (general 0.34)
+- of the framework 0.15 (general 0.01)
+- agreement with the 0.15 (general 0.10)
+- was used to 0.15 (general 0.28)
+- according to the 0.15 (general 0.32)
+- the formation of 0.14 (general 0.42)
+- on the other 0.14 (general 0.17)
+- of the adsorption 0.14 (general 0.13)
+- in the literature 0.14 (general 0.07)
+- the fact that 0.13 (general 0.09)
+
+Sequences the field uses at four times the general rate or more, which mark its
+register:
+
+- the local pressure 0.11/1000, 54x
+- the mil- fe 0.09/1000, 45x
+- the crystal mof- 0.09/1000, 44x
+- the pressure tensor 0.08/1000, 42x
+- the tangential pressure 0.07/1000, 35x
+- the chahine rule 0.07/1000, 34x
+- pressures up to 0.07/1000, 33x
+- the zif- based 0.07/1000, 33x
+- for liquid water 0.06/1000, 31x
+- results and discussion 0.06/1000, 30x
+- the local tangential 0.06/1000, 29x
+- hydrogen storage in 0.06/1000, 29x
+- in equilibrium with 0.05/1000, 27x
+- mofs with the 0.05/1000, 26x
+- and mesoporous materials 0.05/1000, 25x
+- volumetric and gravimetric 0.05/1000, 24x
+- the water benzene 0.05/1000, 24x
+- the side pockets 0.05/1000, 24x
+- please do not 0.05/1000, 24x
+- of chemical physics 0.05/1000, 24x
+- not adjust margins 0.05/1000, 24x
+- do not adjust 0.05/1000, 24x
+- at kpa and 0.05/1000, 24x
+- definition of the 0.05/1000, 23x
+- the maxwell stefan 0.05/1000, 23x
+- pressure tensor is 0.05/1000, 23x
+- naets- degassed at 0.05/1000, 23x
+- in units of 0.05/1000, 23x
+- the normal pressure 0.04/1000, 22x
+- of the nax 0.04/1000, 22x
+
+Four-word combinations used twelve times or more:
+
+- in the case of 0.15
+- on the other hand 0.13
+- in this work we 0.11
+- the adsorption capacity of 0.08
+- can be found in 0.08
+- as well as the 0.08
+- it is possible to 0.08
+- in the range of 0.08
+- as shown in the 0.08
+- of the crystal mof- 0.08
+- in good agreement with 0.08
+- of co and ch 0.07
+- the volume of the 0.07
+- in the presence of 0.07
+- the heat of adsorption 0.07
+- are shown in the 0.07
+- one of the most 0.07
+- in terms of the 0.07
+- the fact that the 0.06
+- the adsorption isotherms of 0.06
+- is one of the 0.06
+- good agreement with the 0.06
+- the isosteric heat of 0.06
+- it should be noted 0.06
+- in the gas phase 0.06
+- can be used to 0.06
+- as can be seen 0.06
+- with respect to the 0.06
+- the adsorption of co 0.06
+- in addition to the 0.06
 
 ## Registers
 
@@ -230,7 +317,7 @@ imperative and scores lower still. Neither is a fault.
 
 ## Vocabulary
 
-The research pipeline holds word frequencies from **6.8 million words** of
+The research pipeline holds word frequencies from **6.4 million words** of
 published papers: 800 PMC chemistry and materials articles, 615 adsorption and simulation
 papers, and 14 from the target group. 41,017 word types; the copy in `data/vocab.json`
 keeps the 31,550 seen at least three times.
@@ -261,11 +348,11 @@ to characterise, give the number instead.
 The measure closest to "the word order reads machine-written". Take every word trigram
 that carries at least two function words: these are phrasing, not content. Papers build
 almost entirely from sequences other papers have used. On 129 excerpts from 19 held-out
-papers, **52 to 63% of connective trigrams are attested** in 6.8M words of papers, never
+papers, **52 to 63% of connective trigrams are attested** in 6.4M words of papers, never
 under 35%. Drafts in the default register run **24 to 39%**, below every excerpt. With
 the rest of this skill applied fully they reach 45 to 65%.
 
-`check.py` reports the share, flags it under 36% (the p05), and lists the unattested sequences. The ones a draft
+`check.py` reports the share, flags it under 39% (the p05), and lists the unattested sequences. The ones a draft
 produces fall into five habits, each with what papers do instead:
 
 | habit | draft | papers |
@@ -276,7 +363,7 @@ produces fall into five habits, each with what papers do instead:
 | copular ranking | "is second at 18%", "is a second source of" | "AllScAIP gives 18%." |
 | chains on "and" | "recovers X and diverges for Y", "cannot represent, and every" | two sentences |
 
-The test is mechanical: a sequence that appears nowhere in 6.8M words of papers is one
+The test is mechanical: a sequence that appears nowhere in 6.4M words of papers is one
 the reader has not met. With the repository present, `scripts/suggest_sequences.py DRAFT`
 lists each unattested triple with what papers write after the same two words: "the
 uptake of" (126) where a draft had "the uptake from", "isosteric heat of" (49) for
@@ -409,7 +496,7 @@ The output for one draft, and what was done with it:
 | was therefore retained | | Therefore, the closed-shell configuration was used for |
 
 Three rules for using it. Technical names are unattested by nature and are left alone:
-real papers themselves run **70 to 77% unattested** on all triples, and a draft that
+real papers themselves run **69 to 76% unattested** on all triples, and a draft that
 reaches that range is done. A suggestion is a continuation, not a synonym; "the
 Boltzmann constant" was not the meaning, and the replacement was the standard term
 "Boltzmann factor", which the index does not hold either. And every rebuilt sentence gets read once more
@@ -481,7 +568,7 @@ Vocabulary is not enough. Papers are built out of connective formulas, and a dra
 use only corpus-attested words while joining none of them the way papers do.
 
 the n-gram index holds 141,296 bigrams and 194,362 trigrams from the same
-6.8 million words. Rebuild both derived files with `python scripts/build_ngrams.py`.
+6.4 million words. Rebuild both derived files with `python scripts/build_ngrams.py`.
 
 **Measured: real papers at 800 words use 7 to 13% of the 60 most common connective
 formulas. Five drafts used 2 to 3%.**
