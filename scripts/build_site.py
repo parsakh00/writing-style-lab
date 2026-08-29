@@ -75,7 +75,7 @@ CHECK_BODY = r"""
 <link rel=preload as=fetch crossorigin href="tool/data/trigrams.json">
 <script type=module>
 import { report } from "./tool/check.js";
-const FILES = ["reference.json", "group_reference.json", "vocab.json", "formulas.json", "trigrams.json"];
+const FILES = ["reference.json", "group_reference.json", "combined_reference.json", "vocab.json", "formulas.json", "trigrams.json"];
 const data = {};
 const status = document.getElementById("status"), run = document.getElementById("run");
 const bar = document.getElementById("bar"), detail = document.getElementById("loaddetail");
@@ -115,7 +115,7 @@ run.onclick = async () => {
   run.disabled = true; busy(true); pe.style.display = "none";
   // The checker runs here and its report travels with the draft, so the rewrite is
   // aimed at what this draft actually does. The report itself is not shown.
-  const rep = report(draft, data, { register: reg, reference: "corpus", suggest: true, name: "draft" });
+  const rep = report(draft, data, { register: reg, reference: "papers", suggest: true, name: "draft" });
   try {
     const r = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ draft, register: reg, report: rep.slice(0, 8000) }) });
@@ -125,7 +125,7 @@ run.onclick = async () => {
     // Second pass: check the polished text itself, and if constructions papers do not
     // use remain, send exactly those back once. Free, and tied to this text by token.
     if (j.text) {
-      const again = report(j.text, data, { register: reg, reference: "corpus", suggest: true, name: "polished" });
+      const again = report(j.text, data, { register: reg, reference: "papers", suggest: true, name: "polished" });
       const flagged = again.split("\n").filter(l => /^\s{2,}(?:\d+x |colon |passive |'|sequences no paper|\[|')/.test(l) || /papers write:/.test(l)).slice(0, 40).join("\n");
       if (flagged.trim()) {
         status.textContent = "polishing, second pass";
@@ -167,7 +167,7 @@ def page(title: str, body: str, current: str = "") -> str:
             f"<title>{html.escape(title)}</title><style>{CSS}</style></head><body>"
             f"<header><div class=in><a class=brand href=index.html>writing-style</a><nav>{nav}</nav></div></header>"
             f"<main>{body}</main>"
-            f"<footer>Measured on 6 million words of published papers. MIT license.</footer></body></html>")
+            f"<footer>Measured on 6.4 million words of published papers. MIT license.</footer></body></html>")
 
 
 def main() -> int:

@@ -181,10 +181,10 @@ def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("draft")
     ap.add_argument("--top", type=int, default=13)
-    ap.add_argument("--reference", choices=("corpus", "group"), default="corpus",
+    ap.add_argument("--reference", choices=("papers", "corpus", "group"), default="papers",
                     help="corpus: 615 excerpts from 615 adsorption and simulation "
-                         "papers. group: 90 excerpts from 19 papers by one research "
-                         "group, the right target for manuscripts from that group")
+                         "papers. group: one research group and its coauthors. papers "
+                         "(default): where the two bands overlap, the stricter target")
     ap.add_argument("--suggest", action="store_true",
                     help="for every word triple no paper uses, show what papers write "
                          "after the same two words, sentence by sentence")
@@ -196,7 +196,7 @@ def build_parser() -> argparse.ArgumentParser:
     return ap
 
 
-def report(text: str, register: str = "paper", reference: str = "corpus",
+def report(text: str, register: str = "paper", reference: str = "papers",
            top: int = 13, name: str = "draft", suggest: bool = False) -> str:
     """Score a text and return the report as a string.
 
@@ -216,7 +216,7 @@ def suggest_sequences(text: str, sents: list[str]) -> None:
     """For each word triple no paper uses, what papers write after the same two words.
 
     This is how a sentence gets rebuilt: not by guessing a better phrase but by reading
-    off the continuation papers actually use. Real papers themselves run 56 to 63%
+    off the continuation papers actually use. Real papers themselves run 69 to 76%
     unattested on all triples, since technical names are unattested by nature, so the
     aim is to reach that range and stop.
     """
@@ -227,7 +227,7 @@ def suggest_sequences(text: str, sents: list[str]) -> None:
         a, b, d = g.split()
         cont[(a, b)][d] += c
     total = unatt = 0
-    print("\nsequence suggestions (papers 56-63% unattested on all triples)")
+    print("\nsequence suggestions (papers 69-76% unattested on all triples)")
     for i, snt in enumerate(sents, 1):
         w = [x.lower() for x in RE_WORD.findall(snt)]
         grams = [" ".join(w[j:j + 3]) for j in range(len(w) - 2)]
@@ -258,7 +258,7 @@ def main() -> int:
 
 def _run(text: str, args: argparse.Namespace, name: str) -> None:
 
-    refname = "reference.json" if args.reference == "corpus" else "group_reference.json"
+    refname = {"papers": "combined_reference.json", "corpus": "reference.json", "group": "group_reference.json"}[args.reference]
     ref = load(refname)["features"]
     vocab = load("vocab.json")
     formulas = load("formulas.json")
@@ -308,8 +308,8 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
 
     # Word sequences. Trigrams carrying at least two function words are phrasing rather
     # than content, and papers build almost entirely from ones other papers have used.
-    # Measured on 19 held-out papers: 52 to 63% of a paper's connective trigrams appear
-    # in the corpus set, never under 35%. Drafts written in the default register run 24
+    # Measured on 20 held-out papers: 47 to 58% of a paper's connective trigrams appear
+    # in the corpus set, p05 39%. Drafts written in the default register run 24
     # to 39%. This is the measure closest to "the word order reads machine-written".
     low = [x.lower() for x in RE_WORD.findall(text)]
     if (DATA / "sequences.json").exists():
@@ -323,11 +323,11 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
     conn = [" ".join(g) for g in conn]
     if conn:
         hit = sum(g in known for g in conn) / len(conn)
-        mark = "" if hit >= 0.46 else "  <<"
-        print(f"\nconnective sequences papers have used: {hit:.0%} (papers 46-69%, p05-p95){mark}")
-        if hit < 0.46:
+        mark = "" if hit >= 0.39 else "  <<"
+        print(f"\nconnective sequences papers have used: {hit:.0%} (papers 39-65%, p05-p95){mark}")
+        if hit < 0.39:
             missing = [g for g in dict.fromkeys(conn) if g not in known]
-            print(f"  sequences no paper in 6M words makes ({len(missing)}), first 15:")
+            print(f"  sequences no paper in 6.4M words makes ({len(missing)}), first 15:")
             for g in missing[:15]:
                 print(f"    {g}")
             print("  Rebuild the sentence around a sequence papers use; the formulas below are a start.")
