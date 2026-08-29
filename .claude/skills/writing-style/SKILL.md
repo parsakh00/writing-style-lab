@@ -66,7 +66,10 @@ Ranges are p25 to p75. Where the corpora differ, both are given; the group range
 narrower target when writing for that group.
 
 Both columns are measured by `check.py` itself on 1200-word excerpts, so a draft and
-its band are the same quantity. `--reference group` switches the column.
+its band are the same quantity. The default target, `--reference papers`, is where the
+two columns overlap: a draft inside it satisfies the field and the group at once, which
+is the stricter of the two. `--reference corpus` and `--reference group` give either
+column alone.
 
 | feature | corpus | that group |
 |---|---|---|
@@ -163,6 +166,50 @@ statistical mechanical 0.11.
 
 Their subject vocabulary at 40 to 59 times the wider corpus rate: tensor, tangential,
 irving, kirkwood, harasima, lj-eos, polycation, polyanion, microgel, nonsolvent.
+
+## How the field writes
+
+Measured on 137 papers from the field collected by the user, 653,263 words, with the
+group's 35 papers beside them. Rates per 1000 words, field first, group second.
+
+**Reporting a result.** The dominant form is the passive with the figure attached:
+"are shown / plotted / presented / listed in" 0.43, 0.38. Then "we find that" 0.06,
+0.14; "these results show" 0.04, 0.02; "it can be seen that" 0.03, 0.00. "Figure 2
+shows" as a sentence subject does not occur.
+
+**Comparing with experiment.** "the experimental data / values / results" 0.51, 0.34;
+"is consistent with" 0.11, 0.12; "in good agreement with" 0.08, 0.08; "overestimates /
+underestimates" 0.08, 0.07; "deviates from" 0.04, 0.08; "captures the" 0.03, 0.05;
+"agrees well with" 0.02, 0.00. Never "higher than the experimental" as a bare
+comparison; the value or the data is the object.
+
+**The field's nouns**, in the order the field uses them: selectivity 1.39; adsorption
+capacity 0.81; pore volume / size / diameter 0.80; breakthrough 0.46; isosteric heat of
+adsorption 0.31; at low pressures 0.27; binding energy / sites 0.23; Henry's constant /
+coefficient 0.18; open metal sites 0.16; at high pressures 0.12; saturation loading 0.07;
+gravimetric uptake 0.05; working capacity 0.04.
+
+**Methods.** "force field" 0.54; "were performed / carried out" 0.36; "was used to" 0.30;
+"is calculated from / obtained using" 0.26; "machine learning / interatomic potential"
+0.24; "Lennard-Jones" 0.21; "training set" 0.17; "is defined as / given by" 0.16;
+"grand canonical Monte Carlo" 0.14; "can be written as" 0.05.
+
+**Cause.** "due to" 0.93; "because" 0.62; "therefore" 0.62; "thus" 0.57; "results in /
+from" 0.37; "leads to" 0.35; "attributed to" 0.22; "because of" 0.21; "hence" 0.15; "as
+a result" 0.13; "consequently" 0.12; "this is because" 0.04. The field uses "therefore"
+and "attributed to" more than the group does; the group uses "leads to" and "arises
+from" more.
+
+**Stance.** "may be" 0.25; "indicates that" 0.24; "note that" 0.18 (group 0.37);
+"suggests that" 0.14; "in particular" 0.12; "possibly / probably" 0.11; "in general"
+0.09; "appears to" 0.05; "it should be noted" 0.05; "it is worth noting" 0.04; "to our
+knowledge" 0.03.
+
+**Sentence openers**, per 1000 sentences: "In this" 10.9; "In the" 10.6; "It is" 10.0;
+"In addition" 8.9; "This is" 7.7; "The adsorption" 5.9; "However, the" 5.4; "For
+example" 5.0; "For the" 4.5; "As a" 4.2; "In contrast" 4.1; "On the" 3.8; "The
+results" 3.7; "As shown" 3.4; "Therefore, the" 3.1; "According to" 2.8; "Based on" 2.7;
+"Here we" 2.3; "Due to" 2.2; "These results" 2.0.
 
 ## Registers
 

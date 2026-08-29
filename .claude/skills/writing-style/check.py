@@ -181,10 +181,10 @@ def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("draft")
     ap.add_argument("--top", type=int, default=13)
-    ap.add_argument("--reference", choices=("corpus", "group"), default="corpus",
+    ap.add_argument("--reference", choices=("papers", "corpus", "group"), default="papers",
                     help="corpus: 615 excerpts from 615 adsorption and simulation "
-                         "papers. group: 90 excerpts from 19 papers by one research "
-                         "group, the right target for manuscripts from that group")
+                         "papers. group: one research group and its coauthors. papers "
+                         "(default): where the two bands overlap, the stricter target")
     ap.add_argument("--suggest", action="store_true",
                     help="for every word triple no paper uses, show what papers write "
                          "after the same two words, sentence by sentence")
@@ -196,7 +196,7 @@ def build_parser() -> argparse.ArgumentParser:
     return ap
 
 
-def report(text: str, register: str = "paper", reference: str = "corpus",
+def report(text: str, register: str = "paper", reference: str = "papers",
            top: int = 13, name: str = "draft", suggest: bool = False) -> str:
     """Score a text and return the report as a string.
 
@@ -258,7 +258,7 @@ def main() -> int:
 
 def _run(text: str, args: argparse.Namespace, name: str) -> None:
 
-    refname = "reference.json" if args.reference == "corpus" else "group_reference.json"
+    refname = {"papers": "combined_reference.json", "corpus": "reference.json", "group": "group_reference.json"}[args.reference]
     ref = load(refname)["features"]
     vocab = load("vocab.json")
     formulas = load("formulas.json")
