@@ -68,8 +68,10 @@ narrower target when writing for that group.
 Both columns are measured by `check.py` itself on 1200-word excerpts, so a draft and
 its band are the same quantity. The default target, `--reference papers`, is where the
 two columns overlap: a draft inside it satisfies the field and the group at once, which
-is the stricter of the two. `--reference corpus` and `--reference group` give either
-column alone.
+is the stricter of the two. Where the two bands barely touch (passive voice: corpus
+0.37 to 0.60, group 0.22 to 0.38), the group's band stands, since a target one
+hundredth wide is not a target. `--reference corpus` and `--reference group` give
+either column alone.
 
 | feature | corpus | that group |
 |---|---|---|

@@ -1,6 +1,6 @@
 {
  "n_documents": 792,
- "source": "the overlap of the corpus band and the group band",
+ "source": "the overlap of the corpus band and the group band; where the overlap is under 30% of the narrower band, the group band",
  "median_words": 1200,
  "measured_with": "check.py measure()",
  "features": {
@@ -53,7 +53,7 @@
    "mean": 0.4846048275482918,
    "sd": 0.17507986983148044,
    "p05": 0.21104521868050408,
-   "p25": 0.36666666666666664,
+   "p25": 0.22,
    "p50": 0.46938775510204084,
    "p75": 0.3783783783783784,
    "p95": 0.7825892857142855
