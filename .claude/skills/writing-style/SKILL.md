@@ -415,6 +415,85 @@ action in the verb and the number in the sentence:
 > the Henry coefficient diverges.
 
 
+## Introductions
+
+Measured on 266 introductions: 69 extracted from the field's and the group's pre-2022
+PDFs and 199 from the PMC corpus (`results/intro_study.json`). The shape that comes
+out is plainer than the writing guides suggest.
+
+**Open with a fact about the subject, not a flourish.** 74% of first sentences are a
+plain factual or definitional claim: "Geopolymers are synthesized by mixing
+alumosilicate powders with alkaline solutions."; "Porous metal-organic frameworks are
+assembled from metal ions or clusters bridged by organic molecules." The rhetorical
+openers are the minority: importance or wide use 11% ("have attracted considerable
+attention"), societal need 6%, "in recent years" 5%, definition-by-classification 4%.
+A draft that opens with "In recent years, X has attracted increasing attention" is
+using the 5% opener with the 11% verb, and both are the field's most worn phrases.
+
+**The gap is stated as a concrete lack, mid-introduction.** Half of introductions (51%)
+carry an explicit gap marker: "remains unclear", "little is known", "few studies",
+"has not been", "to date", or a "however" clause naming a difficulty. It sits between
+18% and 68% of the way through, median 38%: after enough territory that the reader
+knows what is missing from what. The other half narrow to the purpose without a
+formal gap sentence: the funnel does the work.
+
+**The purpose statement is the hinge, in the second half.** 53% state it explicitly,
+"In this work, we...", "Here we...", "The aim of this study...", at 36% to 77% of the
+way through, median 59%. The first "we" of the paper appears at the same place, median
+52%: the front half of an introduction is about the subject, the back half about this
+work. Where both a gap and a purpose appear, the gap comes first in half the cases;
+the strict gap-then-purpose sequence is common, not universal.
+
+**What introductions do not do.** Only 8% announce the findings inside the
+introduction ("we find that..."); the introduction sets the question and the paper
+answers it. Only 3% contain a literal question mark: the question is implied by the
+gap, not asked. None of the 266 outlines the paper's structure ("Section 2
+describes...") in this field's journals.
+
+**Citations are densest here.** Introductions run 9.7 to 44.2 citation markers per
+1000 words against 9.9 to 17.2 for whole papers: every territory claim carries its
+references. Length: 515 to 779 words (p25 to p75), median 617.
+
+`check.py DRAFT --intro` scores a draft introduction against all of this: opener type,
+gap and purpose presence and position, questions, announcements, citation density and
+length.
+
+## Figure captions
+
+Measured on 1,837 captions: 642 from the field's and the group's pre-2022 PDFs, 1,195
+taken exactly from the PMC XML (`results/caption_study.json`).
+
+**A caption is a noun phrase, not a sentence.** 91% open with a verbless fragment that
+names what is shown: "Adsorption isotherms of CO2 and CH4 in ZIF-8 at 296 K." Only 9%
+open with a finite verb, and the common first words are "A", "The", "Comparison",
+"Adsorption", "Schematic", "Effect". "Figure 2 shows..." belongs to the text, never to
+the caption.
+
+**The structure is title first, detail after.** Median 47 words in 2 sentences (p25 24
+words and 1 sentence, p75 92 and 4). The first sentence is the fragment title; the
+following sentences, when present, are full sentences that define panels, conditions
+and symbols:
+
+- panel definitions "(a) ..., (b) ..." in 38%
+- numeric conditions (temperature, pressure, composition, loading) in 31%
+- a line and symbol key ("solid lines, IAST; symbols, GCMC") in 16%
+- a source credit ("adapted from ref 12") in 9%
+
+**What captions leave out.** Conclusions: only 2% say "showing that" or "demonstrating";
+the caption identifies, the text interprets. Error statements: 3% ("error bars represent
+one standard deviation"), written only when the figure carries error bars. Trimming is
+explicit when it happens: 4% say "for clarity", "not shown", or "omitted", naming what
+was cut rather than hiding it: "Curves for higher temperatures are offset on the
+ordinate."; "Error bars are smaller than the symbols."
+
+**The working recipe.** One fragment naming quantity, system and conditions; one
+sentence per panel if there are panels; one sentence for the key if there are multiple
+lines or symbols; a credit if anything is reproduced. Everything the reader needs to
+read the figure without the text, and nothing the text is for.
+
+`check.py DRAFT --caption` scores a caption: fragment or sentence opening, length,
+panels, conditions, key, and whether it argues instead of identifying.
+
 ## Citing
 
 Measured on 245 papers with every citation kept as a marker: 1,136,629 words, 15,312
