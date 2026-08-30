@@ -415,6 +415,49 @@ action in the verb and the number in the sentence:
 > the Henry coefficient diverges.
 
 
+## Introductions
+
+Measured on 266 introductions: 69 extracted from the field's and the group's pre-2022
+PDFs and 199 from the PMC corpus (`results/intro_study.json`). The shape that comes
+out is plainer than the writing guides suggest.
+
+**Open with a fact about the subject, not a flourish.** 74% of first sentences are a
+plain factual or definitional claim: "Geopolymers are synthesized by mixing
+alumosilicate powders with alkaline solutions."; "Porous metal-organic frameworks are
+assembled from metal ions or clusters bridged by organic molecules." The rhetorical
+openers are the minority: importance or wide use 11% ("have attracted considerable
+attention"), societal need 6%, "in recent years" 5%, definition-by-classification 4%.
+A draft that opens with "In recent years, X has attracted increasing attention" is
+using the 5% opener with the 11% verb, and both are the field's most worn phrases.
+
+**The gap is stated as a concrete lack, mid-introduction.** Half of introductions (51%)
+carry an explicit gap marker: "remains unclear", "little is known", "few studies",
+"has not been", "to date", or a "however" clause naming a difficulty. It sits between
+18% and 68% of the way through, median 38%: after enough territory that the reader
+knows what is missing from what. The other half narrow to the purpose without a
+formal gap sentence: the funnel does the work.
+
+**The purpose statement is the hinge, in the second half.** 53% state it explicitly,
+"In this work, we...", "Here we...", "The aim of this study...", at 36% to 77% of the
+way through, median 59%. The first "we" of the paper appears at the same place, median
+52%: the front half of an introduction is about the subject, the back half about this
+work. Where both a gap and a purpose appear, the gap comes first in half the cases;
+the strict gap-then-purpose sequence is common, not universal.
+
+**What introductions do not do.** Only 8% announce the findings inside the
+introduction ("we find that..."); the introduction sets the question and the paper
+answers it. Only 3% contain a literal question mark: the question is implied by the
+gap, not asked. None of the 266 outlines the paper's structure ("Section 2
+describes...") in this field's journals.
+
+**Citations are densest here.** Introductions run 9.7 to 44.2 citation markers per
+1000 words against 9.9 to 17.2 for whole papers: every territory claim carries its
+references. Length: 515 to 779 words (p25 to p75), median 617.
+
+`check.py DRAFT --intro` scores a draft introduction against all of this: opener type,
+gap and purpose presence and position, questions, announcements, citation density and
+length.
+
 ## Citing
 
 Measured on 245 papers with every citation kept as a marker: 1,136,629 words, 15,312

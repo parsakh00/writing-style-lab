@@ -109,6 +109,37 @@ export function measure(text) {
   };
 }
 
+
+function introShape(text, sents, nWords, out) {
+  const n = sents.length;
+  if (n < 5) { out("\nintroduction: too short to score (under 5 sentences)"); return; }
+  const first = sents[0];
+  const OP = [
+    ["importance or wide use (papers 11%)", /(?:play(?:s)? (?:a|an) (?:key|important|crucial|central|vital|major)|(?:has|have) (?:attracted|received|gained|drawn|garnered)|(?:is|are) (?:one of the most|widely|among the most|of (?:great|considerable))|great (?:attention|interest|potential)|(?:emerged|promising) (?:as|candidates?)|extensively (?:studied|investigated|used)|(?:has|have) been (?:widely|extensively))/i],
+    ["recent growth (papers 5%)", /(?:in recent (?:years|decades)|recently|over the (?:past|last)|the last (?:decade|few years))/i],
+    ["societal need (papers 6%)", /(?:the (?:need|demand|challenge)|increasing (?:demand|concern|levels?)|global (?:warming|energy|climate)|greenhouse gas|energy crisis|co2 emissions?|climate change|environmental|air pollution|clean(?:er)? energy)/i],
+    ["definition (papers 4%)", /(?:(?:are|is) a (?:class|family|type|group|series) of|consist(?:s|ing)? of|composed of|constructed (?:from|by)|known as|refers? to)/i],
+  ];
+  let kind = "plain factual claim (papers 74%)";
+  for (const [label, re2] of OP) { if (re2.test(first)) { kind = label; break; } }
+  const GAP = /(?:remains? (?:unclear|unknown|challenging|elusive|an open|a challenge|poorly understood|limited|scarce|to be)|little (?:is known|attention|work|information)|few (?:studies|reports|works|attempts)|no (?:study|report|systematic|general)|has not (?:been|yet)|have not (?:been|yet)|not (?:yet|fully|well) (?:been )?(?:understood|explored|studied|established|investigated|addressed|clear)|is still (?:lacking|missing|unclear|unknown|debated)|lack of|open question|to date|(?:however|but|yet|unfortunately|despite)[^.]{0,120}(?:difficult|challeng|hinder|limit|problem|unclear|unknown|remains?|not been|little|few|scarce|hamper|suffer))/i;
+  const PUR = /(?:in this (?:work|paper|study|article|contribution|letter)|here,? we|in the present (?:work|study|paper)|the (?:aim|purpose|goal|objective) of (?:this|the present)|this (?:work|paper|study) (?:presents|reports|describes|examines|investigates|addresses|focuses|aims)|we (?:report|present|propose|develop|investigate|examine|study|demonstrate|show|introduce|address|extend|apply|use|explore)\b)/i;
+  let gi = null, pi = null;
+  sents.forEach((x, i) => { if (gi === null && GAP.test(x)) gi = i; if (pi === null && PUR.test(x)) pi = i; });
+  const ann = count(text, /(?:we (?:find|found|show|demonstrate|observe) that|our (?:results|findings|calculations|simulations) (?:show|reveal|indicate|suggest|demonstrate))/gi);
+  const MARK = /\[(?:\d{1,3})(?:\s?[,\u2013-]\s?\d{1,3})*\]|\((?:[A-Z][A-Za-z-]+(?: et al\.?)?(?:,| and [A-Z][A-Za-z-]+)? ?\d{4}[a-z]?(?:; ?)?)+\)/g;
+  const dens = 1000 * count(text, MARK) / Math.max(nWords, 1);
+  out("\nintroduction shape (266 published introductions)");
+  out(`  opener: ${kind}`);
+  if (gi === null) out("  gap: none found (papers state one in 51%, as a concrete lack)");
+  else out(`  gap: sentence ${gi + 1}, ${pct(gi / n)} of the way in (papers 18-68%)`);
+  if (pi === null) out("  purpose statement: none found (papers 53%: 'In this work, we...')  <<");
+  else out(`  purpose statement: sentence ${pi + 1}, ${pct(pi / n)} of the way in (papers 36-77%)${pi / n < 0.25 ? "  <<" : ""}`);
+  out(`  length: ${nWords} words (papers 515-779); citations ${pyFixed(dens, 1)}/1000w (papers 9.7-44.2)${dens < 5 ? "  <<" : ""}`);
+  if (text.includes("?")) out("  contains a literal question (papers 3%): the gap implies the question instead");
+  if (ann) out(`  announces findings ${ann}x (papers do this in 8% of introductions)`);
+}
+
 function suggestSequences(text, sents, data, out) {
   const tri = data["trigrams.json"].trigrams;
   const cont = new Map();
@@ -138,7 +169,7 @@ function suggestSequences(text, sents, data, out) {
 
 // data: { "reference.json": {...}, "group_reference.json": {...}, "vocab.json": {...},
 //         "formulas.json": {...}, "trigrams.json": {...}, ["sequences.json": {...}] }
-export function report(text, data, { register = "paper", reference = "papers", top = 13, name = "draft", suggest = false } = {}) {
+export function report(text, data, { register = "paper", reference = "papers", top = 13, name = "draft", suggest = false, intro = false } = {}) {
   const lines = []; const out = (s = "") => lines.push(s);
   text = stripMarkup(text);
   const ref = data[{ papers: "combined_reference.json", corpus: "reference.json", group: "group_reference.json" }[reference] || "combined_reference.json"].features;
@@ -250,6 +281,7 @@ export function report(text, data, { register = "paper", reference = "papers", t
   for (const [label, re] of RULES) { const k = count(text, re); if (k) hits.push([label, k]); }
   if (hits.length) { out("  general rules (SKILL.md, from the suggestions):"); for (const [label, k] of hits) out(`    ${k}x  ${label}`); }
 
+  if (intro) introShape(text, sents, m._n_words, out);
   if (suggest) suggestSequences(text, sents, data, out);
 
   const ftotal = formulas.total_words, fset = formulas.formulas;
@@ -277,5 +309,5 @@ if (typeof process !== "undefined" && process.argv && process.argv[1] && /check\
   }
   const text = fs.readFileSync(file, "utf8");
   process.stdout.write(report(text, data, { register: opt("--register", "paper"), reference: opt("--reference", "papers"),
-    suggest: args.includes("--suggest"), name: path.basename(file) }));
+    suggest: args.includes("--suggest"), intro: args.includes("--intro"), name: path.basename(file) }));
 }

@@ -185,6 +185,9 @@ def build_parser() -> argparse.ArgumentParser:
                     help="corpus: 615 excerpts from 615 adsorption and simulation "
                          "papers. group: one research group and its coauthors. papers "
                          "(default): where the two bands overlap, the stricter target")
+    ap.add_argument("--intro", action="store_true",
+                    help="treat the draft as an introduction and score its shape: "
+                         "opener, gap, purpose statement, questions, citation density")
     ap.add_argument("--suggest", action="store_true",
                     help="for every word triple no paper uses, show what papers write "
                          "after the same two words, sentence by sentence")
@@ -197,7 +200,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def report(text: str, register: str = "paper", reference: str = "papers",
-           top: int = 13, name: str = "draft", suggest: bool = False) -> str:
+           top: int = 13, name: str = "draft", suggest: bool = False,
+           intro: bool = False) -> str:
     """Score a text and return the report as a string.
 
     This is the library entry point: pass prose, get the report. The command line
@@ -208,7 +212,8 @@ def report(text: str, register: str = "paper", reference: str = "papers",
     buf = io.StringIO()
     with contextlib.redirect_stdout(buf):
         _run(strip_markup(text), argparse.Namespace(
-            register=register, reference=reference, top=top, suggest=suggest), name)
+            register=register, reference=reference, top=top, suggest=suggest,
+            intro=intro), name)
     return buf.getvalue()
 
 
@@ -244,6 +249,50 @@ def suggest_sequences(text: str, sents: list[str]) -> None:
             print(f"        '{g}' -> after '{a} {b}' papers write: {alts}")
     if total:
         print(f"  unattested triples: {unatt}/{total} = {unatt / total:.0%}")
+
+
+
+def intro_shape(text: str, sents: list[str], n_words: int) -> None:
+    """Score an introduction against 266 published ones; see SKILL.md, Introductions."""
+    n = len(sents)
+    if n < 5:
+        print("\nintroduction: too short to score (under 5 sentences)")
+        return
+    first = sents[0]
+    OP = [("importance or wide use (papers 11%)",
+           r"(?:play(?:s)? (?:a|an) (?:key|important|crucial|central|vital|major)|(?:has|have) (?:attracted|received|gained|drawn|garnered)|(?:is|are) (?:one of the most|widely|among the most|of (?:great|considerable))|great (?:attention|interest|potential)|(?:emerged|promising) (?:as|candidates?)|extensively (?:studied|investigated|used)|(?:has|have) been (?:widely|extensively))"),
+          ("recent growth (papers 5%)", r"(?:in recent (?:years|decades)|recently|over the (?:past|last)|the last (?:decade|few years))"),
+          ("societal need (papers 6%)", r"(?:the (?:need|demand|challenge)|increasing (?:demand|concern|levels?)|global (?:warming|energy|climate)|greenhouse gas|energy crisis|co2 emissions?|climate change|environmental|air pollution|clean(?:er)? energy)"),
+          ("definition (papers 4%)", r"(?:(?:are|is) a (?:class|family|type|group|series) of|consist(?:s|ing)? of|composed of|constructed (?:from|by)|known as|refers? to)")]
+    kind = "plain factual claim (papers 74%)"
+    for label, pat in OP:
+        if re.search(pat, first, re.I):
+            kind = label
+            break
+    GAP = re.compile(r"(?:remains? (?:unclear|unknown|challenging|elusive|an open|a challenge|poorly understood|limited|scarce|to be)|little (?:is known|attention|work|information)|few (?:studies|reports|works|attempts)|no (?:study|report|systematic|general)|has not (?:been|yet)|have not (?:been|yet)|not (?:yet|fully|well) (?:been )?(?:understood|explored|studied|established|investigated|addressed|clear)|is still (?:lacking|missing|unclear|unknown|debated)|lack of|open question|to date|(?:however|but|yet|unfortunately|despite)[^.]{0,120}(?:difficult|challeng|hinder|limit|problem|unclear|unknown|remains?|not been|little|few|scarce|hamper|suffer))", re.I)
+    PUR = re.compile(r"(?:in this (?:work|paper|study|article|contribution|letter)|here,? we|in the present (?:work|study|paper)|the (?:aim|purpose|goal|objective) of (?:this|the present)|this (?:work|paper|study) (?:presents|reports|describes|examines|investigates|addresses|focuses|aims)|we (?:report|present|propose|develop|investigate|examine|study|demonstrate|show|introduce|address|extend|apply|use|explore)\b)", re.I)
+    gi = next((i for i, x in enumerate(sents) if GAP.search(x)), None)
+    pi = next((i for i, x in enumerate(sents) if PUR.search(x)), None)
+    ann = len(re.findall(r"(?:we (?:find|found|show|demonstrate|observe) that|our (?:results|findings|calculations|simulations) (?:show|reveal|indicate|suggest|demonstrate))", text, flags=re.I))
+    MARK = re.compile(r"\[(?:\d{1,3})(?:\s?[,\u2013-]\s?\d{1,3})*\]|\((?:[A-Z][A-Za-z-]+(?: et al\.?)?(?:,| and [A-Z][A-Za-z-]+)? ?\d{4}[a-z]?(?:; ?)?)+\)")
+    dens = 1000 * len(MARK.findall(text)) / max(n_words, 1)
+    print("\nintroduction shape (266 published introductions)")
+    print(f"  opener: {kind}")
+    if gi is None:
+        print("  gap: none found (papers state one in 51%, as a concrete lack)")
+    else:
+        print(f"  gap: sentence {gi + 1}, {gi / n:.0%} of the way in (papers 18-68%)")
+    if pi is None:
+        print("  purpose statement: none found (papers 53%: 'In this work, we...')  <<")
+    else:
+        print(f"  purpose statement: sentence {pi + 1}, {pi / n:.0%} of the way in (papers 36-77%)"
+              f"{'  <<' if pi / n < 0.25 else ''}")
+    print(f"  length: {n_words} words (papers 515-779); citations {dens:.1f}/1000w (papers 9.7-44.2)"
+          f"{'  <<' if dens < 5 else ''}")
+    if "?" in text:
+        print("  contains a literal question (papers 3%): the gap implies the question instead")
+    if ann:
+        print(f"  announces findings {ann}x (papers do this in 8% of introductions)")
 
 
 def main() -> int:
@@ -439,6 +488,9 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
         print("  general rules (SKILL.md, from the suggestions):")
         for label, k in hits:
             print(f"    {k}x  {label}")
+
+    if getattr(args, "intro", False):
+        intro_shape(text, sents, m["_n_words"])
 
     if getattr(args, "suggest", False):
         suggest_sequences(text, sents)
