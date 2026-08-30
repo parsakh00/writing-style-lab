@@ -14,10 +14,10 @@ python check.py DRAFT.md
 
 No dependencies beyond the Python standard library. The bundled `data/` holds the style
 reference (615 excerpts from 615 adsorption and simulation papers), a second profile for one
-research group (82 excerpts from 20 of their papers published before 2022), a vocabulary of 32,815 word
+research group (82 excerpts from 20 of their papers published before 2022), a vocabulary of 32,650 word
 types,
-the 300 connective formulas papers rely on, 82,556 connective word sequences, and
-148,117 word triples with counts for `--suggest`.
+the 300 connective formulas papers rely on, 82,657 connective word sequences, and
+148,318 word triples with counts for `--suggest`.
 
 **Calibration: a real published paper scores 6 to 8 of 13 targets.** The bands are p25
 to p75, so half the corpus sits outside any given one. Thirteen out of thirteen means the
