@@ -110,6 +110,25 @@ export function measure(text) {
 }
 
 
+
+function captionShape(text, nWords, out) {
+  text = text.trim();
+  const sents = text.split(/(?<=[.!?])\s+(?=[A-Z(])/).filter(x => x.trim());
+  if (!sents.length) { out("\ncaption: nothing to measure"); return; }
+  const VERB1 = /\b(?:is|are|was|were|shows?|show|illustrates?|presents?|depicts?|displays?|compares?|represents?|gives?|indicates?|has|have|can|reveals?)\b/;
+  const frag = !VERB1.test(sents[0]);
+  out("\ncaption shape (1,837 published captions)");
+  out(`  opening: ${frag ? "verbless fragment (papers 91%)" : "full sentence (papers 9%)  <<"}`);
+  const mark = (nWords >= 10 && nWords <= 120) ? "" : "  <<";
+  out(`  length: ${nWords} words in ${sents.length} sentence(s) (papers p25-p75: 24-92 words, 1-4 sentences)${mark}`);
+  if (/\(\s*[a-d]\s*\)/i.test(text)) out("  panel labels present (papers 38% when multi-panel)");
+  if (/\d+\s*(?:K|bar|kPa|MPa|atm|mol|wt%|nm)\b|\bat \d|\bT\s*=|\bP\s*=/.test(text)) out("  numeric conditions present (papers 31%)");
+  else out("  no numeric conditions: add temperature, pressure or composition if the figure depends on them");
+  if (/\b(?:solid|dashed|dotted|open|filled|closed) (?:lines?|circles?|symbols?|squares?|triangles?|curves?)|\bsymbols? (?:are|represent|denote|show)|\blines? (?:are|represent|denote|show|correspond)/i.test(text)) out("  line and symbol key present (papers 16%)");
+  if (/\bshow(?:s|ing)? that\b|\bdemonstrat|\bindicating that\b|\bconfirming\b|\bsuggesting that\b/i.test(text)) out("  states a conclusion (papers 2%): the caption identifies, the text interprets  <<");
+  if (/\bfigure \d+ shows\b|\bfig\.? \d+ shows\b/i.test(text)) out("  'Figure N shows' belongs to the text, not the caption  <<");
+}
+
 function introShape(text, sents, nWords, out) {
   const n = sents.length;
   if (n < 5) { out("\nintroduction: too short to score (under 5 sentences)"); return; }
@@ -169,7 +188,7 @@ function suggestSequences(text, sents, data, out) {
 
 // data: { "reference.json": {...}, "group_reference.json": {...}, "vocab.json": {...},
 //         "formulas.json": {...}, "trigrams.json": {...}, ["sequences.json": {...}] }
-export function report(text, data, { register = "paper", reference = "papers", top = 13, name = "draft", suggest = false, intro = false } = {}) {
+export function report(text, data, { register = "paper", reference = "papers", top = 13, name = "draft", suggest = false, intro = false, caption = false } = {}) {
   const lines = []; const out = (s = "") => lines.push(s);
   text = stripMarkup(text);
   const ref = data[{ papers: "combined_reference.json", corpus: "reference.json", group: "group_reference.json" }[reference] || "combined_reference.json"].features;
@@ -281,6 +300,7 @@ export function report(text, data, { register = "paper", reference = "papers", t
   for (const [label, re] of RULES) { const k = count(text, re); if (k) hits.push([label, k]); }
   if (hits.length) { out("  general rules (SKILL.md, from the suggestions):"); for (const [label, k] of hits) out(`    ${k}x  ${label}`); }
 
+  if (caption) captionShape(text, m._n_words, out);
   if (intro) introShape(text, sents, m._n_words, out);
   if (suggest) suggestSequences(text, sents, data, out);
 
@@ -309,5 +329,5 @@ if (typeof process !== "undefined" && process.argv && process.argv[1] && /check\
   }
   const text = fs.readFileSync(file, "utf8");
   process.stdout.write(report(text, data, { register: opt("--register", "paper"), reference: opt("--reference", "papers"),
-    suggest: args.includes("--suggest"), intro: args.includes("--intro"), name: path.basename(file) }));
+    suggest: args.includes("--suggest"), intro: args.includes("--intro"), caption: args.includes("--caption"), name: path.basename(file) }));
 }

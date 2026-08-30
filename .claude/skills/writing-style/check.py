@@ -185,6 +185,8 @@ def build_parser() -> argparse.ArgumentParser:
                     help="corpus: 615 excerpts from 615 adsorption and simulation "
                          "papers. group: one research group and its coauthors. papers "
                          "(default): where the two bands overlap, the stricter target")
+    ap.add_argument("--caption", action="store_true",
+                    help="treat the draft as a figure caption and score its shape")
     ap.add_argument("--intro", action="store_true",
                     help="treat the draft as an introduction and score its shape: "
                          "opener, gap, purpose statement, questions, citation density")
@@ -201,7 +203,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 def report(text: str, register: str = "paper", reference: str = "papers",
            top: int = 13, name: str = "draft", suggest: bool = False,
-           intro: bool = False) -> str:
+           intro: bool = False, caption: bool = False) -> str:
     """Score a text and return the report as a string.
 
     This is the library entry point: pass prose, get the report. The command line
@@ -213,7 +215,7 @@ def report(text: str, register: str = "paper", reference: str = "papers",
     with contextlib.redirect_stdout(buf):
         _run(strip_markup(text), argparse.Namespace(
             register=register, reference=reference, top=top, suggest=suggest,
-            intro=intro), name)
+            intro=intro, caption=caption), name)
     return buf.getvalue()
 
 
@@ -293,6 +295,34 @@ def intro_shape(text: str, sents: list[str], n_words: int) -> None:
         print("  contains a literal question (papers 3%): the gap implies the question instead")
     if ann:
         print(f"  announces findings {ann}x (papers do this in 8% of introductions)")
+
+
+
+def caption_shape(text: str, n_words: int) -> None:
+    """Score a figure caption against 1,837 published ones; see SKILL.md."""
+    text = text.strip()
+    sents = [x for x in re.split(r"(?<=[.!?])\s+(?=[A-Z(])", text) if x.strip()]
+    if not sents:
+        print("\ncaption: nothing to measure")
+        return
+    VERB1 = re.compile(r"\b(?:is|are|was|were|shows?|show|illustrates?|presents?|depicts?|displays?|compares?|represents?|gives?|indicates?|has|have|can|reveals?)\b")
+    frag = not VERB1.search(sents[0])
+    print("\ncaption shape (1,837 published captions)")
+    print(f"  opening: {'verbless fragment (papers 91%)' if frag else 'full sentence (papers 9%)  <<'}")
+    mark = "" if 10 <= n_words <= 120 else "  <<"
+    print(f"  length: {n_words} words in {len(sents)} sentence(s) (papers p25-p75: 24-92 words, 1-4 sentences){mark}")
+    if re.search(r"\(\s*[a-d]\s*\)", text, re.I):
+        print("  panel labels present (papers 38% when multi-panel)")
+    if re.search(r"\d+\s*(?:K|bar|kPa|MPa|atm|mol|wt%|nm)\b|\bat \d|\bT\s*=|\bP\s*=", text):
+        print("  numeric conditions present (papers 31%)")
+    else:
+        print("  no numeric conditions: add temperature, pressure or composition if the figure depends on them")
+    if re.search(r"\b(?:solid|dashed|dotted|open|filled|closed) (?:lines?|circles?|symbols?|squares?|triangles?|curves?)|\bsymbols? (?:are|represent|denote|show)|\blines? (?:are|represent|denote|show|correspond)", text, re.I):
+        print("  line and symbol key present (papers 16%)")
+    if re.search(r"\bshow(?:s|ing)? that\b|\bdemonstrat|\bindicating that\b|\bconfirming\b|\bsuggesting that\b", text, re.I):
+        print("  states a conclusion (papers 2%): the caption identifies, the text interprets  <<")
+    if re.search(r"\bfigure \d+ shows\b|\bfig\.? \d+ shows\b", text, re.I):
+        print("  'Figure N shows' belongs to the text, not the caption  <<")
 
 
 def main() -> int:
@@ -488,6 +518,9 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
         print("  general rules (SKILL.md, from the suggestions):")
         for label, k in hits:
             print(f"    {k}x  {label}")
+
+    if getattr(args, "caption", False):
+        caption_shape(text, m["_n_words"])
 
     if getattr(args, "intro", False):
         intro_shape(text, sents, m["_n_words"])

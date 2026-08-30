@@ -458,6 +458,42 @@ references. Length: 515 to 779 words (p25 to p75), median 617.
 gap and purpose presence and position, questions, announcements, citation density and
 length.
 
+## Figure captions
+
+Measured on 1,837 captions: 642 from the field's and the group's pre-2022 PDFs, 1,195
+taken exactly from the PMC XML (`results/caption_study.json`).
+
+**A caption is a noun phrase, not a sentence.** 91% open with a verbless fragment that
+names what is shown: "Adsorption isotherms of CO2 and CH4 in ZIF-8 at 296 K." Only 9%
+open with a finite verb, and the common first words are "A", "The", "Comparison",
+"Adsorption", "Schematic", "Effect". "Figure 2 shows..." belongs to the text, never to
+the caption.
+
+**The structure is title first, detail after.** Median 47 words in 2 sentences (p25 24
+words and 1 sentence, p75 92 and 4). The first sentence is the fragment title; the
+following sentences, when present, are full sentences that define panels, conditions
+and symbols:
+
+- panel definitions "(a) ..., (b) ..." in 38%
+- numeric conditions (temperature, pressure, composition, loading) in 31%
+- a line and symbol key ("solid lines, IAST; symbols, GCMC") in 16%
+- a source credit ("adapted from ref 12") in 9%
+
+**What captions leave out.** Conclusions: only 2% say "showing that" or "demonstrating";
+the caption identifies, the text interprets. Error statements: 3% ("error bars represent
+one standard deviation"), written only when the figure carries error bars. Trimming is
+explicit when it happens: 4% say "for clarity", "not shown", or "omitted", naming what
+was cut rather than hiding it: "Curves for higher temperatures are offset on the
+ordinate."; "Error bars are smaller than the symbols."
+
+**The working recipe.** One fragment naming quantity, system and conditions; one
+sentence per panel if there are panels; one sentence for the key if there are multiple
+lines or symbols; a credit if anything is reproduced. Everything the reader needs to
+read the figure without the text, and nothing the text is for.
+
+`check.py DRAFT --caption` scores a caption: fragment or sentence opening, length,
+panels, conditions, key, and whether it argues instead of identifying.
+
 ## Citing
 
 Measured on 245 papers with every citation kept as a marker: 1,136,629 words, 15,312
