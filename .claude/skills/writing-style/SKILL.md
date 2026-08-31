@@ -454,6 +454,43 @@ describes...") in this field's journals.
 1000 words against 9.9 to 17.2 for whole papers: every territory claim carries its
 references. Length: 515 to 779 words (p25 to p75), median 617.
 
+### The drift inside the introduction
+
+Splitting the same 268 introductions into fifths shows a steady drift under the moves,
+rates per 1000 words by fifth:
+
+| | 1st | 2nd | 3rd | 4th | 5th |
+|---|---|---|---|---|---|
+| citations | 29.5 | 31.4 | 31.6 | 22.5 | 20.2 |
+| "was measured / was reported" (past) | 1.3 | 2.7 | 3.4 | 5.5 | 8.5 |
+| we / our | 1.5 | 2.3 | 3.3 | 4.7 | 6.1 |
+| "such as" | 3.4 | 2.6 | 2.6 | 1.9 | 0.9 |
+| gap markers (% of sentences) | 0.9 | 1.4 | 1.9 | 1.4 | 1.1 |
+
+Four movements, none of them a rule anyone states but all of them measured:
+
+1. **Person arrives as the introduction closes.** "we / our" quadruples from the first
+   fifth to the last. The subject of the opening is the field; the subject of the close
+   is this work.
+2. **Tense narrows from the general to the particular.** The timeless present carries
+   the territory; the present perfect carries the accumulated literature ("has been
+   shown to", steady throughout); the simple past rises six-fold toward the end, where
+   specific studies are reported one by one on the way to the gap.
+3. **Exemplification is an opening device.** "such as" runs four times higher in the
+   first fifth than the last: examples fan the territory out early, and the close
+   narrows to one thing.
+4. **Citations thin as the introduction turns to this work.** Densest through the first
+   three fifths (about 30 per 1000 words), dropping by a third in the last two, where
+   the sentences are the authors' own.
+
+The introduction also has its own phrasing, concentrated at 3 to 6 times the
+whole-corpus rate: the present-perfect reporting frames "have been proposed", "has been
+shown to", "have also been", "have focused on", "been used to"; the fan-out frames
+"such as" after techniques / methods / properties / applications; "is one of";
+"referred to as"; "there has been"; and the closing "in this work we". A body paragraph
+built from these reads like a stranded introduction, and an introduction without them
+reads like a results section.
+
 `check.py DRAFT --intro` scores a draft introduction against all of this: opener type,
 gap and purpose presence and position, questions, announcements, citation density and
 length.
