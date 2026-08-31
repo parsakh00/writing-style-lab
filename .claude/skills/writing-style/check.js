@@ -120,7 +120,7 @@ function captionShape(text, nWords, out) {
   out("\ncaption shape (1,837 published captions)");
   out(`  opening: ${frag ? "verbless fragment (papers 91%)" : "full sentence (papers 9%)  <<"}`);
   const mark = (nWords >= 10 && nWords <= 120) ? "" : "  <<";
-  out(`  length: ${nWords} words in ${sents.length} sentence(s) (papers p25-p75: 24-92 words, 1-4 sentences)${mark}`);
+  out(`  length: ${nWords} words in ${sents.length} sentence(s) (figure captions 24-92 words; table captions 11-30)${mark}`);
   if (/\(\s*[a-d]\s*\)/i.test(text)) out("  panel labels present (papers 38% when multi-panel)");
   if (/\d+\s*(?:K|bar|kPa|MPa|atm|mol|wt%|nm)\b|\bat \d|\bT\s*=|\bP\s*=/.test(text)) out("  numeric conditions present (papers 31%)");
   else out("  no numeric conditions: add temperature, pressure or composition if the figure depends on them");

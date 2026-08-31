@@ -528,8 +528,31 @@ sentence per panel if there are panels; one sentence for the key if there are mu
 lines or symbols; a credit if anything is reproduced. Everything the reader needs to
 read the figure without the text, and nothing the text is for.
 
-`check.py DRAFT --caption` scores a caption: fragment or sentence opening, length,
-panels, conditions, key, and whether it argues instead of identifying.
+### Table captions
+
+Measured on 569 table captions (219 from the PDFs, 350 exactly from the PMC XML;
+`results/table_caption_study.json`). Same family as figure captions, tighter form:
+
+- **Shorter and flatter.** 11 to 30 words (p25 to p75), median 18, and almost always
+  one sentence; figure captions run 24 to 92 in one to four.
+- **Even more of a noun phrase.** 95% open verbless. The vocabulary is its own:
+  "parameters" appears in 20% ("Lennard-Jones parameters used in the simulations"),
+  "properties" in 9%, "summary / comparison / list of" in 7%. First words: The,
+  Comparison, Summary, Parameters, Results, Adsorption, Effect.
+- **What it specifies**: numeric conditions in 15%, a units statement in 7% ("all
+  energies in kJ mol-1", "values in parentheses are..."), the source of the values in
+  3%, an uncertainty note in 3%.
+- **What it never does**: state a conclusion. 0% of 569, against 2% for figures. A
+  table caption names the contents; even interpretation by adjective is absent.
+
+The working form: "Quantity of system under conditions", then a units or uncertainty
+note only if the table needs one. "Lennard-Jones parameters for the framework atoms.";
+"Isosteric heats of adsorption at zero coverage (kJ mol-1); values in parentheses are
+one standard deviation."
+
+`check.py DRAFT --caption` scores a figure or table caption: fragment or sentence
+opening, length against both bands, panels, conditions, key, and whether it argues
+instead of identifying.
 
 ## Citing
 

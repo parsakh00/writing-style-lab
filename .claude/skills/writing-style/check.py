@@ -310,7 +310,7 @@ def caption_shape(text: str, n_words: int) -> None:
     print("\ncaption shape (1,837 published captions)")
     print(f"  opening: {'verbless fragment (papers 91%)' if frag else 'full sentence (papers 9%)  <<'}")
     mark = "" if 10 <= n_words <= 120 else "  <<"
-    print(f"  length: {n_words} words in {len(sents)} sentence(s) (papers p25-p75: 24-92 words, 1-4 sentences){mark}")
+    print(f"  length: {n_words} words in {len(sents)} sentence(s) (figure captions 24-92 words; table captions 11-30){mark}")
     if re.search(r"\(\s*[a-d]\s*\)", text, re.I):
         print("  panel labels present (papers 38% when multi-panel)")
     if re.search(r"\d+\s*(?:K|bar|kPa|MPa|atm|mol|wt%|nm)\b|\bat \d|\bT\s*=|\bP\s*=", text):
