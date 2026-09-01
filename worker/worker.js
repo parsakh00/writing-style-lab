@@ -5,11 +5,12 @@
 // Limits (all enforced here, not on the page):
 //   3 polishes per visitor per day, by IP address
 //   DAILY_TOTAL polishes per day for everyone together
-//   MAX_CHARS characters of draft
+//   MAX_WORDS words (and MAX_CHARS characters) of draft
 //
 // Bindings: ANTHROPIC_API_KEY (secret), RATE (KV namespace), ALLOWED_ORIGIN (var).
 
-const MAX_CHARS = 12000;
+const MAX_WORDS = 5000;
+const MAX_CHARS = 40000;
 const PER_IP_PER_DAY = 3;
 const DAILY_TOTAL = 200;
 const MODEL = "claude-sonnet-5";
@@ -58,8 +59,9 @@ export default {
     const pass2 = body.pass === 2 && typeof body.token === "string";
     const register = ["paper", "letter", "docs"].includes(body.register) ? body.register : "paper";
     const report = String(body.report || "").slice(0, 8000);
-    if (draft.split(/\s+/).length < 5) return json(env, 400, { error: "paste a draft" });
-    if (draft.length > MAX_CHARS) return json(env, 413, { error: `drafts are limited to ${MAX_CHARS} characters` });
+    const nWords = draft.split(/\s+/).filter(Boolean).length;
+    if (nWords < 5) return json(env, 400, { error: "paste a draft" });
+    if (nWords > MAX_WORDS || draft.length > MAX_CHARS) return json(env, 413, { error: `drafts are limited to ${MAX_WORDS} words` });
 
     // Limits. KV keys expire at the end of the day they were made.
     const day = new Date().toISOString().slice(0, 10);
@@ -84,7 +86,7 @@ export default {
       headers: { "content-type": "application/json", "x-api-key": env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
       // Thinking is off: with it on, a long draft used the whole output budget on thought
       // and returned no text. The checker's report already says what to change.
-      body: JSON.stringify({ model: MODEL, max_tokens: 8192, thinking: { type: "disabled" },
+      body: JSON.stringify({ model: MODEL, max_tokens: 16384, thinking: { type: "disabled" },
                              system: SYSTEM_HEAD + policy, messages: [{ role: "user", content: user }] }),
     });
     const j = await r.json();

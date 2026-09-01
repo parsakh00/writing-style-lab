@@ -64,6 +64,7 @@ CHECK_BODY = r"""
 <label>Register <select id=register><option value=paper>paper</option><option value=letter>letter</option><option value=docs>documentation</option></select></label>
 </div>
 <p style="margin:1rem 0 .5rem"><textarea id=draft rows=14 placeholder="Paste your draft."></textarea></p>
+<p class=note style="margin:0" id=wc>0 / 5000 words</p>
 <p style="margin:.4rem 0 0"><button id=run disabled>Polish</button><span class=status id=status></span></p>
 <p class=note style="margin:.6rem 0 0" id=quota>3/3 attempts left</p>
 </div>
@@ -106,9 +107,17 @@ async function loadQuota() {
   try { const q = await (await fetch(POLISH_URL + "/quota")).json(); if (q.limit) showQuota(q.remaining, q.limit); } catch (e) {}
 }
 ready.then(loadQuota);
+const draftBox = document.getElementById("draft"), wc = document.getElementById("wc");
+const nw = (s) => s.trim() ? s.trim().split(/\s+/).length : 0;
+draftBox.addEventListener("input", () => {
+  const n = nw(draftBox.value);
+  wc.textContent = `${n} / 5000 words`;
+  wc.style.color = n > 5000 ? "#b3261e" : "";
+});
 run.onclick = async () => {
   await ready;
-  const draft = document.getElementById("draft").value, reg = document.getElementById("register").value;
+  const draft = draftBox.value, reg = document.getElementById("register").value;
+  if (nw(draft) > 5000) { status.textContent = "drafts are limited to 5000 words"; return; }
   const pe = document.getElementById("polished");
   if (draft.trim().split(/\s+/).length < 5) { status.textContent = "paste a draft"; return; }
   if (!POLISH_URL) { status.textContent = "the polish service is not set up yet"; return; }
