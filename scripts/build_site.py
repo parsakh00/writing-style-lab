@@ -165,9 +165,11 @@ run.onclick = async () => {
     pe.scrollIntoView({ behavior: "smooth", block: "start" });
     // Second pass: check the polished text itself, and if constructions papers do not
     // use remain, send exactly those back once. Free, and tied to this text by token.
+    // Only the hard findings travel: the trigram suggestion lines led the model to
+    // rewrite whole paragraphs, so when only suggestions remain there is no second pass.
     if (res.text) {
-      const again = report(res.text, data, { register: reg, reference: "papers", suggest: true, name: "polished" });
-      const flagged = again.split("\n").filter(l => /^\s{2,}(?:\d+x |colon |passive |'|sequences no paper|\[|')/.test(l) || /papers write:/.test(l)).slice(0, 40).join("\n");
+      const again = report(res.text, data, { register: reg, reference: "papers", suggest: false, name: "polished" });
+      const flagged = again.split("\n").filter(l => /^\s{2,}(?:\d+x |colon |passive |sequences no paper)/.test(l)).slice(0, 40).join("\n");
       if (flagged.trim()) {
         status.textContent = "polishing, second pass";
         try {
