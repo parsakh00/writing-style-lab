@@ -490,40 +490,6 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
                 print(f"    {f}")
 
 
-
-    # The story of the paper, after StoryScope (arXiv 2604.03136) translated to
-    # scientific prose and re-measured on this project's corpora: machine text applauds
-    # its own significance (1.66 per 1000 words against 0.30 in papers), resolves
-    # everything (complications 0.04 against 0.21), and never revisits itself
-    # (cross-references 0.22 against 0.65).
-    COMMENT = re.compile(r"\bpav\w+ the way\b|\bunderscor\w+ the (?:importance|significance|potential|need)\b|"
-                         r"\bhighlight\w+ the (?:importance|significance|potential|need)\b|"
-                         r"\bdemonstrat\w+ the (?:importance|potential|power|promise|utility|value)\b|"
-                         r"\bopen\w* (?:up )?(?:new )?(?:avenues|possibilities|opportunities)\b|"
-                         r"\bis (?:important|crucial|critical|essential) (?:because|for|to)\b|"
-                         r"\bplay\w* a (?:key|crucial|vital|central) role\b|"
-                         r"\bhold\w* (?:great |significant )?promise\b|"
-                         r"\bthese (?:results|findings) (?:emphasize|underscore|highlight)\b", re.I)
-    COMPLIC = re.compile(r"\bsurprisingly\b|\bunexpectedly\b|\bcounterintuitiv\w+|\bfailed to\b|"
-                         r"\bdid not (?:show|yield|result|improve|reproduce|converge|change|match)\b|"
-                         r"\bno significant (?:difference|change|effect|improvement)\b|"
-                         r"\bwe (?:were unable|could not|cannot|failed)\b|\bdiscrepanc\w+|\binconsistenc\w+|"
-                         r"\bcannot be ruled out\b|\blimitations? of (?:this|the|our)\b", re.I)
-    NONLIN = re.compile(r"\bas (?:mentioned|noted|discussed|described|stated|shown) (?:above|earlier|previously|before)\b|"
-                        r"\b(?:see|cf\.?) (?:above|below|section|sec\.)|\baforementioned\b|\babove\b|"
-                        r"\b(?:discussed|described|shown|presented|given) (?:below|later)\b|\brecall that\b|"
-                        r"\bthe (?:previous|preceding|following) section\b", re.I)
-    nw = max(m["_n_words"], 1)
-    cm = 1000 * len(COMMENT.findall(text)) / nw
-    cp = 1000 * len(COMPLIC.findall(text)) / nw
-    nl = 1000 * len(NONLIN.findall(text)) / nw
-    print("  story (after StoryScope, arXiv 2604.03136):")
-    print(f"    significance commentary: {cm:.2f}/1000w (papers 0.30, machine 1.66){'  <<' if cm > 0.8 else ''}")
-    print(f"    complications reported: {cp:.2f}/1000w (papers 0.21, machine 0.04)"
-          f"{'  << nothing fails or surprises here' if cp == 0 and m['_n_words'] >= 600 else ''}")
-    print(f"    the text revisits itself: {nl:.2f}/1000w (papers 0.65, machine 0.22)")
-
-
     # General rules derived from the suggestions and verified across the corpus. Each
     # is a construction papers use at or near zero against a form they use hundreds of
     # times; see SKILL.md, "General rules from the suggestions".
