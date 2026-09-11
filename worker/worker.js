@@ -34,7 +34,7 @@ async function sign(env, text) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     if (request.method === "OPTIONS") return new Response(null, { headers: cors(env) });
     if (request.method === "GET" && new URL(request.url).pathname === "/health") {
       // Reports what is bound, never the values.
@@ -85,23 +85,64 @@ export default {
       method: "POST",
       headers: { "content-type": "application/json", "x-api-key": env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
       // Thinking is off: with it on, a long draft used the whole output budget on thought
-      // and returned no text. The checker's report already says what to change.
-      body: JSON.stringify({ model: MODEL, max_tokens: 16384, thinking: { type: "disabled" },
+      // and returned no text. The checker's report already says what to change. The
+      // answer streams, so the page can show the revision as it is written.
+      body: JSON.stringify({ model: MODEL, max_tokens: 16384, thinking: { type: "disabled" }, stream: true,
                              system: SYSTEM_HEAD + policy, messages: [{ role: "user", content: user }] }),
     });
-    const j = await r.json();
-    if (!r.ok) return json(env, 502, { error: j.error ? j.error.message : "upstream error" });
-
-    const text = (j.content || []).map(c => c.text || "").join("");
+    if (!r.ok) {
+      let msg = "upstream error";
+      try { const j = await r.json(); if (j.error) msg = j.error.message; } catch {}
+      return json(env, 502, { error: msg });
+    }
     if (!pass2) {
       const ttl = 86400;
       await env.RATE.put(ipKey, String(used + 1), { expirationTtl: ttl });
       await env.RATE.put(totalKey, String(total + 1), { expirationTtl: ttl });
     }
-    // The reply's shape travels with the text, so an empty answer can be diagnosed
-    // from the page rather than guessed at.
-    const shape = { stop_reason: j.stop_reason, blocks: (j.content || []).map(c => c.type), usage: j.usage, model: j.model };
     const remaining = pass2 ? Math.max(PER_IP_PER_DAY - used, 0) : PER_IP_PER_DAY - used - 1;
-    return json(env, 200, { text, shape, token: await sign(env, text) }, { "x-remaining": String(remaining) });
+
+    // The upstream stream is re-sent to the page one text piece at a time. The closing
+    // event carries the token for the second pass and the reply's shape, so an empty
+    // answer can be diagnosed from the page rather than guessed at.
+    const { readable, writable } = new TransformStream();
+    const writer = writable.getWriter();
+    const enc = new TextEncoder();
+    const send = (obj) => writer.write(enc.encode("data: " + JSON.stringify(obj) + "\n\n"));
+    const pump = (async () => {
+      const dec = new TextDecoder();
+      const reader = r.body.getReader();
+      let buf = "", text = "", stopReason = null, usage = null, modelName = null;
+      const blocks = [];
+      try {
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += dec.decode(value, { stream: true });
+          const lines = buf.split("\n");
+          buf = lines.pop();
+          for (const line of lines) {
+            if (!line.startsWith("data:")) continue;
+            let ev;
+            try { ev = JSON.parse(line.slice(5)); } catch { continue; }
+            if (ev.type === "content_block_start") blocks.push(ev.content_block && ev.content_block.type);
+            else if (ev.type === "content_block_delta" && ev.delta && ev.delta.type === "text_delta") {
+              text += ev.delta.text;
+              await send({ delta: ev.delta.text });
+            } else if (ev.type === "message_start" && ev.message) modelName = ev.message.model;
+            else if (ev.type === "message_delta") { if (ev.delta) stopReason = ev.delta.stop_reason; if (ev.usage) usage = ev.usage; }
+            else if (ev.type === "error") await send({ error: ev.error ? ev.error.message : "the stream broke" });
+          }
+        }
+        await send({ done: true, token: await sign(env, text),
+                     shape: { stop_reason: stopReason, blocks, usage, model: modelName } });
+      } catch (e) {
+        try { await send({ error: String(e) }); } catch {}
+      }
+      try { await writer.close(); } catch {}
+    })();
+    if (ctx) ctx.waitUntil(pump);
+    return new Response(readable, { status: 200, headers: { "content-type": "text/event-stream", "cache-control": "no-store",
+                                                            ...cors(env, { "x-remaining": String(remaining) }) } });
   },
 };
