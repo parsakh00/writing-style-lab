@@ -114,6 +114,40 @@ draftBox.addEventListener("input", () => {
   wc.textContent = `${n} / 5000 words`;
   wc.style.color = n > 5000 ? "#b3261e" : "";
 });
+// One call to the polish service. The worker streams the revision back, and the text
+// grows on the page as it is written; a closing event carries the token for the second
+// pass. A plain JSON reply (an older worker) still works.
+async function polish(body, pe) {
+  const r = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify(body) });
+  const left = r.headers.get("x-remaining");
+  if (!r.ok) {
+    let j = {}; try { j = await r.json(); } catch (e) {}
+    throw new Error(j.error || r.statusText);
+  }
+  if (!/event-stream/.test(r.headers.get("content-type") || "")) {
+    const j = await r.json();
+    return { text: j.text || "", token: j.token, shape: j.shape, left };
+  }
+  pe.textContent = ""; pe.style.display = "block";
+  const reader = r.body.getReader(), dec = new TextDecoder();
+  let buf = "", text = "", token = null, shape = null;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true });
+    const events = buf.split("\n\n"); buf = events.pop();
+    for (const evt of events) {
+      const line = evt.split("\n").find(l => l.startsWith("data:"));
+      if (!line) continue;
+      let ev; try { ev = JSON.parse(line.slice(5)); } catch (e) { continue; }
+      if (ev.delta) { text += ev.delta; pe.textContent = text; }
+      else if (ev.error) throw new Error(ev.error);
+      else if (ev.done) { token = ev.token; shape = ev.shape; }
+    }
+  }
+  return { text, token, shape, left };
+}
 run.onclick = async () => {
   await ready;
   const draft = draftBox.value, reg = document.getElementById("register").value;
@@ -126,28 +160,26 @@ run.onclick = async () => {
   // aimed at what this draft actually does. The report itself is not shown.
   const rep = report(draft, data, { register: reg, reference: "papers", suggest: true, name: "draft" });
   try {
-    const r = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ draft, register: reg, report: rep.slice(0, 8000) }) });
-    let j = await r.json();
-    const left = r.headers.get("x-remaining");
-    if (!r.ok) throw new Error(j.error || r.statusText);
+    let res = await polish({ draft, register: reg, report: rep.slice(0, 8000) }, pe);
+    const left = res.left;
+    pe.scrollIntoView({ behavior: "smooth", block: "start" });
     // Second pass: check the polished text itself, and if constructions papers do not
     // use remain, send exactly those back once. Free, and tied to this text by token.
-    if (j.text) {
-      const again = report(j.text, data, { register: reg, reference: "papers", suggest: true, name: "polished" });
+    if (res.text) {
+      const again = report(res.text, data, { register: reg, reference: "papers", suggest: true, name: "polished" });
       const flagged = again.split("\n").filter(l => /^\s{2,}(?:\d+x |colon |passive |'|sequences no paper|\[|')/.test(l) || /papers write:/.test(l)).slice(0, 40).join("\n");
       if (flagged.trim()) {
         status.textContent = "polishing, second pass";
-        const r2 = await fetch(POLISH_URL, { method: "POST", headers: { "content-type": "application/json" },
-          body: JSON.stringify({ draft: j.text, register: reg, report: flagged, pass: 2, token: j.token }) });
-        const j2 = await r2.json();
-        if (r2.ok && j2.text) j = j2;
+        try {
+          const res2 = await polish({ draft: res.text, register: reg, report: flagged, pass: 2, token: res.token }, pe);
+          if (res2.text) res = res2;
+        } catch (e) { /* the first pass stands */ }
       }
     }
-    pe.textContent = j.text || ("The service answered without text. Reply shape: " + JSON.stringify(j.shape || j).slice(0, 600));
-    pe.style.display = "block"; pe.scrollIntoView({ behavior: "smooth", block: "start" });
+    pe.textContent = res.text || ("The service answered without text. Reply shape: " + JSON.stringify(res.shape || {}).slice(0, 600));
+    pe.style.display = "block";
     if (left !== null) showQuota(parseInt(left, 10), 3); else loadQuota();
-    document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&passage=" + encodeURIComponent(j.text.slice(0, 3000));
+    document.getElementById("fblink").href = "https://github.com/parsakh00/writing-style-lab/issues/new?template=feedback.yml&title=" + encodeURIComponent("Feedback: ") + "&passage=" + encodeURIComponent(res.text.slice(0, 3000));
     document.getElementById("fb").style.display = "block";
     busy(false);
   } catch (e) {

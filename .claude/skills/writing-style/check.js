@@ -287,6 +287,18 @@ export function report(text, data, { register = "paper", reference = "papers", t
     if (flags.length) { out("  draft habits papers do not share:"); for (const f of flags) out(`    ${f}`); }
   }
 
+
+  // The story of the paper, after StoryScope (arXiv 2604.03136); see check.py.
+  const COMMENT = /\bpav\w+ the way\b|\bunderscor\w+ the (?:importance|significance|potential|need)\b|\bhighlight\w+ the (?:importance|significance|potential|need)\b|\bdemonstrat\w+ the (?:importance|potential|power|promise|utility|value)\b|\bopen\w* (?:up )?(?:new )?(?:avenues|possibilities|opportunities)\b|\bis (?:important|crucial|critical|essential) (?:because|for|to)\b|\bplay\w* a (?:key|crucial|vital|central) role\b|\bhold\w* (?:great |significant )?promise\b|\bthese (?:results|findings) (?:emphasize|underscore|highlight)\b/gi;
+  const COMPLIC = /\bsurprisingly\b|\bunexpectedly\b|\bcounterintuitiv\w+|\bfailed to\b|\bdid not (?:show|yield|result|improve|reproduce|converge|change|match)\b|\bno significant (?:difference|change|effect|improvement)\b|\bwe (?:were unable|could not|cannot|failed)\b|\bdiscrepanc\w+|\binconsistenc\w+|\bcannot be ruled out\b|\blimitations? of (?:this|the|our)\b/gi;
+  const NONLIN = /\bas (?:mentioned|noted|discussed|described|stated|shown) (?:above|earlier|previously|before)\b|\b(?:see|cf\.?) (?:above|below|section|sec\.)|\baforementioned\b|\babove\b|\b(?:discussed|described|shown|presented|given) (?:below|later)\b|\brecall that\b|\bthe (?:previous|preceding|following) section\b/gi;
+  const nwS = Math.max(m._n_words, 1);
+  const cm = 1000 * count(text, COMMENT) / nwS, cp = 1000 * count(text, COMPLIC) / nwS, nl = 1000 * count(text, NONLIN) / nwS;
+  out("  story (after StoryScope, arXiv 2604.03136):");
+  out(`    significance commentary: ${pyFixed(cm, 2)}/1000w (papers 0.30, machine 1.66)${cm > 0.8 ? "  <<" : ""}`);
+  out(`    complications reported: ${pyFixed(cp, 2)}/1000w (papers 0.21, machine 0.04)${cp === 0 && m._n_words >= 600 ? "  << nothing fails or surprises here" : ""}`);
+  out(`    the text revisits itself: ${pyFixed(nl, 2)}/1000w (papers 0.65, machine 0.22)`);
+
   const RULES = [
     ["quantity noun + at/from/among (papers: of)", /\b(?:uptake|heat|spread|deviation|amount|density|capacity|loading|enthalpy|rate|value|values|distribution|coefficient|fraction|ratio|number)\s+(?:at|from|among)\b(?!\s+(?:which|that))/gi],
     ["comparison with bare 'experiment' (papers: the experimental value/data)", /\b(?:than|with|to|from)\s+experiment\b(?!al|s)/gi],
