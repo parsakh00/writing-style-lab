@@ -199,6 +199,29 @@ export function report(text, data, { register = "paper", reference = "papers", t
   out(`${name}: ${commas(m._n_words)} words, ${m._n_sentences} sentences\n`);
   if (m._n_sentences === 0) { out("nothing to measure"); return lines.join("\n") + "\n"; }
   if (m._n_words < 300) out("under 300 words; these measures are noisy at this length\n");
+  // Text pasted from a PDF often loses spaces, fusing words; see check.py.
+  const spots = [];
+  for (const fm of text.matchAll(/\b([a-z]{3,})([A-Z]{3,}\d*)([a-z]*)\b/g)) {
+    const [, pre, nm, tail] = fm;
+    const fix = tail.length <= 1 ? `${pre} ${nm}${tail}` : tail.length <= 3 ? `${pre} ${nm} ${tail}`
+      : `${pre} ${nm}${tail} (split the rest by hand)`;
+    spots.push([fm[0], fix]);
+  }
+  for (const fm of text.matchAll(/([a-z]{2,})\.([A-Z][a-z]{2,})/g)) spots.push([fm[0], `${fm[1]}. ${fm[2]}`]);
+  for (const fm of text.matchAll(/\b[a-z]{25,}\b/g)) spots.push([fm[0], null]);
+  if (spots.length >= 2) {
+    out(`this text looks pasted from a PDF: ${spots.length} places have lost their spaces`);
+    for (let [tok, fix] of spots.slice(0, 6)) {
+      tok = tok.length <= 40 ? tok : tok.slice(0, 37) + "...";
+      if (fix) {
+        fix = fix.length <= 50 ? fix : fix.slice(0, 47) + "...";
+        out(`    ${tok} -> ${fix}`);
+      } else out(`    ${tok} (fused lowercase; restore the spaces by hand)`);
+    }
+    out("  A capitalized run inside a fused word is often a name the authors made up;");
+    out("  keep it exactly as they wrote it and restore only the spaces. Every measure");
+    out("  below, and any detector score, is unreliable until the text is repaired.\n");
+  }
   out(padR("", 38) + padL("draft", 9) + padL(reference, 16));
   out("-".repeat(64));
   const allowed = REGISTERS[register];
