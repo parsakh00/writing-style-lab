@@ -348,16 +348,39 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
     if m["_n_words"] < 300:
         print("under 300 words; these measures are noisy at this length\n")
 
-    # Text pasted from a PDF often loses spaces, fusing words ("theproposed",
-    # "resultsSHOW"). Fused tokens distort every measure here and swing AI
-    # detectors by tens of points, so damaged text is flagged before anything
-    # else is reported.
-    fused = re.findall(r"\b\w*[a-z]{3,}[A-Z]{3,}\w*\b|\b[a-z]+[A-Z][a-z]{2,}[A-Z]\w*\b", text)
-    if len(fused) >= 2:
-        shown = ", ".join(dict.fromkeys(fused[:4]))
-        print(f"this text looks pasted from a PDF: {len(fused)} words have lost their spaces")
-        print(f"  ({shown}). Repair them first; every measure below, and any")
-        print("  detector score, is unreliable on damaged text.\n")
+    # Text pasted from a PDF often loses spaces, fusing words at case changes
+    # ("proposeSTORYSCOPE"), at sentence breaks ("stability.This"), or into
+    # long lowercase runs. Fused tokens distort every measure here and can
+    # swing an AI detector to any of its verdicts, so damaged text is flagged
+    # before anything else is reported. A capitalized run inside a fused word
+    # is usually a name the authors coined; the suggestions keep it exactly
+    # as written and restore only the spaces around it.
+    spots = []
+    for fm in re.finditer(r"\b([a-z]{3,})([A-Z]{3,}\d*)([a-z]*)\b", text):
+        pre, name, tail = fm.group(1), fm.group(2), fm.group(3)
+        if len(tail) <= 1:
+            fix = f"{pre} {name}{tail}"
+        elif len(tail) <= 3:
+            fix = f"{pre} {name} {tail}"
+        else:
+            fix = f"{pre} {name}{tail} (split the rest by hand)"
+        spots.append((fm.group(0), fix))
+    for fm in re.finditer(r"([a-z]{2,})\.([A-Z][a-z]{2,})", text):
+        spots.append((fm.group(0), f"{fm.group(1)}. {fm.group(2)}"))
+    for fm in re.finditer(r"\b[a-z]{25,}\b", text):
+        spots.append((fm.group(0), None))
+    if len(spots) >= 2:
+        print(f"this text looks pasted from a PDF: {len(spots)} places have lost their spaces")
+        for tok, fix in spots[:6]:
+            tok = tok if len(tok) <= 40 else tok[:37] + "..."
+            if fix:
+                fix = fix if len(fix) <= 50 else fix[:47] + "..."
+                print(f"    {tok} -> {fix}")
+            else:
+                print(f"    {tok} (fused lowercase; restore the spaces by hand)")
+        print("  A capitalized run inside a fused word is often a name the authors made up;")
+        print("  keep it exactly as they wrote it and restore only the spaces. Every measure")
+        print("  below, and any detector score, is unreliable until the text is repaired.\n")
 
     print(f"{'':38s}{'draft':>9s}{args.reference:>16s}")
     print("-" * 64)
