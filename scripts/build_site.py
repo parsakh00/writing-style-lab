@@ -76,7 +76,7 @@ CHECK_BODY = r"""
 <link rel=preload as=fetch crossorigin href="tool/data/trigrams.json">
 <script type=module>
 import { report } from "./tool/check.js";
-const FILES = ["reference.json", "group_reference.json", "combined_reference.json", "vocab.json", "formulas.json", "trigrams.json"];
+const FILES = ["reference.json", "group_reference.json", "combined_reference.json", "vocab.json", "formulas.json", "trigrams.json", "sequences.json"];
 const data = {};
 const status = document.getElementById("status"), run = document.getElementById("run");
 const bar = document.getElementById("bar"), detail = document.getElementById("loaddetail");
@@ -224,7 +224,7 @@ def main() -> int:
     if tool.exists():
         shutil.rmtree(tool)
     shutil.copytree(SKILL, tool, ignore=shutil.ignore_patterns(
-        "__pycache__", "*.py", "local_preferences.json", "sequences.json", "group_profile.json", "awl_measured.json"))
+        "__pycache__", "*.py", "local_preferences.json", "group_profile.json", "awl_measured.json"))
     body = CHECK_BODY.replace("__POLISH_URL__", POLISH_URL)
     (OUT / "check.html").write_text(page("Polish a draft", body, "check.html"), encoding="utf-8")
     print("site/index.html, site/check.html")
