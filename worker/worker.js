@@ -79,7 +79,7 @@ export default {
 
     const policy = await (await fetch(POLICY_URL, { cf: { cacheTtl: 3600 } })).text();
     const user = pass2
-      ? "Register: " + register + "\n\nThis text is your own revision. The checker still finds these constructions in it; change only these, keep everything else exactly as it is, and add nothing:\n" + report + "\n\nThe text:\n" + draft
+      ? "Register: " + register + "\n\nThis text is your own revision. The checker still finds the constructions below in it. Rewrite only the sentences those findings point to, and copy every other sentence character for character; if a finding cannot be fixed without touching another sentence, leave it. Do not reword, reorder or add anything outside the flagged sentences:\n" + report + "\n\nThe text:\n" + draft
       : "Register: " + register + "\n\nThe checker's report on this draft:\n" + report + "\n\nThe draft:\n" + draft;
     const r = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
