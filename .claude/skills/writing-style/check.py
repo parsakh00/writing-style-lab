@@ -348,6 +348,17 @@ def _run(text: str, args: argparse.Namespace, name: str) -> None:
     if m["_n_words"] < 300:
         print("under 300 words; these measures are noisy at this length\n")
 
+    # Text pasted from a PDF often loses spaces, fusing words ("theproposed",
+    # "resultsSHOW"). Fused tokens distort every measure here and swing AI
+    # detectors by tens of points, so damaged text is flagged before anything
+    # else is reported.
+    fused = re.findall(r"\b\w*[a-z]{3,}[A-Z]{3,}\w*\b|\b[a-z]+[A-Z][a-z]{2,}[A-Z]\w*\b", text)
+    if len(fused) >= 2:
+        shown = ", ".join(dict.fromkeys(fused[:4]))
+        print(f"this text looks pasted from a PDF: {len(fused)} words have lost their spaces")
+        print(f"  ({shown}). Repair them first; every measure below, and any")
+        print("  detector score, is unreliable on damaged text.\n")
+
     print(f"{'':38s}{'draft':>9s}{args.reference:>16s}")
     print("-" * 64)
     allowed = REGISTERS[args.register]

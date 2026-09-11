@@ -199,6 +199,14 @@ export function report(text, data, { register = "paper", reference = "papers", t
   out(`${name}: ${commas(m._n_words)} words, ${m._n_sentences} sentences\n`);
   if (m._n_sentences === 0) { out("nothing to measure"); return lines.join("\n") + "\n"; }
   if (m._n_words < 300) out("under 300 words; these measures are noisy at this length\n");
+  // Text pasted from a PDF often loses spaces, fusing words; see check.py.
+  const fused = text.match(/\b\w*[a-z]{3,}[A-Z]{3,}\w*\b|\b[a-z]+[A-Z][a-z]{2,}[A-Z]\w*\b/g) || [];
+  if (fused.length >= 2) {
+    const shown = [...new Set(fused.slice(0, 4))].join(", ");
+    out(`this text looks pasted from a PDF: ${fused.length} words have lost their spaces`);
+    out(`  (${shown}). Repair them first; every measure below, and any`);
+    out("  detector score, is unreliable on damaged text.\n");
+  }
   out(padR("", 38) + padL("draft", 9) + padL(reference, 16));
   out("-".repeat(64));
   const allowed = REGISTERS[register];
