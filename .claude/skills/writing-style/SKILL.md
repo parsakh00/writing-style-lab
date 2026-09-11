@@ -806,6 +806,44 @@ These are correct English and correct academic English; they are also the words 
 draft reaches for when it has nothing specific to say. Use them where the meaning is
 that word and nowhere else.
 
+## The story of the paper
+
+StoryScope (Russell et al., COLM 2026, arXiv 2604.03136) showed that AI-written fiction
+differs from human fiction at the discourse level even with surface style stripped away:
+AI over-explains its themes, keeps plots tidy and single-track, and stays chronological,
+while human stories carry ambiguity and revisit themselves. The three findings translate
+to scientific prose and replicate on this project's corpora, per 1000 words on 1.1M
+words of human papers against 141K words of machine output:
+
+| | human papers | group | machine |
+|---|---|---|---|
+| thematic commentary | 0.30 | 0.16 | 1.66 |
+| complication | 0.21 | 0.19 | 0.04 |
+| nonlinearity | 0.65 | 0.41 | 0.22 |
+
+**Do not applaud your own result.** The machine's commentary is significance talk:
+"paving the way" (0.22 against 0.01 in papers), "is important because" (0.63 against
+0.12), "plays a key role" (0.23 against 0.05), "demonstrates the potential of",
+"highlighting the importance of", "opens new avenues". Papers state the result and let
+the discussion place it. The two commentary forms papers do use are pointers, not
+applause: "it is worth noting" and "in other words" appear in human text and almost
+never in machine text.
+
+**Let the untidy result stand.** Human papers carry five times the machine's rate of
+things going wrong: "surprisingly", "failed to", "did not improve", "no significant
+difference", "discrepancy", "we were unable to". Machine text resolves everything. A
+results section in which nothing failed, surprised, or disagreed reads
+machine-written at the story level, whatever its sentences do; when something did not
+work, reporting it is both honest and, measurably, human.
+
+**Let the text revisit itself.** Papers point backward and forward: "as mentioned
+above", "described below", "the aforementioned", "see Section 2", at three times the
+machine rate. Machine text runs strictly forward, each paragraph new. Cross-references
+are how a paper binds its parts into one argument; a draft with none is a list of
+paragraphs.
+
+`check.py` reports all three rates against the bands.
+
 ## The published humanization levers, tested
 
 The installable "humanizer" skills (blader/humanizer, 5.1K installs; jpeggdev/humanize-
